@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rarium — Privacy</title>
+<style>
+  :root { --bg:#ffffff; --fg:#16191c; --muted:#5b6570; --line:#e3e6ea; --accent:#0f766e; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0b0d0e; --fg:#e8ecef; --muted:#98a3ad; --line:#232830; --accent:#37d9c8; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  h1 { font-size: 1.9rem; line-height:1.2; margin:0 0 .3rem; }
+  h2 { font-size: 1.2rem; margin: 2.4rem 0 .6rem; padding-top:1.2rem; border-top:1px solid var(--line); }
+  h3 { font-size: 1.02rem; margin: 1.6rem 0 .4rem; }
+  .sub { color: var(--muted); margin:0 0 2rem; }
+  a { color: var(--accent); }
+  ul, ol { padding-left: 1.3rem; }
+  li { margin:.35rem 0; }
+  code { font-size:.9em; overflow-wrap:anywhere; }
+  table { border-collapse: collapse; width:100%; margin:.8rem 0; font-size:.94rem; display:block; overflow-x:auto; }
+  th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color: var(--muted); font-weight:600; }
+  td:first-child { overflow-wrap:anywhere; }
+  .todo { border-left:3px solid #d97706; background:rgba(217,119,6,.1);
+          padding:.8rem 1rem; margin:1.2rem 0; font-size:.94rem; }
+  /* Segna nel testo le basi giuridiche ancora da far confermare: si trovano
+     cercando la classe e si tolgono, una per una, quando il legale risponde. */
+  .da-confermare { background:rgba(217,119,6,.16); border-radius:3px;
+                   padding:0 .3em; font-size:.86em; white-space:nowrap; }
+  /* Il diritto di opposizione va presentato «separato da qualsiasi altra
+     informazione» (art. 21, par. 4, GDPR): in fondo a un elenco di diritti non
+     lo e', in un riquadro a se' si'. */
+  .separato { border-left:3px solid var(--accent); background:rgba(15,118,110,.08);
+              padding:.7rem 1rem; margin:1.2rem 0; }
+  footer { margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+           color:var(--muted); font-size:.88rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Privacy — Rarium</h1>
+<p class="sub">Ultimo aggiornamento: 27 ottobre 2026 · <a href="#english">English version below</a></p>
+<!-- Le sezioni su account, sincronizzazione e abbonamento stanno in
+     docs/legale/bozza-privacy-account.html e si pubblicano solo con la
+     versione che introduce quelle funzioni. -->
+
+<p>Rarium è un'app Android che riconosce le carte collezionabili inquadrandole
+con la fotocamera, ne mostra l'andamento dei prezzi e permette di tenere una
+collezione sul telefono. Questa pagina spiega quali dati tratta, perché, dove
+restano e come cancellarli. Descrive la versione distribuita su Google Play.</p>
+
+<p><strong>Titolare del trattamento:</strong> Alberto Fontolan, via Trivellato 273, 35040 Piacenza d'Adige (PD) —
+contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+
+<h2 id="breve">In breve</h2>
+<ul>
+  <li>Rarium si usa <strong>senza account</strong>: non ci si registra, e l'app
+  non invia al titolare dati su chi la usa. Google Play gli mostra però
+  statistiche sugli arresti anomali dell'app e le recensioni pubblicate
+  (<a href="#destinatari">sezione 8</a>).</li>
+  <li>Le <strong>immagini della fotocamera</strong> sono elaborate solo sul
+  telefono e non vengono inviate a nessuno. Di ogni carta riconosciuta l'app
+  conserva sul telefono un piccolo ritaglio, come anteprima
+  (<a href="#fotocamera">sezione 2</a>).</li>
+  <li>Il riconoscimento del testo usa <strong>Google ML Kit</strong>, che invia
+  a Google dati tecnici di diagnostica e di utilizzo
+  (<a href="#fotocamera">sezione 2</a>).</li>
+  <li>Il confronto fra la carta inquadrata e le illustrazioni del catalogo usa un
+  <strong>modello incluso nell'app</strong> (DINOv2) e avviene interamente sul
+  telefono: non invia dati a nessuno.</li>
+  <li>Per trovare carte, illustrazioni e prezzi l'app interroga <strong>servizi
+  di terzi</strong>, che ricevono l'indirizzo IP e, secondo il servizio, la
+  carta cercata o l'illustrazione mostrata (<a href="#servizi">sezione 4</a>).</li>
+  <li>Collezione, cronologia e storico dei prezzi restano <strong>sul
+  telefono</strong>; il backup di Android può copiarli nel tuo Google Drive
+  (<a href="#backup">sezione 5</a>).</li>
+  <li>Niente pubblicità, niente strumenti di statistiche che mandino dati al
+  titolare, e oggi l'app non vende nulla.</li>
+</ul>
+
+<h2 id="app">1. Che cosa fa l'app</h2>
+<p>Inquadri una carta: l'app legge il nome e il numero stampati, cerca la carta
+nei cataloghi, ne mostra l'illustrazione per confrontarla con quella che hai in
+mano e mostra l'andamento del prezzo su Cardmarket. Puoi aggiungere le carte a
+una collezione, indicare quante copie hai, la condizione e, se vuoi, quanto le
+hai pagate, scrivere una nota, segnare una carta come gradata o da vendere,
+segnare una vendita con il prezzo incassato, tenere una lista dei desideri,
+scegliere un prezzo sotto il quale (o sopra il quale) ricevere un avviso, ed
+esportare la collezione in un file CSV o in un backup completo. Tutto questo funziona senza registrarsi: l'app non ha
+account.</p>
+
+<h2 id="fotocamera">2. Le immagini della fotocamera restano sul telefono</h2>
+<p>Il riconoscimento avviene <strong>sul telefono</strong>: i fotogrammi vengono
+analizzati in memoria per leggere il titolo e il numero stampati sulla carta e,
+nella versione pubblicata su Google Play, non vengono mai inviati ad alcun
+server. Rarium non chiede l'accesso alle foto della galleria. Di ogni
+carta riconosciuta conserva sul telefono un piccolo ritaglio (al massimo 480
+pixel sul lato lungo), usato come anteprima quando il catalogo non ha
+l'illustrazione: resta nella memoria dell'app, non entra nel backup e si
+cancella disinstallando l'app. Tiene inoltre in una cache temporanea le
+illustrazioni delle carte scaricate dai cataloghi
+(<a href="#telefono">sezione 3</a>).</p>
+
+<h3>Google ML Kit</h3>
+<p>Il riconoscimento del testo usa Google ML Kit, una libreria di Google inclusa
+nell'app. Le immagini sono elaborate solo sul telefono: né le immagini né il
+testo riconosciuto vengono inviati a Google. ML Kit invia però a Google, cifrati,
+dati tecnici di diagnostica e di utilizzo:</p>
+<ul>
+  <li>produttore, modello e versione di sistema del telefono, e gli
+  acceleratori hardware disponibili;</li>
+  <li>nome e versione dell'app;</li>
+  <li>un identificativo per installazione, che secondo Google non è destinato a
+  identificare in modo univoco l'utente o il telefono;</li>
+  <li>tempi di elaborazione, formato e risoluzione delle immagini, dimensioni di
+  ciò che entra ed esce dal riconoscimento, versione della funzione;</li>
+  <li>tipo di evento (per esempio l'avvio o un riconoscimento) e codici di
+  errore.</li>
+</ul>
+<p>Google dichiara di usare questi dati per diagnostica e statistiche d'uso e di
+non trasferirli a terzi; i termini di ML Kit aggiungono che li usa anche per
+misurare le prestazioni, correggere, mantenere e migliorare le API e rilevare
+usi impropri o abusi. ML Kit può inoltre contattare i server di Google per
+ricevere correzioni, modelli aggiornati e informazioni sulla compatibilità degli
+acceleratori hardware. Il titolare di Rarium non riceve questi dati. L'app non
+ha un'impostazione per disattivare questo invio, e ML Kit non ne documenta una.
+Fonti: <a href="https://developers.google.com/ml-kit/android-data-disclosure">dati
+raccolti da ML Kit</a>, <a href="https://developers.google.com/ml-kit/terms">termini
+di ML Kit</a>, <a href="https://policies.google.com/privacy">informativa privacy di
+Google</a>.</p>
+
+<h2 id="telefono">3. Dati sul tuo telefono</h2>
+<p>Rarium salva questi dati sul telefono, nella memoria riservata all'app; se il
+backup di Android è attivo, una copia va nel tuo Google Drive
+(<a href="#backup">sezione 5</a>). Nessuno di questi dati viene inviato al
+titolare.</p>
+<table>
+  <tr><th>Che cosa</th><th>Dettaglio</th><th>Nel backup di Android (<a href="#backup">sezione 5</a>)</th></tr>
+  <tr><td>Cronologia delle scansioni</td>
+      <td>Le carte identificate: nome, set, numero, prezzo al momento della
+      scansione, data e ora. Tenere premuta una scansione la toglie dalla
+      cronologia, ma la riga resta nel database del telefono.</td>
+      <td>Sì</td></tr>
+  <tr><td>Collezione</td>
+      <td>I raccoglitori e, per ogni carta: stampa, lingua, finitura,
+      condizione, numero di copie, prezzo pagato (solo se lo inserisci), la
+      nota che scrivi tu, se è da vendere, la soglia di prezzo oltre la quale
+      vuoi un avviso e, per una carta gradata, la società, il voto, il numero
+      di certificato e il valore che dichiari tu con la sua data. Data in cui
+      l'hai aggiunta. Le carte che togli restano nel «Cestino», insieme
+      al registro delle aggiunte e delle rimozioni.</td>
+      <td>Sì</td></tr>
+  <tr><td>Vendite</td>
+      <td>Le vendite che segni: carta, copie, prezzo incassato, costo delle copie
+      vendute, tendenza del momento e data.</td>
+      <td>Sì</td></tr>
+  <tr><td>Pila di scansioni</td>
+      <td>Con la scansione a pila accesa, le carte in attesa di conferma, in un
+      file nella memoria dell'app finché non le confermi o le togli.</td>
+      <td>Sì</td></tr>
+  <tr><td>Lista desideri</td>
+      <td>Le carte che segui: stampa, lingua, finitura, edizione scelta, la
+      soglia di prezzo sotto la quale vuoi un avviso e, quando un avviso è
+      partito, la cifra di quel momento.</td>
+      <td>Sì</td></tr>
+  <tr><td>Valore della collezione</td>
+      <td>Un valore per ogni giorno, con costo e margine. Si scrive quando apri
+      l'app e anche ad app chiusa, dal lavoro in sottofondo che aggiorna lo
+      storico dei prezzi.</td>
+      <td>Sì</td></tr>
+  <tr><td>Storico dei prezzi</td>
+      <td>I prezzi Cardmarket, giorno per giorno, dei prodotti che segui: quelli
+      che hai in collezione o nei desideri e quelli delle carte che hai
+      scansionato negli ultimi 120 giorni. I giorni che l'app non ha visto si
+      riempiono da un archivio pubblico dei listini e sono segnati come tali.</td>
+      <td>Sì</td></tr>
+  <tr><td>Foto delle carte</td>
+      <td>Di ogni carta riconosciuta un piccolo ritaglio dell'inquadratura (lato
+      lungo 480 pixel), fino a 12 MB in tutto, usato come anteprima.</td>
+      <td>No</td></tr>
+  <tr><td>Preferenze</td>
+      <td>Le impostazioni dell'app: aggiunta rapida, scansione a pila,
+      raccoglitore predefinito, obiettivo di valore, seconda valuta e gli ultimi
+      tassi di cambio scaricati, aggiornare i prezzi solo con il Wi-Fi, avvisi
+      di prezzo e riepilogo settimanale accesi o spenti, l'ultima lingua di
+      stampa rilevata.</td>
+      <td>Sì</td></tr>
+  <tr><td>Cataloghi scaricati</td>
+      <td>Il listino e il catalogo dei prodotti Cardmarket, gli elenchi dei nomi
+      delle carte, le numerazioni dei set.</td>
+      <td>Solo gli elenchi dei nomi e le numerazioni dei set; il listino e il
+      catalogo Cardmarket no</td></tr>
+  <tr><td>Illustrazioni delle carte</td>
+      <td>Una cache temporanea, fino a 20 MB, che Android può svuotare quando
+      serve spazio. Le illustrazioni sono ricontrollate dopo sette giorni.</td>
+      <td>No</td></tr>
+  <tr><td>Confronto fra immagini</td>
+      <td>Le impronte numeriche delle illustrazioni del catalogo, calcolate sul
+      telefono per confrontarle con la carta che inquadri (fino a 70 MB di cache),
+      e gli elenchi delle carte per la ricerca nel catalogo (fino a 2,4 MB per
+      lingua). Sono cache temporanee e Android può svuotarle.</td>
+      <td>No</td></tr>
+</table>
+<p>Gli avvisi di prezzo e il riepilogo settimanale sono <strong>notifiche
+generate sul telefono</strong>: l'app confronta lo storico dei prezzi che ha già
+scritto con le soglie che hai scelto, senza server e senza inviare nulla a
+nessuno. Android ti chiede il permesso di mostrare le notifiche solo quando
+imposti un avviso o accendi il riepilogo (anche ripristinando un backup che lo
+aveva acceso), e puoi toglierlo dalle impostazioni del telefono. Il lavoro in sottofondo che aggiorna i prezzi gira
+circa ogni otto ore, quando c'è rete e la batteria non è scarica; con
+l'interruttore «Aggiorna i prezzi solo con il Wi-Fi» acceso non scarica il
+listino con i dati mobili.</p>
+<p>«Salva un backup completo» e «Unisci un backup alla collezione» (menu ⋮ della
+collezione) scrivono e leggono un file JSON nel punto che scegli tu con il
+selettore di Android: dentro ci sono raccoglitori, carte (anche quelle tolte),
+desideri con le soglie, note, cronologia, valore giornaliero, storico dei prezzi
+dei prodotti che segui e le impostazioni. Il file è tuo e l'app non lo invia a
+nessuno. «Condividi come immagine», l'elenco da vendere e la lista scambi
+passano dal menu di condivisione di Android: sei tu a scegliere con quale app
+condividerli, e nessuno dei tre contiene i prezzi che hai pagato o le tue
+note.</p>
+<p>L'export CSV (Collezione → menu ⋮ → Esporta in CSV) crea un file nel punto che
+scegli tu con il selettore di Android: da quel momento il file è tuo, e l'app
+non lo invia a nessuno.</p>
+
+<h2 id="servizi">4. Servizi contattati dall'app</h2>
+<p>Per trovare le carte, le illustrazioni e i prezzi, l'app si collega
+direttamente dal telefono ai servizi qui sotto. <strong>Ogni servizio riceve
+l'indirizzo IP, l'ora e i dati tecnici della connessione</strong>; che cos'altro
+riceve dipende dal servizio, come dice l'ultima colonna della tabella:</p>
+<ul>
+  <li>il <strong>listino Cardmarket</strong> e gli elenchi dei nomi delle carte
+  si scaricano interi, periodicamente, anche senza una ricerca: da questi
+  download i server non sanno quale carta ti interessa;</li>
+  <li>i <strong>cataloghi e i servizi di immagini</strong> ricevono il nome o il
+  numero della carta cercata, o l'illustrazione richiesta. Le illustrazioni si
+  scaricano quando l'app mostra una carta: quando la cerchi, ma anche quando
+  guardi la collezione, la cronologia delle scansioni o i set, insieme ai loghi
+  dei set. Una cache sul telefono evita di riscaricare molte delle illustrazioni
+  già viste, ma non elimina queste richieste: quei server possono quindi sapere
+  quali carte stai guardando;</li>
+  <li><strong>Google</strong> riceve da ML Kit i dati tecnici della
+  <a href="#fotocamera">sezione 2</a>, compresi il nome dell'app e un
+  identificativo per installazione.</li>
+</ul>
+<p>Nessuno di questi servizi riceve la tua collezione come elenco, né i prezzi
+che hai pagato. Oltre a Google, che riceve da ML Kit l'identificativo per
+installazione, nessuno riceve identificativi dell'installazione o del
+telefono.</p>
+
+<table>
+  <tr><th>Indirizzo</th><th>A cosa serve</th><th>Che cosa riceve della carta</th></tr>
+  <tr><td>api.tcgdex.net</td>
+      <td>Catalogo delle carte, delle espansioni e dei nomi (TCGdex)</td>
+      <td>La carta cercata</td></tr>
+  <tr><td>assets.tcgdex.net</td>
+      <td>Illustrazioni delle carte e loghi dei set (TCGdex)</td>
+      <td>L'immagine richiesta, cioè quale carta stai guardando</td></tr>
+  <tr><td>downloads.s3.cardmarket.com</td>
+      <td>Listino prezzi e catalogo dei prodotti Cardmarket, scaricati interi
+      quando la copia sul telefono è scaduta (circa una volta al giorno), anche
+      ad app chiusa: così lo storico dei prezzi non ha buchi nei giorni in cui
+      non la apri</td>
+      <td>Niente: il file è lo stesso per tutti</td></tr>
+  <tr><td>raw.githubusercontent.com (archivio pubblico dei listini)</td>
+      <td>I prezzi Cardmarket dei giorni in cui l'app non li aveva registrati,
+      per le carte che hai in collezione o nei desideri: un archivio pubblico
+      copia il listino ogni giorno dal 16 settembre 2026. Si scarica un blocco
+      di circa 150 KB per volta, al massimo una volta a settimana per carta,
+      anche ad app chiusa</td>
+      <td>L'indirizzo del blocco richiesto, che dipende dalle ultime tre cifre
+      del numero del prodotto Cardmarket: non il nome della carta né chi sei
+      (il servizio vede, come ogni sito, il tuo indirizzo IP)</td></tr>
+  <tr><td>www.ecb.europa.eu</td>
+      <td>I tassi di cambio di riferimento della Banca centrale europea, solo se
+      in Impostazioni hai scelto una seconda valuta accanto all'euro: un file
+      pubblico, lo stesso per tutti, scaricato al massimo ogni dodici ore</td>
+      <td>Niente: la richiesta non contiene dati tuoi</td></tr>
+  <tr><td>api.psacard.com</td>
+      <td>La verifica del certificato di una carta gradata PSA, solo nelle build
+      in cui chi compila ha inserito la propria chiave dell'API PSA (nelle build
+      distribuite non c'è, e la funzione non compare)</td>
+      <td>Il numero del certificato che hai scritto nella voce della collezione</td></tr>
+  <tr><td>www.pokemon-card.com</td>
+      <td>Catalogo ufficiale giapponese: ricerca, schede e illustrazioni delle
+      carte giapponesi</td>
+      <td>La carta cercata e l'immagine richiesta</td></tr>
+  <tr><td>asia.pokemon-card.com</td>
+      <td>Catalogo ufficiale di Taiwan: ricerca, schede e illustrazioni delle
+      carte in cinese tradizionale</td>
+      <td>La carta cercata e l'immagine richiesta</td></tr>
+  <tr><td>www.hktcg.com, cdn.shopify.com</td>
+      <td>Negozio di Hong Kong (www.hktcg.com): ricerca delle carte in cinese
+      semplificato. Le foto delle carte sono ospitate da Shopify
+      (cdn.shopify.com)</td>
+      <td>La carta cercata e l'immagine richiesta</td></tr>
+  <tr><td>k-tcg.com, i0.wp.com</td>
+      <td>Negozio coreano (k-tcg.com): ricerca delle carte coreane. Le foto
+      delle carte possono passare dal servizio di immagini Jetpack di Automattic
+      (i0.wp.com)</td>
+      <td>La carta cercata e l'immagine richiesta</td></tr>
+  <tr><td>pokeapi.co</td>
+      <td>Nome coreano di una specie, quando manca dall'elenco incluso nell'app
+      (PokeAPI)</td>
+      <td>Il nome della specie</td></tr>
+  <tr><td>billsarchive.com, bills-archive.nyc3.cdn.digitaloceanspaces.com</td>
+      <td>Archivio delle carte giapponesi storiche: elenco delle espansioni e
+      illustrazioni</td>
+      <td>Niente per l'elenco, che si scarica intero; l'immagine richiesta</td></tr>
+  <tr><td>static.tcgcollector.com, limitlesstcg.nyc3.cdn.digitaloceanspaces.com,
+      api.pokemontcg.io, images.pokemontcg.io, images.scrydex.com,
+      tcgplayer-cdn.tcgplayer.com</td>
+      <td>Illustrazioni delle carte che i cataloghi precedenti non hanno</td>
+      <td>L'immagine richiesta, cioè quale carta stai guardando</td></tr>
+  <tr><td>pkmncards.com, dz3we2x72f7ol.cloudfront.net</td>
+      <td>Illustrazioni dei mazzi Trading Card Game Classic (pkmncards.com) e
+      della Collezione Classica del 30° anniversario, dal sito ufficiale
+      (dz3we2x72f7ol.cloudfront.net)</td>
+      <td>L'immagine richiesta, cioè quale carta stai guardando</td></tr>
+  <tr><td>raw.githubusercontent.com, pokesymbols.com, archives.bulbagarden.net,
+      media.pokemoncentral.it</td>
+      <td>Loghi e simboli dei set mostrati nell'elenco dei set</td>
+      <td>L'immagine richiesta, cioè quale set stai guardando</td></tr>
+  <tr><td>Server di Google (ML Kit)</td>
+      <td>Dati tecnici di diagnostica e di utilizzo del riconoscimento del
+      testo (<a href="#fotocamera">sezione 2</a>)</td>
+      <td>Niente: mai immagini né testo letto</td></tr>
+</table>
+
+<p>Ciascun servizio tratta questi dati secondo la propria informativa: il
+titolare di Rarium non ha accordi con loro e non controlla che cosa ne fanno.
+Alcuni di questi server si trovano, con ogni probabilità, fuori dallo Spazio
+economico europeo (per esempio in Giappone, Corea del Sud, Hong Kong o negli
+Stati Uniti); le loro sedi non sono state verificate
+(<a href="#trasferimenti">sezione 9</a>).</p>
+
+<p>Alcuni pulsanti aprono invece una pagina nel <strong>browser</strong> del
+telefono, e solo se li tocchi: la scheda, la ricerca o le offerte della carta su
+www.cardmarket.com; quando c'è, la pagina da cui arriva la scheda della carta
+(per esempio su www.pokemon-card.com o su www.tcgcollector.com); per una carta
+gradata, i venduti su www.ebay.it filtrati per carta e voto e la pagina del
+certificato su www.psacard.com o www.cgccards.com; e, dalla
+schermata «Privacy e licenze», questa informativa e le pagine delle licenze
+delle librerie usate dall'app. Quei siti applicano la propria informativa e i
+propri cookie.</p>
+
+<p>Questa pagina è ospitata da GitHub Pages (GitHub, Inc.), che registra
+l'indirizzo IP di chi la visita per motivi di sicurezza
+(<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection">documentazione
+di GitHub Pages</a>). Il titolare non usa cookie né statistiche su questa
+pagina.</p>
+
+<h2 id="backup">5. Backup di Android</h2>
+<p>Se il backup di Android è attivo nel tuo account Google, il sistema salva una
+copia del database di Rarium (collezione, prezzi pagati, date di aggiunta, note,
+dati delle carte gradate, vendite, raccoglitori, lista desideri con le soglie di prezzo,
+cronologia delle scansioni, storico dei prezzi e valore giornaliero della
+collezione) e delle impostazioni dell'app, con gli elenchi dei
+nomi e le numerazioni dei set, in una cartella privata del tuo Google Drive,
+fino a 25 MB. Il backup parte da solo, non più di una volta al giorno, quando il
+telefono è inattivo e di norma connesso al Wi-Fi, e Google conserva solo la copia
+più recente. Sono esclusi il listino e il catalogo Cardmarket, la cache delle
+illustrazioni e la cartella esterna dell'app.</p>
+<p>Da Android 9, se sul telefono è impostato un PIN, una sequenza o una
+password, la copia è cifrata end-to-end. Il titolare di Rarium non riceve questa
+copia e non ha modo di leggerla. Gli stessi dati possono passare a un telefono
+nuovo durante il trasferimento dei dati da un telefono all'altro, e Android li
+ripristina quando reinstalli Rarium con lo stesso account Google: per questo
+<strong>disinstallare l'app non cancella una copia già salvata su Google
+Drive</strong>. Puoi disattivare il backup dalle impostazioni di Android o
+eliminarlo dal tuo account Google (<a href="#cancellare">sezione 15</a>). Fonte:
+<a href="https://developer.android.com/identity/data/autobackup">documentazione di
+Android sul backup automatico</a>.</p>
+
+<h2 id="prova">6. Fotogrammi e testo letto</h2>
+<p><strong>L'app non salva i fotogrammi della fotocamera né il testo letto dalle carte, e non li invia a nessuno.</strong> Il riconoscimento avviene sul telefono: ogni fotogramma viene letto e poi scartato. Cio' che resta sul telefono e' quanto descritto nella <a href="#telefono">sezione 3</a> (la collezione, la cronologia e, se aggiungi una carta, la foto del ritaglio della carta).</p>
+
+<h2 id="basi">7. Finalità e basi giuridiche</h2>
+<table>
+  <tr><th>Trattamento</th><th>Finalità</th><th>Base giuridica</th></tr>
+  <tr><td>Riconoscimento della carta sul telefono</td>
+      <td>Identificare la carta inquadrata</td>
+      <td>Esecuzione del servizio che chiedi usando l'app (art. 6.1.b GDPR)</td></tr>
+  <tr><td>Richieste ai servizi della <a href="#servizi">sezione 4</a></td>
+      <td>Trovare la carta, la sua illustrazione e il suo prezzo</td>
+      <td>Esecuzione del servizio richiesto (art. 6.1.b) o, in alternativa,
+      legittimo interesse a mostrarti la carta, l'illustrazione e il prezzo che
+      cerchi (art. 6.1.f)</td></tr>
+  <tr><td>Dati tecnici inviati a Google da ML Kit</td>
+      <td>Diagnostica e statistiche d'uso del riconoscimento del testo</td>
+      <td>Legittimo interesse a far funzionare e correggere il riconoscimento
+      (art. 6.1.f)</td></tr>
+  <tr><td>Dati salvati sul telefono</td>
+      <td>Far funzionare cronologia, collezione e storico dei prezzi</td>
+      <td>Esecuzione del servizio richiesto (art. 6.1.b); i dati restano sotto
+      il tuo controllo e il titolare non li riceve</td></tr>
+  <tr><td>Backup di Android</td>
+      <td>Non perdere i dati se cambi telefono</td>
+      <td>Lo esegue Android secondo le impostazioni del tuo account Google, che
+      decidi tu: il titolare non riceve la copia e non vi accede</td></tr>
+  <tr><td>Messaggi che scrivi al titolare</td>
+      <td>Rispondere alle tue richieste</td>
+      <td>Misure richieste da te (art. 6.1.b) o legittimo interesse a rispondere
+      a chi scrive (art. 6.1.f)</td></tr>
+  <tr><td>Rapporti sugli arresti anomali in Play Console
+      (<a href="#destinatari">sezione 8</a>)</td>
+      <td>Correggere gli errori dell'app</td>
+      <td>Legittimo interesse a trovare e correggere gli arresti anomali e i
+      blocchi dell'app (art. 6.1.f)</td></tr>
+  <tr><td>Recensioni su Google Play
+      (<a href="#destinatari">sezione 8</a>)</td>
+      <td>Leggerle e rispondere</td>
+      <td>Legittimo interesse a conoscere le opinioni su Rarium e a rispondere
+      pubblicamente (art. 6.1.f)</td></tr>
+</table>
+
+<h2 id="destinatari">8. Destinatari</h2>
+<ul>
+  <li><strong>Google</strong>: per ML Kit (<a href="#fotocamera">sezione 2</a>),
+  per il backup di Android (<a href="#backup">sezione 5</a>) e, quando scarichi
+  l'app da Google Play, per Google Play, che tratta i dati del download e
+  dell'installazione secondo la propria informativa. Se sul telefono hai scelto
+  di condividere con Google i dati di utilizzo e diagnostica, Google può
+  mostrare al titolare, nella Play Console, statistiche e rapporti sugli arresti
+  anomali e sui blocchi dell'app, suddivisi per paese, modello di telefono,
+  versione di Android e versione dell'app. Se pubblichi una recensione su
+  Google Play, il titolare la vede nella Play Console con il nome con cui la
+  pubblichi, la data e, quando Google li fornisce, alcuni dati del telefono e
+  dell'app (per esempio produttore, versione di Android, lingua e versione
+  dell'app), e può risponderti pubblicamente.</li>
+  <li><strong>I servizi della <a href="#servizi">sezione 4</a></strong>, che
+  ricevono le richieste dal telefono.</li>
+</ul>
+<p>Nessun dato viene venduto, e il titolare non usa pubblicità né strumenti di
+profilazione. Google e gli altri servizi della sezione 4 trattano questi dati
+come titolari autonomi, secondo le proprie informative: il titolare di Rarium
+non ha affidato loro alcun trattamento per proprio conto.</p>
+
+<h2 id="trasferimenti">9. Trasferimenti fuori dallo SEE</h2>
+<p>Alcuni dei servizi della <a href="#servizi">sezione 4</a> hanno, con ogni
+probabilità, server fuori dallo Spazio economico europeo, per esempio in
+Giappone, Corea del Sud, Hong Kong o negli Stati Uniti; le sedi dei server non
+sono state verificate. Anche Google può trattare i dati fuori dallo SEE, secondo
+la propria informativa. Il titolare non invia dati fuori dallo SEE: sono le
+richieste del tuo telefono, quando cerchi o guardi una carta, a raggiungere
+direttamente quei server, che le trattano secondo le proprie informative.</p>
+
+<h2 id="conservazione">10. Per quanto tempo</h2>
+<p><strong>L'app non invia al titolare dati su chi la usa.</strong> Il titolare
+conserva i messaggi che scegli di inviargli, per il tempo necessario a
+rispondere e a gestire la richiesta; i dati che vede nella Play Console seguono le regole qui sotto.</p>
+<ul>
+  <li>I dati sul telefono restano finché non li cancelli
+  (<a href="#cancellare">sezione 15</a>); la cache delle illustrazioni può essere
+  svuotata da Android in qualsiasi momento.</li>
+  <li>La copia nel backup di Android segue le regole di Google: si conserva solo
+  la più recente, e i backup non più usati vengono cancellati dopo un periodo
+  di inattività.</li>
+  <li>Google e i servizi della <a href="#servizi">sezione 4</a> conservano i dati
+  delle richieste secondo le proprie informative.</li>
+  <li>I rapporti sugli arresti anomali e le recensioni restano nella Play
+  Console, dove li conserva Google secondo le proprie regole.</li>
+</ul>
+
+<h2 id="facoltativi">11. Dati facoltativi e decisioni automatizzate</h2>
+<p>Non devi fornire alcun dato: non ci si registra, e il prezzo pagato e la
+condizione delle carte sono facoltativi. Per scansionare servono il permesso
+della fotocamera e la connessione, senza la quale l'app non può cercare le carte
+né aggiornare i prezzi.</p>
+<p>Rarium non prende decisioni basate unicamente su un trattamento automatizzato
+che producano effetti giuridici o che ti riguardino in modo significativo
+(art. 22 GDPR): propone una carta e un prezzo, che puoi sempre confrontare con
+la carta che hai in mano e correggere.</p>
+
+<h2 id="pagamenti">12. Pagamenti</h2>
+<p>Oggi Rarium non vende nulla: nell'app non ci sono acquisti né abbonamenti, e
+il titolare non tratta dati di pagamento. Se in futuro sarà introdotto un
+abbonamento, questa informativa sarà aggiornata prima.</p>
+
+<h2 id="diritti">13. I tuoi diritti</h2>
+<p>Il GDPR ti dà diritto di accedere ai dati che ti riguardano, correggerli,
+cancellarli, limitarne il trattamento e riceverli in un formato portabile
+(articoli da 15 a 22). Scrivi a
+<a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+<p class="separato"><strong>Diritto di opposizione.</strong> Puoi opporti in
+qualsiasi momento, per motivi legati alla tua situazione particolare, ai
+trattamenti che si basano sul legittimo interesse
+(<a href="#basi">sezione 7</a>), scrivendo a
+<a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (art. 21 GDPR).</p>
+<p>Poiché l'app non invia al titolare dati su chi la usa, il titolare potrebbe
+non essere in grado di individuare dati che ti riguardano (art. 11 GDPR). I dati
+della <a href="#telefono">sezione 3</a> sono già sul tuo telefono: li cancelli
+come spiega la <a href="#cancellare">sezione 15</a>, e puoi esportare la
+collezione in CSV. Per i dati trattati da Google o dagli altri servizi della
+<a href="#servizi">sezione 4</a> puoi rivolgerti anche direttamente a loro.</p>
+<p>Puoi inoltre proporre reclamo al Garante per la protezione dei dati personali
+(<a href="https://www.garanteprivacy.it">garanteprivacy.it</a>) o all'autorità di
+controllo del paese in cui vivi, lavori o in cui è avvenuta la presunta
+violazione.</p>
+
+<h2 id="minori">14. Minori</h2>
+<p>Rarium non è rivolto a minori di 14 anni. Il titolare non riceve dati che gli
+permettano di conoscere l'età di chi usa l'app e non raccoglie consapevolmente
+dati di minori. Se sei un genitore e hai domande, scrivi all'indirizzo qui
+sopra.</p>
+
+<h2 id="cancellare">15. Come cancellare i tuoi dati</h2>
+<p>Rarium non ha account. Per cancellare i tuoi dati disinstalla l'app, oppure
+cancellane i dati da Impostazioni di Android → App → Rarium → Spazio di
+archiviazione → Cancella dati (le voci cambiano da un produttore all'altro), ed
+elimina l'eventuale backup dal tuo account Google.</p>
+<ul>
+  <li><strong>Nessun gesto dentro l'app cancella davvero i dati.</strong>
+  Togliere una carta dalla collezione la sposta nel «Cestino», da cui si può
+  rimettere; tenere premuta una scansione la toglie dalla cronologia. In
+  entrambi i casi la riga resta nel database del telefono (per la collezione,
+  insieme al registro delle aggiunte e delle rimozioni) e nell'eventuale backup:
+  se ne va solo cancellando i dati dell'app e il backup.</li>
+  <li>Disinstallare l'app non cancella una copia già salvata su Google Drive,
+  che Android ripristina se reinstalli Rarium con lo stesso account.</li>
+  <li>Il backup si elimina dal tuo account Google. Google gestisce i backup
+  insieme: secondo come lo elimini, puoi cancellare anche i dati delle altre app
+  e degli altri telefoni del tuo account, compresi quelli di WhatsApp. Prima di
+  farlo leggi la <a href="https://support.google.com/android/answer/2819582">guida
+  di Google sul backup</a>. Per non salvarne altri, disattiva il backup nelle
+  impostazioni di Android.</li>
+</ul>
+
+<h2 id="modifiche">16. Modifiche a questa informativa</h2>
+<p>Le modifiche saranno pubblicate su questa pagina, con la data di
+aggiornamento in cima. L'informativa sarà aggiornata prima di ogni versione che
+cambi i dati trattati, per esempio con un accesso tramite account o con un
+abbonamento.</p>
+
+<section lang="en">
+
+<h2 id="english">English version</h2>
+<p>Rarium is an Android app that identifies collectible cards through the
+camera, shows their price trend and lets you keep a collection on your phone.
+This page explains which data it processes, why, where the data stays and how to
+delete it. It describes the version distributed on Google Play.</p>
+
+<p><strong>Data controller:</strong> Alberto Fontolan, via Trivellato 273, 35040 Piacenza d'Adige (PD) —
+contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+
+<h2 id="en-short">In short</h2>
+<ul>
+  <li>Rarium is used <strong>without an account</strong>: there is no sign-up,
+  and the app sends the controller no data about the people who use it. Google
+  Play does, however, show the controller statistics on the app's crashes and
+  the published reviews (<a href="#en-recipients">section 8</a>).</li>
+  <li><strong>Camera frames</strong> are processed only on the phone and are
+  sent to no one. For each recognised card the app keeps a small crop on the
+  phone, as a preview (<a href="#en-camera">section 2</a>).</li>
+  <li>Comparing the card in the frame with the catalogue artwork uses a
+  <strong>model included in the app</strong> (DINOv2) and happens entirely on
+  the phone: it sends no data to anyone.</li>
+  <li>Text recognition uses <strong>Google ML Kit</strong>, which sends Google
+  technical diagnostics and usage data (<a href="#en-camera">section 2</a>).</li>
+  <li>To find cards, artwork and prices the app queries <strong>third-party
+  services</strong>, which receive your IP address and, depending on the
+  service, the card searched or the artwork shown
+  (<a href="#en-services">section 4</a>).</li>
+  <li>Your collection, scan history and price history stay <strong>on the
+  phone</strong>; Android backup may copy them to your Google Drive
+  (<a href="#en-backup">section 5</a>).</li>
+  <li>No ads, no analytics tools that send data to the controller, and today the
+  app sells nothing.</li>
+</ul>
+
+<h2 id="en-app">1. What the app does</h2>
+<p>You frame a card: the app reads the printed name and number, looks the card
+up in the catalogues, shows its artwork so you can compare it with the card in
+your hand, and shows its price trend on Cardmarket. You can add cards to a
+collection, record how many copies you own, their condition and, if you wish,
+what you paid, write a note, mark a card as graded or for sale, record a sale
+with the price you received, keep a wishlist, choose a price below (or above)
+which you get an alert, and export the collection to a CSV file or a full
+backup. All of this works without signing up: the app has no accounts.</p>
+
+<h2 id="en-camera">2. Camera frames stay on the phone</h2>
+<p>Recognition runs <strong>on the phone</strong>: frames are analysed in memory
+to read the title and number printed on the card and, in the version published
+on Google Play, they are never sent to any server. Rarium does not ask for
+access to your photo gallery. For each recognised card it keeps a small crop
+on the phone (at most 480 pixels on the long side), used as a preview when the
+catalogue has no artwork: it stays in the app's storage, is not included in
+the backup and is deleted when you uninstall the app. It also keeps a
+temporary cache of the card artwork downloaded from the catalogues
+(<a href="#en-phone">section 3</a>).</p>
+
+<h3>Google ML Kit</h3>
+<p>Text recognition uses Google ML Kit, a Google library included in the app.
+Images are processed only on the phone: neither the images nor the recognised
+text are sent to Google. ML Kit does, however, send Google encrypted technical
+diagnostics and usage data:</p>
+<ul>
+  <li>the phone's manufacturer, model and system version, and the available
+  hardware accelerators;</li>
+  <li>the app's name and version;</li>
+  <li>a per-installation identifier which, according to Google, is not intended
+  to uniquely identify a user or a device;</li>
+  <li>processing times, image format and resolution, the size of what goes into
+  and comes out of recognition, and the feature version;</li>
+  <li>the event type (for example start-up or a recognition) and error
+  codes.</li>
+</ul>
+<p>Google states that it uses this data for diagnostics and usage analytics and
+does not transfer it to third parties; the ML Kit terms add that Google also
+uses it to measure performance, debug, maintain and improve the APIs, and detect
+misuse or abuse. ML Kit may also contact Google servers to receive bug fixes,
+updated models and hardware accelerator compatibility information. The Rarium
+data controller does not receive this data. The app has no setting to turn this
+off, and ML Kit does not document one. Sources:
+<a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit data
+disclosure</a>, <a href="https://developers.google.com/ml-kit/terms">ML Kit
+terms</a>, <a href="https://policies.google.com/privacy">Google privacy
+policy</a>.</p>
+
+<h2 id="en-phone">3. Data on your phone</h2>
+<p>Rarium stores this data on the phone, in the storage reserved for the app; if
+Android backup is on, a copy goes to your Google Drive
+(<a href="#en-backup">section 5</a>). None of this data is sent to the
+controller.</p>
+<table>
+  <tr><th>What</th><th>Details</th><th>In Android backup (<a href="#en-backup">section 5</a>)</th></tr>
+  <tr><td>Scan history</td>
+      <td>The cards identified: name, set, number, price at the time of the
+      scan, date and time. Long-pressing a scan removes it from the history, but
+      the row stays in the phone's database.</td>
+      <td>Yes</td></tr>
+  <tr><td>Collection</td>
+      <td>Your binders and, for each card: print, language, finish, condition,
+      number of copies, price paid (only if you enter it), the note you write,
+      whether it is for sale, the price above which you want an alert and, for
+      a graded card, the grading company, the grade, the certificate number and
+      the value you declare with its date. Date you added it. Cards you remove
+      stay in the «Trash», together with the log of additions and
+      removals.</td>
+      <td>Yes</td></tr>
+  <tr><td>Sales</td>
+      <td>The sales you record: card, copies, price received, cost of the copies
+      sold, the trend at that moment and the date.</td>
+      <td>Yes</td></tr>
+  <tr><td>Scan stack</td>
+      <td>With stack scanning on, the cards waiting for your confirmation, in a
+      file in the app's storage until you confirm or remove them.</td>
+      <td>Yes</td></tr>
+  <tr><td>Wishlist</td>
+      <td>The cards you follow: print, language, finish, chosen edition, the
+      price below which you want an alert and, once an alert has gone off, the
+      figure at that moment.</td>
+      <td>Yes</td></tr>
+  <tr><td>Collection value</td>
+      <td>One value for each day, with cost and margin. It is written when you
+      open the app and also while it is closed, by the background job that
+      updates the price history.</td>
+      <td>Yes</td></tr>
+  <tr><td>Price history</td>
+      <td>Daily Cardmarket prices of the products you follow: those in your
+      collection or wishlist and those of the cards you scanned in the last 120
+      days. Days the app did not see are filled in from a public price-guide
+      archive and marked as such.</td>
+      <td>Yes</td></tr>
+  <tr><td>Card photos</td>
+      <td>For each recognised card a small crop of the frame (480 pixels on the
+      long side), up to 12 MB in total, used as a preview.</td>
+      <td>No</td></tr>
+  <tr><td>Preferences</td>
+      <td>App settings: quick add, stack scanning, default binder, value goal,
+      second currency and the last exchange rates downloaded, update prices on
+      Wi-Fi only, price alerts and weekly summary on or off, the last printed
+      language detected.</td>
+      <td>Yes</td></tr>
+  <tr><td>Downloaded catalogues</td>
+      <td>The Cardmarket price guide and product catalogue, the lists of card
+      names, the set numbering.</td>
+      <td>Only the name lists and the set numbering; the Cardmarket price guide
+      and catalogue are not</td></tr>
+  <tr><td>Card artwork</td>
+      <td>A temporary cache of up to 20 MB, which Android can clear when it
+      needs space. Artwork is checked again after seven days.</td>
+      <td>No</td></tr>
+  <tr><td>Image comparison</td>
+      <td>The numerical fingerprints of the catalogue artwork, computed on the
+      phone to compare it with the card you frame (a cache of up to 70 MB), and
+      the card lists for the catalogue search (up to 2.4 MB per language). These
+      are temporary caches that Android can clear.</td>
+      <td>No</td></tr>
+</table>
+<p>Price alerts and the weekly summary are <strong>notifications generated on
+the phone</strong>: the app compares the price history it has already written
+with the thresholds you chose, with no server and without sending anything to
+anyone. Android asks for permission to show notifications only when you set an
+alert or turn the summary on (also when restoring a backup that had it on), and
+you can withdraw it in the phone's settings. The background job that updates
+prices runs about every eight hours, when there is a connection and the battery
+is not low; with «Update prices on Wi-Fi only» on, it does not download the
+price guide over mobile data.</p>
+<p>«Save a full backup» and «Merge a backup into the collection» (⋮ menu of the
+collection) write and read a JSON file wherever you choose with Android's file
+picker: it contains binders, cards (including removed ones), wishlist with
+thresholds, notes, sales, scan history, daily value, price history of the
+products you follow and the settings. The file is yours and the app does not
+send it to anyone. «Share as image», the for-sale list and the trade list go
+through Android's share menu: you choose which app to share them with, and none
+of the three contains the prices you paid or your notes.</p>
+<p>The CSV export (Collection → ⋮ menu → Export to CSV) creates a file wherever
+you choose with Android's file picker: from then on the file is yours, and the
+app does not send it to anyone.</p>
+
+<h2 id="en-services">4. Services the app contacts</h2>
+<p>To find cards, artwork and prices, the app connects directly from the phone
+to the services below. <strong>Every service receives your IP address, the time
+and the technical connection data</strong>; what else it receives depends on the
+service, as the last column of the table shows:</p>
+<ul>
+  <li>the <strong>Cardmarket price guide</strong> and the lists of card names are
+  downloaded in full, periodically, even without a search: from these downloads
+  the servers cannot tell which card you are interested in;</li>
+  <li><strong>catalogues and image services</strong> receive the name or number
+  of the card searched, or the artwork requested. Artwork is downloaded when the
+  app shows a card: when you search for it, but also when you look at your
+  collection, your scan history or the sets, together with the set logos. A
+  cache on the phone avoids downloading again much of the artwork you have
+  already seen, but does not remove these requests, so those servers can know
+  which cards you are looking at;</li>
+  <li><strong>Google</strong> receives from ML Kit the technical data described
+  in <a href="#en-camera">section 2</a>, including the app's name and a
+  per-installation identifier.</li>
+</ul>
+<p>None of these services receives your collection as a list, or the prices you
+paid. Apart from Google, which receives ML Kit's per-installation identifier,
+none of them receives an identifier of the installation or of the phone.</p>
+
+<table>
+  <tr><th>Address</th><th>Purpose</th><th>What it learns about the card</th></tr>
+  <tr><td>api.tcgdex.net</td>
+      <td>Catalogue of cards, expansions and names (TCGdex)</td>
+      <td>The card searched</td></tr>
+  <tr><td>assets.tcgdex.net</td>
+      <td>Card artwork and set logos (TCGdex)</td>
+      <td>The image requested, that is which card you are looking at</td></tr>
+  <tr><td>downloads.s3.cardmarket.com</td>
+      <td>Cardmarket price guide and product catalogue, downloaded in full when
+      the copy on the phone has expired (about once a day), also while the app
+      is closed, so the price history has no gaps on days you do not open it</td>
+      <td>Nothing: the file is the same for everyone</td></tr>
+  <tr><td>raw.githubusercontent.com (public price-guide archive)</td>
+      <td>The Cardmarket prices of the days the app had not recorded, for the
+      cards in your collection or wishlist: a public archive copies the price
+      guide every day since 16 September 2026. One block of about 150 KB is
+      downloaded at a time, at most once a week per card, even when the app
+      is closed</td>
+      <td>The address of the block requested, which depends on the last three
+      digits of the Cardmarket product number: not the card's name or who you
+      are (the service sees your IP address, like any website)</td></tr>
+  <tr><td>www.ecb.europa.eu</td>
+      <td>The European Central Bank's reference exchange rates, only if you
+      chose a second currency next to the euro in Settings: a public file, the
+      same for everyone, downloaded at most every twelve hours</td>
+      <td>Nothing: the request carries no data of yours</td></tr>
+  <tr><td>api.psacard.com</td>
+      <td>Verification of a PSA-graded card's certificate, only in builds where
+      whoever compiled the app entered their own PSA API key (distributed builds
+      have none, and the feature does not appear)</td>
+      <td>The certificate number you typed into the collection entry</td></tr>
+  <tr><td>www.pokemon-card.com</td>
+      <td>Official Japanese catalogue: search, card pages and artwork of
+      Japanese cards</td>
+      <td>The card searched and the image requested</td></tr>
+  <tr><td>asia.pokemon-card.com</td>
+      <td>Official Taiwan catalogue: search, card pages and artwork of
+      Traditional Chinese cards</td>
+      <td>The card searched and the image requested</td></tr>
+  <tr><td>www.hktcg.com, cdn.shopify.com</td>
+      <td>Hong Kong shop (www.hktcg.com): search for Simplified Chinese cards.
+      The card photos are hosted by Shopify (cdn.shopify.com)</td>
+      <td>The card searched and the image requested</td></tr>
+  <tr><td>k-tcg.com, i0.wp.com</td>
+      <td>Korean shop (k-tcg.com): search for Korean cards. The card photos
+      may be served through Automattic's Jetpack image service (i0.wp.com)</td>
+      <td>The card searched and the image requested</td></tr>
+  <tr><td>pokeapi.co</td>
+      <td>Korean name of a species, when it is missing from the list included in
+      the app (PokeAPI)</td>
+      <td>The species name</td></tr>
+  <tr><td>billsarchive.com, bills-archive.nyc3.cdn.digitaloceanspaces.com</td>
+      <td>Archive of vintage Japanese cards: list of expansions and artwork</td>
+      <td>Nothing for the list, which is downloaded in full; the image
+      requested</td></tr>
+  <tr><td>static.tcgcollector.com, limitlesstcg.nyc3.cdn.digitaloceanspaces.com,
+      api.pokemontcg.io, images.pokemontcg.io, images.scrydex.com,
+      tcgplayer-cdn.tcgplayer.com</td>
+      <td>Artwork of cards that the catalogues above do not have</td>
+      <td>The image requested, that is which card you are looking at</td></tr>
+  <tr><td>pkmncards.com, dz3we2x72f7ol.cloudfront.net</td>
+      <td>Artwork of the Trading Card Game Classic decks (pkmncards.com) and of
+      the 30th anniversary Classic Collection, from the official site
+      (dz3we2x72f7ol.cloudfront.net)</td>
+      <td>The image requested, that is which card you are looking at</td></tr>
+  <tr><td>raw.githubusercontent.com, pokesymbols.com, archives.bulbagarden.net,
+      media.pokemoncentral.it</td>
+      <td>Set logos and symbols shown in the list of sets</td>
+      <td>The image requested, that is which set you are looking at</td></tr>
+  <tr><td>Google servers (ML Kit)</td>
+      <td>Technical diagnostics and usage data of text recognition
+      (<a href="#en-camera">section 2</a>)</td>
+      <td>Nothing: never images or recognised text</td></tr>
+</table>
+
+<p>Each service processes this data under its own privacy policy: the Rarium
+data controller has no agreement with them and does not control what they do
+with it. Some of these servers are most likely located outside the European
+Economic Area (for example in Japan, South Korea, Hong Kong or the United
+States); their locations have not been verified
+(<a href="#en-transfers">section 9</a>).</p>
+
+<p>Some buttons instead open a page in the phone's <strong>browser</strong>,
+and only when you tap them: the card's page, search or offers on
+www.cardmarket.com; where available, the page the card's record comes from
+(for example on www.pokemon-card.com or www.tcgcollector.com); for a graded
+card, the sold listings on www.ebay.it filtered by card and grade and the
+certificate page on www.psacard.com or www.cgccards.com; and, from the
+«Privacy e licenze» (privacy and licences) screen, this notice and the licence
+pages of the libraries the app uses. Those sites apply their own privacy
+policies and cookies.</p>
+
+<p>This page is hosted by GitHub Pages (GitHub, Inc.), which logs the IP
+address of visitors for security purposes
+(<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection">GitHub
+Pages documentation</a>). The controller uses no cookies or analytics on this
+page.</p>
+
+<h2 id="en-backup">5. Android backup</h2>
+<p>If Android backup is turned on for your Google account, the system saves a
+copy of Rarium's database (collection, prices paid, dates added, notes, graded
+card details, sales, binders, wishlist with price thresholds, scan
+history, price history and the collection's daily value) and of the app's
+settings, together with the name lists and set numbering, in a private folder
+of your Google Drive, up to 25 MB. Backup runs on its own, at most once a day,
+when the phone is idle and normally on Wi-Fi, and Google keeps only the most
+recent copy. The Cardmarket price guide and catalogue, the artwork cache and the
+app's external folder are excluded.</p>
+<p>On Android 9 and later, if a PIN, pattern or password is set on the phone,
+the copy is end-to-end encrypted. The Rarium data controller does not receive
+this copy and has no way to read it. The same data can move to a new phone
+during a phone-to-phone data transfer, and Android restores it when you
+reinstall Rarium with the same Google account: this is why
+<strong>uninstalling the app does not delete a copy already saved on Google
+Drive</strong>. You can turn backup off in Android settings or delete it from
+your Google account (<a href="#en-delete">section 15</a>). Source:
+<a href="https://developer.android.com/identity/data/autobackup">Android Auto
+Backup documentation</a>.</p>
+
+<h2 id="en-test">6. Camera frames and recognised text</h2>
+<p><strong>The app does not save camera frames or the text read from cards, and it sends them to nobody.</strong> Recognition happens on the phone: each frame is read and then discarded. What stays on the phone is what <a href="#en-phone">section 3</a> describes (your collection, your history and, if you add a card, the photo cropped from the card).</p>
+
+<h2 id="en-bases">7. Purposes and legal bases</h2>
+<table>
+  <tr><th>Processing</th><th>Purpose</th><th>Legal basis</th></tr>
+  <tr><td>Card recognition on the phone</td>
+      <td>Identify the card in the frame</td>
+      <td>Performance of the service you request by using the app (Art. 6(1)(b)
+      GDPR)</td></tr>
+  <tr><td>Requests to the services in <a href="#en-services">section 4</a></td>
+      <td>Find the card, its artwork and its price</td>
+      <td>Performance of the service requested (Art. 6(1)(b)) or, alternatively,
+      legitimate interest in showing you the card, the artwork and the price you
+      are looking for (Art. 6(1)(f))</td></tr>
+  <tr><td>Technical data sent to Google by ML Kit</td>
+      <td>Diagnostics and usage analytics of text recognition</td>
+      <td>Legitimate interest in keeping recognition working and fixing it
+      (Art. 6(1)(f))</td></tr>
+  <tr><td>Data stored on the phone</td>
+      <td>Make the scan history, collection and price history work</td>
+      <td>Performance of the service requested (Art. 6(1)(b)); the data stays
+      under your control and the controller does not receive it</td></tr>
+  <tr><td>Android backup</td>
+      <td>Keep your data when you change phone</td>
+      <td>Performed by Android according to your Google account settings,
+      which you decide: the controller does not receive the copy and has no
+      access to it</td></tr>
+  <tr><td>Messages you send to the controller</td>
+      <td>Answer your requests</td>
+      <td>Steps taken at your request (Art. 6(1)(b)) or legitimate interest in
+      answering the people who write (Art. 6(1)(f))</td></tr>
+  <tr><td>Crash reports in Play Console
+      (<a href="#en-recipients">section 8</a>)</td>
+      <td>Fix app errors</td>
+      <td>Legitimate interest in finding and fixing the app's crashes and
+      freezes (Art. 6(1)(f))</td></tr>
+  <tr><td>Reviews on Google Play
+      (<a href="#en-recipients">section 8</a>)</td>
+      <td>Read them and reply</td>
+      <td>Legitimate interest in knowing what people think of Rarium and in
+      replying publicly (Art. 6(1)(f))</td></tr>
+</table>
+
+<h2 id="en-recipients">8. Recipients</h2>
+<ul>
+  <li><strong>Google</strong>: for ML Kit (<a href="#en-camera">section 2</a>),
+  for Android backup (<a href="#en-backup">section 5</a>) and, when you download
+  the app from Google Play, for Google Play, which processes download and
+  installation data under its own privacy policy. If you have chosen on your
+  phone to share usage and diagnostics data with Google, Google may show the
+  controller, in Play Console, statistics and reports on the app's crashes and
+  freezes, broken down by country, phone model, Android version and app version.
+  If you publish a review on Google Play, the controller sees it in Play Console
+  with the name you publish it under, the date and, when Google provides them,
+  some details of the phone and the app (for example manufacturer, Android
+  version, language and app version), and can reply to you publicly.</li>
+  <li><strong>The services in <a href="#en-services">section 4</a></strong>,
+  which receive the requests from the phone.</li>
+</ul>
+<p>No data is sold, and the controller uses no advertising or profiling tools.
+Google and the other services in section 4 process this data as independent
+controllers, under their own privacy policies: the Rarium controller has not
+entrusted them with any processing on its behalf.</p>
+
+<h2 id="en-transfers">9. Transfers outside the EEA</h2>
+<p>Some of the services in <a href="#en-services">section 4</a> most likely have
+servers outside the European Economic Area, for example in Japan, South Korea,
+Hong Kong or the United States; the server locations have not been verified.
+Google may also process data outside the EEA, under its own privacy policy. The
+controller sends no data outside the EEA: it is your phone's requests, when you
+search for or look at a card, that reach those servers directly, and they
+process them under their own privacy policies.</p>
+
+<h2 id="en-retention">10. How long</h2>
+<p><strong>The app sends the controller no data about the people who use
+it.</strong> The controller keeps the messages you choose to send, for as long
+as needed to answer and handle the request; the data the controller sees in
+Play Console follows the rules below.</p>
+<ul>
+  <li>Data on the phone stays until you delete it
+  (<a href="#en-delete">section 15</a>); Android may clear the artwork cache at
+  any time.</li>
+  <li>The copy in Android backup follows Google's rules: only the most recent is
+  kept, and backups no longer in use are deleted after a period of
+  inactivity.</li>
+  <li>Google and the services in <a href="#en-services">section 4</a> keep request
+  data under their own privacy policies.</li>
+  <li>Crash reports and reviews stay in Play Console, where Google keeps them
+  under its own rules.</li>
+</ul>
+
+<h2 id="en-optional">11. Optional data and automated decisions</h2>
+<p>You do not have to provide any data: there is no sign-up, and the price paid
+and the condition of your cards are optional. Scanning needs the camera
+permission and a connection, without which the app cannot search for cards or
+update prices.</p>
+<p>Rarium takes no decisions based solely on automated processing that produce
+legal effects concerning you or similarly significantly affect you (Art. 22
+GDPR): it suggests a card and a price, which you can always compare with the
+card in your hand and correct.</p>
+
+<h2 id="en-payments">12. Payments</h2>
+<p>Today Rarium sells nothing: there are no purchases or subscriptions in the
+app, and the controller processes no payment data. If a subscription is
+introduced in the future, this notice will be updated beforehand.</p>
+
+<h2 id="en-rights">13. Your rights</h2>
+<p>Under the GDPR you have the right to access the data concerning you, rectify
+it, erase it, restrict its processing and receive it in a portable format
+(Articles 15 to 22). Write to
+<a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+<p class="separato"><strong>Right to object.</strong> You can object at any
+time, on grounds relating to your particular situation, to the processing based
+on legitimate interest (<a href="#en-bases">section 7</a>), by writing to
+<a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (Art. 21 GDPR).</p>
+<p>Since the app sends the controller no data about the people who use it, the
+controller may be unable to identify data concerning you (Art. 11 GDPR). The
+data in <a href="#en-phone">section 3</a> is already on your phone: you delete
+it as explained in <a href="#en-delete">section 15</a>, and you can export your
+collection to CSV. For data processed by Google or by the other services in
+<a href="#en-services">section 4</a> you can also contact them directly.</p>
+<p>You can also lodge a complaint with the Italian data protection authority,
+the Garante per la protezione dei dati personali
+(<a href="https://www.garanteprivacy.it">garanteprivacy.it</a>), or with the
+supervisory authority of the country where you live, where you work or where
+the alleged infringement took place.</p>
+
+<h2 id="en-minors">14. Minors</h2>
+<p>Rarium is not intended for children under 14. The controller receives no data
+that would reveal the age of the people using the app and does not knowingly
+collect data from minors. If you are a parent and have questions, write to the
+address above.</p>
+
+<h2 id="en-delete">15. How to delete your data</h2>
+<p>Rarium has no accounts. To delete your data, uninstall the app or clear its
+data in Android Settings → Apps → Rarium → Storage → Clear storage (labels vary
+by manufacturer), and delete any backup from your Google account.</p>
+<ul>
+  <li><strong>Nothing you do inside the app really deletes data.</strong>
+  Removing a card from the collection moves it to the «Trash»,
+  from which it can be restored; long-pressing a scan removes it from the
+  history. In both cases the row stays in the phone's database (for the
+  collection, together with the log of additions and removals) and in any
+  backup: it only goes away when you clear the app's data and the backup.</li>
+  <li>Uninstalling the app does not delete a copy already saved on Google Drive,
+  which Android restores if you reinstall Rarium with the same account.</li>
+  <li>The backup is deleted from your Google account. Google manages backups
+  together: depending on how you delete it, you may also erase the data of other
+  apps and other phones on your account, WhatsApp included. Before doing so,
+  read <a href="https://support.google.com/android/answer/2819582">Google's guide
+  to backup</a>. To stop saving new copies, turn backup off in Android
+  settings.</li>
+</ul>
+
+<h2 id="en-changes">16. Changes to this notice</h2>
+<p>Changes will be published on this page, with the update date at the top.
+This notice will be updated before any version that changes the data processed,
+for example by adding sign-in with an account or a subscription.</p>
+
+</section>
+
+<footer>
+<p>Rarium è un'app indipendente e non ufficiale. Non è prodotta, approvata,
+sponsorizzata né affiliata a Nintendo, The Pokémon Company, Creatures Inc.,
+GAME FREAK inc. o Cardmarket. Pokémon e i nomi dei personaggi Pokémon sono
+marchi di Nintendo. © 2026 Pokémon. © 1995–2026 Nintendo / Creatures Inc. /
+GAME FREAK inc. Le illustrazioni delle carte appartengono ai rispettivi titolari
+dei diritti e sono mostrate solo per aiutarti a identificare la carta. I prezzi
+sono statistiche di mercato pubblicate da Cardmarket, a scopo informativo: non
+sono una perizia né un'offerta.</p>
+<p lang="en">Rarium is an independent, unofficial app. It is not produced,
+endorsed, sponsored by, or affiliated with Nintendo, The Pokémon Company,
+Creatures Inc., GAME FREAK inc., or Cardmarket. Pokémon and Pokémon character
+names are trademarks of Nintendo. © 2026 Pokémon. © 1995–2026 Nintendo /
+Creatures Inc. / GAME FREAK inc. Card artwork belongs to its respective rights
+holders and is shown only to help you identify the card. Prices are market
+statistics published by Cardmarket, for information only; they are not an
+appraisal or an offer.</p>
+</footer>
+
+</main>
+</body>
+</html>
