@@ -27,10 +27,6 @@
   td:first-child { overflow-wrap:anywhere; }
   .todo { border-left:3px solid #d97706; background:rgba(217,119,6,.1);
           padding:.8rem 1rem; margin:1.2rem 0; font-size:.94rem; }
-  /* Segna nel testo le basi giuridiche ancora da far confermare: si trovano
-     cercando la classe e si tolgono, una per una, quando il legale risponde. */
-  .da-confermare { background:rgba(217,119,6,.16); border-radius:3px;
-                   padding:0 .3em; font-size:.86em; white-space:nowrap; }
   /* Il diritto di opposizione va presentato «separato da qualsiasi altra
      informazione» (art. 21, par. 4, GDPR): in fondo a un elenco di diritti non
      lo e', in un riquadro a se' si'. */
@@ -44,10 +40,20 @@
 <main>
 
 <h1>Privacy — Rarium</h1>
-<p class="sub">Ultimo aggiornamento: 27 ottobre 2026 · <a href="#english">English version below</a></p>
-<!-- Le sezioni su account, sincronizzazione e abbonamento stanno in
+<p class="sub">Ultimo aggiornamento: 27 ottobre 2026 · <a href="#english" lang="en">English version below</a> · <a href="#deutsch" lang="de">Deutsche Fassung weiter unten</a></p>
+<!-- La pagina ha tre versioni: italiana, inglese (#english) e tedesca
+     (#deutsch, che dichiara che in caso di dubbi fa fede l'italiana). L'app
+     apre quella della propria lingua (LegalLinks.inAppLanguage): ogni modifica
+     va fatta in tutte e tre.
+     Le sezioni su account e sincronizzazione stanno in
      docs/legale/bozza-privacy-account.html e si pubblicano solo con la
-     versione che introduce quelle funzioni. -->
+     versione che introduce l'accesso con un account. Rarium Plus, venduto con
+     Google Play Billing senza account e senza server, e' descritto qui
+     (sezioni 2, 3, 4, 5, 7, 8, 10, 12, 13 e 15) e nei Termini d'uso (termini.html).
+     I dati che la libreria Google Play Billing invia a Google (sezione 2) sono
+     stati letti nel codice della versione 9.1.0 (registro «BillingLogger», trasporto
+     datatransport/CCT): se cambia playBilling in gradle/libs.versions.toml, vanno
+     ricontrollati nelle tre versioni. -->
 
 <p>Rarium è un'app Android che riconosce le carte collezionabili inquadrandole
 con la fotocamera, ne mostra l'andamento dei prezzi e permette di tenere una
@@ -61,8 +67,9 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
 <ul>
   <li>Rarium si usa <strong>senza account</strong>: non ci si registra, e l'app
   non invia al titolare dati su chi la usa. Google Play gli mostra però
-  statistiche sugli arresti anomali dell'app e le recensioni pubblicate
-  (<a href="#destinatari">sezione 8</a>).</li>
+  statistiche sugli arresti anomali dell'app, le recensioni pubblicate e, per chi
+  compra Rarium Plus, i dati dell'ordine (<a href="#destinatari">sezione 8</a> e
+  <a href="#pagamenti">sezione 12</a>).</li>
   <li>Le <strong>immagini della fotocamera</strong> sono elaborate solo sul
   telefono e non vengono inviate a nessuno. Di ogni carta riconosciuta l'app
   conserva sul telefono un piccolo ritaglio, come anteprima
@@ -70,6 +77,11 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   <li>Il riconoscimento del testo usa <strong>Google ML Kit</strong>, che invia
   a Google dati tecnici di diagnostica e di utilizzo
   (<a href="#fotocamera">sezione 2</a>).</li>
+  <li>Per Rarium Plus l'app include la libreria <strong>Google Play
+  Billing</strong>, che invia a Google dati tecnici di diagnostica sul proprio
+  funzionamento anche se non compri nulla, perché l'app chiede a Google Play lo
+  stato dell'abbonamento ogni volta che la apri
+  (<a href="#billing">sezione 2</a>).</li>
   <li>Il confronto fra la carta inquadrata e le illustrazioni del catalogo usa un
   <strong>modello incluso nell'app</strong> (DINOv2) e avviene interamente sul
   telefono: non invia dati a nessuno.</li>
@@ -79,8 +91,13 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   <li>Collezione, cronologia e storico dei prezzi restano <strong>sul
   telefono</strong>; il backup di Android può copiarli nel tuo Google Drive
   (<a href="#backup">sezione 5</a>).</li>
-  <li>Niente pubblicità, niente strumenti di statistiche che mandino dati al
-  titolare, e oggi l'app non vende nulla.</li>
+  <li>Niente pubblicità e niente strumenti di statistiche che mandino dati al
+  titolare.</li>
+  <li>Alcune funzioni fanno parte di <strong>Rarium Plus</strong>, un abbonamento
+  facoltativo che si compra su Google Play: il pagamento lo gestisce Google, il
+  titolare non riceve i dati del tuo metodo di pagamento, e l'app verifica
+  l'abbonamento sul telefono senza inviare nulla al titolare
+  (<a href="#pagamenti">sezione 12</a>).</li>
 </ul>
 
 <h2 id="app">1. Che cosa fa l'app</h2>
@@ -93,6 +110,12 @@ segnare una vendita con il prezzo incassato, tenere una lista dei desideri,
 scegliere un prezzo sotto il quale (o sopra il quale) ricevere un avviso, ed
 esportare la collezione in un file CSV o in un backup completo. Tutto questo funziona senza registrarsi: l'app non ha
 account.</p>
+<p>Alcune di queste funzioni, fra cui gli avvisi di prezzo, più di un
+raccoglitore, la collezione oltre le 50 copie e la lista dei desideri oltre le
+10 carte, fanno parte di Rarium Plus, un abbonamento facoltativo che si compra su
+Google Play (<a href="#pagamenti">sezione 12</a>); l'elenco completo è nei
+<a href="termini.html">Termini d'uso</a>. La scansione, il riconoscimento e il
+prezzo di ogni carta restano gratuiti.</p>
 
 <h2 id="fotocamera">2. Le immagini della fotocamera restano sul telefono</h2>
 <p>Il riconoscimento avviene <strong>sul telefono</strong>: i fotogrammi vengono
@@ -133,6 +156,32 @@ Fonti: <a href="https://developers.google.com/ml-kit/android-data-disclosure">da
 raccolti da ML Kit</a>, <a href="https://developers.google.com/ml-kit/terms">termini
 di ML Kit</a>, <a href="https://policies.google.com/privacy">informativa privacy di
 Google</a>.</p>
+
+<h3 id="billing">Google Play Billing</h3>
+<p>Per vendere Rarium Plus e verificare l'abbonamento
+(<a href="#pagamenti">sezione 12</a>) l'app include la libreria Google Play
+Billing (versione 9.1.0). Oltre a dialogare con l'app Play Store del telefono, la
+libreria invia a Google, direttamente dall'app e non attraverso il Play Store,
+eventi tecnici di diagnostica sul proprio funzionamento. Succede a
+<strong>chiunque usi l'app, anche a chi non compra Rarium Plus</strong>: l'app
+chiede a Google Play lo stato dell'abbonamento ogni volta che la apri o ci torni
+(al massimo una volta ogni 30 secondi) e nel lavoro in sottofondo che aggiorna i
+prezzi.</p>
+<p>Secondo le note di versione di Google, dalla versione 6 la libreria registra
+informazioni sull'uso delle proprie funzioni (per esempio le richieste riuscite e
+quelle non riuscite) e sui problemi di connessione con Google Play, che Google usa
+per migliorarne le prestazioni e l'assistenza sugli errori. Google non documenta
+il contenuto esatto di questi eventi; dal codice della libreria risulta che
+riportano, fra l'altro, marca, produttore e modello del telefono, la versione di
+Android e la build del sistema, la memoria RAM del telefono, il nome e la versione
+dell'app, la versione della libreria e un numero casuale generato ogni volta che
+l'app avvia la libreria. Non contengono le tue carte, la collezione né i prezzi
+che hai pagato: l'app non li passa alla libreria. Il titolare di Rarium non
+riceve questi dati, che Google tratta secondo la propria
+<a href="https://policies.google.com/privacy">informativa privacy</a>; l'app non
+ha un'impostazione per disattivare questo invio. Fonte:
+<a href="https://developer.android.com/google/play/billing/release-notes">note di
+versione della libreria Google Play Billing</a>.</p>
 
 <h2 id="telefono">3. Dati sul tuo telefono</h2>
 <p>Rarium salva questi dati sul telefono, nella memoria riservata all'app; se il
@@ -190,6 +239,17 @@ titolare.</p>
       di prezzo e riepilogo settimanale accesi o spenti, l'ultima lingua di
       stampa rilevata.</td>
       <td>Sì</td></tr>
+  <tr><td>Stato di Rarium Plus</td>
+      <td>L'esito dell'ultima verifica riuscita con Google Play: se Rarium Plus è
+      attivo, se l'abbonamento è sospeso o in pausa, se c'è un pagamento in
+      attesa, se si rinnova automaticamente, il piano (mensile o annuale) quando è
+      noto, l'impronta SHA-256 del codice dell'acquisto (non il codice) e quando è
+      stato verificato l'ultima volta. L'impronta serve solo a riconoscere lo
+      stesso acquisto alla verifica successiva, e nessuno di questi dati lascia il
+      telefono. Vale al massimo 40 giorni dall'ultima verifica riuscita
+      (<a href="#pagamenti">sezione 12</a>).</td>
+      <td>No, e nemmeno nel backup completo in un file: su un telefono nuovo
+      l'app lo chiede di nuovo a Google Play</td></tr>
   <tr><td>Cataloghi scaricati</td>
       <td>Il listino e il catalogo dei prodotti Cardmarket, gli elenchi dei nomi
       delle carte, le numerazioni dei set.</td>
@@ -218,8 +278,9 @@ listino con i dati mobili.</p>
 <p>«Salva un backup completo» e «Unisci un backup alla collezione» (menu ⋮ della
 collezione) scrivono e leggono un file JSON nel punto che scegli tu con il
 selettore di Android: dentro ci sono raccoglitori, carte (anche quelle tolte),
-desideri con le soglie, note, cronologia, valore giornaliero, storico dei prezzi
-dei prodotti che segui e le impostazioni. Il file è tuo e l'app non lo invia a
+desideri con le soglie, note, vendite, cronologia, valore giornaliero, storico
+dei prezzi dei prodotti che segui e le impostazioni, ma non lo stato di Rarium
+Plus. Il file è tuo e l'app non lo invia a
 nessuno. «Condividi come immagine», l'elenco da vendere e la lista scambi
 passano dal menu di condivisione di Android: sei tu a scegliere con quale app
 condividerli, e nessuno dei tre contiene i prezzi che hai pagato o le tue
@@ -247,11 +308,20 @@ riceve dipende dal servizio, come dice l'ultima colonna della tabella:</p>
   <li><strong>Google</strong> riceve da ML Kit i dati tecnici della
   <a href="#fotocamera">sezione 2</a>, compresi il nome dell'app e un
   identificativo per installazione.</li>
+  <li><strong>Google Play</strong>, attraverso l'app Play Store del telefono e la
+  libreria Google Play Billing inclusa in Rarium, gestisce l'acquisto di Rarium
+  Plus e risponde all'app se l'abbonamento è attivo per l'account Google con cui
+  il Play Store è collegato (<a href="#pagamenti">sezione 12</a>). La libreria
+  invia inoltre a Google, direttamente dall'app, i dati tecnici di diagnostica
+  della <a href="#billing">sezione 2</a>, compresi il nome dell'app e un numero
+  casuale generato a ogni avvio della libreria, anche se non compri nulla.</li>
 </ul>
 <p>Nessuno di questi servizi riceve la tua collezione come elenco, né i prezzi
 che hai pagato. Oltre a Google, che riceve da ML Kit l'identificativo per
-installazione, nessuno riceve identificativi dell'installazione o del
-telefono.</p>
+installazione, dalla libreria Google Play Billing il numero casuale generato a
+ogni suo avvio e, attraverso Google Play, conosce l'account Google con cui il
+Play Store è collegato e con cui compri Rarium Plus, nessuno riceve
+identificativi dell'installazione o del telefono.</p>
 
 <table>
   <tr><th>Indirizzo</th><th>A cosa serve</th><th>Che cosa riceve della carta</th></tr>
@@ -326,6 +396,18 @@ telefono.</p>
       media.pokemoncentral.it</td>
       <td>Loghi e simboli dei set mostrati nell'elenco dei set</td>
       <td>L'immagine richiesta, cioè quale set stai guardando</td></tr>
+  <tr><td>Google Play (app Play Store del telefono e server di Google)</td>
+      <td>L'acquisto di Rarium Plus e la verifica dell'abbonamento, con la libreria
+      Google Play Billing inclusa nell'app: l'app chiede al Play Store se
+      l'abbonamento è attivo ogni volta che la apri o ci torni (al massimo una
+      volta ogni 30 secondi) e nel lavoro in sottofondo; acquisto e pagamento
+      avvengono su Google Play (<a href="#pagamenti">sezione 12</a>). La libreria
+      invia inoltre a Google, direttamente dall'app, dati tecnici di diagnostica
+      sul proprio funzionamento, anche se non compri nulla
+      (<a href="#billing">sezione 2</a>)</td>
+      <td>Niente della carta: l'abbonamento, il piano scelto e, per Google, il tuo
+      account Google; dalla libreria, i dati tecnici sul telefono e sull'app
+      descritti nella <a href="#billing">sezione 2</a></td></tr>
   <tr><td>Server di Google (ML Kit)</td>
       <td>Dati tecnici di diagnostica e di utilizzo del riconoscimento del
       testo (<a href="#fotocamera">sezione 2</a>)</td>
@@ -344,10 +426,11 @@ telefono, e solo se li tocchi: la scheda, la ricerca o le offerte della carta su
 www.cardmarket.com; quando c'è, la pagina da cui arriva la scheda della carta
 (per esempio su www.pokemon-card.com o su www.tcgcollector.com); per una carta
 gradata, i venduti su www.ebay.it filtrati per carta e voto e la pagina del
-certificato su www.psacard.com o www.cgccards.com; e, dalla
-schermata «Privacy e licenze», questa informativa e le pagine delle licenze
-delle librerie usate dall'app. Quei siti applicano la propria informativa e i
-propri cookie.</p>
+certificato su www.psacard.com o www.cgccards.com; per gestire o disdire Rarium
+Plus, il Centro abbonamenti di Google Play su play.google.com; questa
+informativa e i Termini d'uso, su questo stesso sito; e, dalla schermata
+«Privacy e licenze», le pagine delle licenze delle librerie usate dall'app. Quei
+siti applicano la propria informativa e i propri cookie.</p>
 
 <p>Questa pagina (ciano-ctrl.github.io) è ospitata da GitHub Pages (GitHub, Inc.), che registra
 l'indirizzo IP di chi la visita per motivi di sicurezza
@@ -365,7 +448,9 @@ nomi e le numerazioni dei set, in una cartella privata del tuo Google Drive,
 fino a 25 MB. Il backup parte da solo, non più di una volta al giorno, quando il
 telefono è inattivo e di norma connesso al Wi-Fi, e Google conserva solo la copia
 più recente. Sono esclusi il listino e il catalogo Cardmarket, la cache delle
-illustrazioni e la cartella esterna dell'app.</p>
+illustrazioni, la cartella esterna dell'app e lo stato di Rarium Plus, che su un
+telefono nuovo, o dopo aver reinstallato l'app, Rarium chiede di nuovo a Google
+Play.</p>
 <p>Da Android 9, se sul telefono è impostato un PIN, una sequenza o una
 password, la copia è cifrata end-to-end. Il titolare di Rarium non riceve questa
 copia e non ha modo di leggerla. Gli stessi dati possono passare a un telefono
@@ -378,7 +463,7 @@ eliminarlo dal tuo account Google (<a href="#cancellare">sezione 15</a>). Fonte:
 Android sul backup automatico</a>.</p>
 
 <h2 id="prova">6. Fotogrammi e testo letto</h2>
-<p><strong>L'app non salva i fotogrammi della fotocamera né il testo letto dalle carte, e non li invia a nessuno.</strong> Il riconoscimento avviene sul telefono: ogni fotogramma viene letto e poi scartato. Cio' che resta sul telefono e' quanto descritto nella <a href="#telefono">sezione 3</a> (la collezione, la cronologia e, se aggiungi una carta, la foto del ritaglio della carta).</p>
+<p><strong>L'app non salva i fotogrammi della fotocamera né il testo letto dalle carte, e non li invia a nessuno.</strong> Il riconoscimento avviene sul telefono: ogni fotogramma viene letto e poi scartato. Ciò che resta sul telefono è quanto descritto nella <a href="#telefono">sezione 3</a> (la collezione, la cronologia e, se aggiungi una carta, la foto del ritaglio della carta).</p>
 
 <h2 id="basi">7. Finalità e basi giuridiche</h2>
 <table>
@@ -395,6 +480,12 @@ Android sul backup automatico</a>.</p>
       <td>Diagnostica e statistiche d'uso del riconoscimento del testo</td>
       <td>Legittimo interesse a far funzionare e correggere il riconoscimento
       (art. 6.1.f)</td></tr>
+  <tr><td>Dati tecnici inviati a Google dalla libreria Google Play Billing
+      (<a href="#billing">sezione 2</a>)</td>
+      <td>Diagnostica del funzionamento della libreria con cui l'app vende e
+      verifica Rarium Plus</td>
+      <td>Legittimo interesse a offrire Rarium Plus con Google Play e a farne
+      funzionare la verifica (art. 6.1.f)</td></tr>
   <tr><td>Dati salvati sul telefono</td>
       <td>Far funzionare cronologia, collezione e storico dei prezzi</td>
       <td>Esecuzione del servizio richiesto (art. 6.1.b); i dati restano sotto
@@ -403,6 +494,17 @@ Android sul backup automatico</a>.</p>
       <td>Non perdere i dati se cambi telefono</td>
       <td>Lo esegue Android secondo le impostazioni del tuo account Google, che
       decidi tu: il titolare non riceve la copia e non vi accede</td></tr>
+  <tr><td>Verifica di Rarium Plus sul telefono
+      (<a href="#pagamenti">sezione 12</a>)</td>
+      <td>Sapere se hai diritto alle funzioni di Rarium Plus</td>
+      <td>Esecuzione del contratto di abbonamento (art. 6.1.b); il dato resta sul
+      telefono e il titolare non lo riceve</td></tr>
+  <tr><td>Dati degli ordini di Rarium Plus nella Play Console e registrazioni
+      contabili (<a href="#pagamenti">sezione 12</a>)</td>
+      <td>Assistenza, rimborsi e obblighi fiscali e contabili</td>
+      <td>Obbligo di legge per le registrazioni fiscali e contabili
+      (art. 6.1.c); per assistenza e rimborsi, esecuzione del contratto
+      (art. 6.1.b)</td></tr>
   <tr><td>Messaggi che scrivi al titolare</td>
       <td>Rispondere alle tue richieste</td>
       <td>Misure richieste da te (art. 6.1.b) o legittimo interesse a rispondere
@@ -422,9 +524,15 @@ Android sul backup automatico</a>.</p>
 <h2 id="destinatari">8. Destinatari</h2>
 <ul>
   <li><strong>Google</strong>: per ML Kit (<a href="#fotocamera">sezione 2</a>),
-  per il backup di Android (<a href="#backup">sezione 5</a>) e, quando scarichi
-  l'app da Google Play, per Google Play, che tratta i dati del download e
-  dell'installazione secondo la propria informativa. Se sul telefono hai scelto
+  per la libreria Google Play Billing, che invia a Google i dati tecnici della
+  <a href="#billing">sezione 2</a> dal telefono di chiunque usi l'app, anche di chi
+  non compra Rarium Plus, per il backup di Android (<a href="#backup">sezione 5</a>)
+  e, quando scarichi l'app da Google Play, per Google Play, che tratta i dati del
+  download e dell'installazione secondo la propria informativa. Se compri Rarium Plus,
+  Google Play tratta anche i dati dell'acquisto e del pagamento: nello Spazio
+  economico europeo il contratto d'acquisto si conclude con Google Commerce
+  Limited, e Google mostra al titolare, nella Play Console, i dati dell'ordine
+  descritti nella <a href="#pagamenti">sezione 12</a>. Se sul telefono hai scelto
   di condividere con Google i dati di utilizzo e diagnostica, Google può
   mostrare al titolare, nella Play Console, statistiche e rapporti sugli arresti
   anomali e sui blocchi dell'app, suddivisi per paese, modello di telefono,
@@ -437,9 +545,10 @@ Android sul backup automatico</a>.</p>
   ricevono le richieste dal telefono.</li>
 </ul>
 <p>Nessun dato viene venduto, e il titolare non usa pubblicità né strumenti di
-profilazione. Google e gli altri servizi della sezione 4 trattano questi dati
-come titolari autonomi, secondo le proprie informative: il titolare di Rarium
-non ha affidato loro alcun trattamento per proprio conto.</p>
+profilazione. Google, anche per i dati tecnici che riceve da ML Kit e dalla
+libreria Google Play Billing, e gli altri servizi della sezione 4 trattano questi
+dati come titolari autonomi, secondo le proprie informative: il titolare di
+Rarium non ha affidato loro alcun trattamento per proprio conto.</p>
 
 <h2 id="trasferimenti">9. Trasferimenti fuori dallo SEE</h2>
 <p>Alcuni dei servizi della <a href="#servizi">sezione 4</a> hanno, con ogni
@@ -465,22 +574,71 @@ rispondere e a gestire la richiesta; i dati che vede nella Play Console seguono 
   delle richieste secondo le proprie informative.</li>
   <li>I rapporti sugli arresti anomali e le recensioni restano nella Play
   Console, dove li conserva Google secondo le proprie regole.</li>
+  <li>Lo stato di Rarium Plus resta sul telefono finché non cancelli i dati
+  dell'app; l'app smette di considerarlo valido 40 giorni dopo l'ultima verifica
+  riuscita con Google Play.</li>
+  <li>I dati degli ordini di Rarium Plus restano nella Play Console secondo le
+  regole di Google. Il titolare conserva quelli che servono agli obblighi fiscali
+  e contabili (per esempio i rapporti di vendita) per il tempo richiesto dalla
+  legge fiscale.</li>
 </ul>
 
 <h2 id="facoltativi">11. Dati facoltativi e decisioni automatizzate</h2>
 <p>Non devi fornire alcun dato: non ci si registra, e il prezzo pagato e la
 condizione delle carte sono facoltativi. Per scansionare servono il permesso
 della fotocamera e la connessione, senza la quale l'app non può cercare le carte
-né aggiornare i prezzi.</p>
+né aggiornare i prezzi. Per comprare Rarium Plus servono un account Google e un
+metodo di pagamento: li chiede e li tratta Google Play, non il titolare.</p>
 <p>Rarium non prende decisioni basate unicamente su un trattamento automatizzato
 che producano effetti giuridici o che ti riguardino in modo significativo
 (art. 22 GDPR): propone una carta e un prezzo, che puoi sempre confrontare con
 la carta che hai in mano e correggere.</p>
 
-<h2 id="pagamenti">12. Pagamenti</h2>
-<p>Oggi Rarium non vende nulla: nell'app non ci sono acquisti né abbonamenti, e
-il titolare non tratta dati di pagamento. Se in futuro sarà introdotto un
-abbonamento, questa informativa sarà aggiornata prima.</p>
+<h2 id="pagamenti">12. Rarium Plus e pagamenti</h2>
+<p>Rarium Plus, l'abbonamento facoltativo che aggiunge alcune funzioni (le
+elencano i <a href="termini.html">Termini d'uso</a>), si compra solo su
+<strong>Google Play</strong>, con il sistema di pagamento di Google. Pagamento,
+IVA, rinnovo, disdetta e rimborsi li gestisce Google Play: nello Spazio economico
+europeo il contratto d'acquisto si conclude con Google Commerce Limited, secondo i
+<a href="https://play.google.com/about/play-terms/eea/index.html">Termini di
+servizio di Google Play</a>. <strong>Il titolare non riceve i dati del tuo metodo
+di pagamento.</strong></p>
+<ul>
+  <li><strong>Sul telefono.</strong> Per sapere se Rarium Plus è attivo, l'app lo
+  chiede a Google Play sul telefono, attraverso l'app Play Store e la libreria
+  Google Play Billing inclusa in Rarium, ogni volta che la apri o ci torni (al
+  massimo una volta ogni 30 secondi) e nel lavoro in sottofondo che aggiorna i
+  prezzi. Conserva nella memoria dell'app l'esito dell'ultima verifica riuscita:
+  se Rarium Plus è attivo, se l'abbonamento è sospeso o in pausa, se c'è un
+  pagamento in attesa, se si rinnova automaticamente, il piano (mensile o
+  annuale) quando è noto, l'impronta SHA-256 del codice dell'acquisto (non il
+  codice) e quando è stato verificato l'ultima volta. L'impronta serve solo a
+  riconoscere lo stesso acquisto alla verifica successiva. Questi dati non
+  lasciano il telefono: non vengono inviati al titolare, non entrano nel backup
+  di Android né nel backup completo in un file, e si cancellano con i dati
+  dell'app. Valgono al massimo 40 giorni dall'ultima verifica riuscita: oltre,
+  l'app torna alla versione gratuita finché Google Play non conferma di nuovo
+  l'abbonamento. La libreria Google Play Billing invia invece a Google i dati
+  tecnici di diagnostica della <a href="#billing">sezione 2</a>, anche se non
+  compri nulla.</li>
+  <li><strong>Nella Play Console.</strong> Per ogni acquisto Google mostra al
+  titolare, nella Play Console e nei rapporti di vendita e di guadagno, i dati
+  dell'ordine: numero d'ordine, data e ora, prodotto, piano (mensile o annuale)
+  ed eventuale offerta (per esempio la prova gratuita), prezzo, imposte e importo
+  addebitato con la valuta, stato (per esempio addebitato o rimborsato), paese
+  dell'acquirente e, quando Google li fornisce, regione, città e codice postale,
+  e modello del telefono usato per l'acquisto. Nella Play Console un ordine si può
+  anche cercare con il suo numero o con l'indirizzo email completo dell'account
+  Google che l'ha fatto: il titolare lo fa quando glieli indichi tu per una
+  richiesta. Il titolare usa questi dati per l'assistenza, i rimborsi e gli
+  obblighi fiscali e contabili, e li conserva per il tempo richiesto dalla legge
+  fiscale.</li>
+  <li><strong>Disdetta.</strong> L'abbonamento si gestisce e si disdice dal
+  <a href="https://play.google.com/store/account/subscriptions">Centro
+  abbonamenti di Google Play</a> (play.google.com). Disinstallare Rarium o
+  cancellarne i dati non disdice l'abbonamento e non cancella l'ordine presso
+  Google.</li>
+</ul>
 
 <h2 id="diritti">13. I tuoi diritti</h2>
 <p>Il GDPR ti dà diritto di accedere ai dati che ti riguardano, correggerli,
@@ -493,7 +651,10 @@ trattamenti che si basano sul legittimo interesse
 (<a href="#basi">sezione 7</a>), scrivendo a
 <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (art. 21 GDPR).</p>
 <p>Poiché l'app non invia al titolare dati su chi la usa, il titolare potrebbe
-non essere in grado di individuare dati che ti riguardano (art. 11 GDPR). I dati
+non essere in grado di individuare dati che ti riguardano (art. 11 GDPR). Fanno
+eccezione gli ordini di Rarium Plus: indica il numero d'ordine che trovi nella
+ricevuta di Google Play (di solito comincia con «GPA.») o l'indirizzo email del
+tuo account Google, e il titolare può ritrovare l'ordine nella Play Console. I dati
 della <a href="#telefono">sezione 3</a> sono già sul tuo telefono: li cancelli
 come spiega la <a href="#cancellare">sezione 15</a>, e puoi esportare la
 collezione in CSV. Per i dati trattati da Google o dagli altri servizi della
@@ -523,6 +684,11 @@ elimina l'eventuale backup dal tuo account Google.</p>
   se ne va solo cancellando i dati dell'app e il backup.</li>
   <li>Disinstallare l'app non cancella una copia già salvata su Google Drive,
   che Android ripristina se reinstalli Rarium con lo stesso account.</li>
+  <li>Disinstallare Rarium o cancellarne i dati <strong>non disdice Rarium
+  Plus</strong> e non cancella l'ordine presso Google: l'abbonamento si disdice dal
+  <a href="https://play.google.com/store/account/subscriptions">Centro abbonamenti
+  di Google Play</a>. Lo stato di Rarium Plus salvato sul telefono si cancella
+  con i dati dell'app.</li>
   <li>Il backup si elimina dal tuo account Google. Google gestisce i backup
   insieme: secondo come lo elimini, puoi cancellare anche i dati delle altre app
   e degli altri telefoni del tuo account, compresi quelli di WhatsApp. Prima di
@@ -534,8 +700,7 @@ elimina l'eventuale backup dal tuo account Google.</p>
 <h2 id="modifiche">16. Modifiche a questa informativa</h2>
 <p>Le modifiche saranno pubblicate su questa pagina, con la data di
 aggiornamento in cima. L'informativa sarà aggiornata prima di ogni versione che
-cambi i dati trattati, per esempio con un accesso tramite account o con un
-abbonamento.</p>
+cambi i dati trattati, per esempio con un accesso tramite account.</p>
 
 <section lang="en">
 
@@ -552,8 +717,10 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
 <ul>
   <li>Rarium is used <strong>without an account</strong>: there is no sign-up,
   and the app sends the controller no data about the people who use it. Google
-  Play does, however, show the controller statistics on the app's crashes and
-  the published reviews (<a href="#en-recipients">section 8</a>).</li>
+  Play does, however, show the controller statistics on the app's crashes, the
+  published reviews and, for people who buy Rarium Plus, the order details
+  (<a href="#en-recipients">section 8</a> and
+  <a href="#en-payments">section 12</a>).</li>
   <li><strong>Camera frames</strong> are processed only on the phone and are
   sent to no one. For each recognised card the app keeps a small crop on the
   phone, as a preview (<a href="#en-camera">section 2</a>).</li>
@@ -562,6 +729,11 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   the phone: it sends no data to anyone.</li>
   <li>Text recognition uses <strong>Google ML Kit</strong>, which sends Google
   technical diagnostics and usage data (<a href="#en-camera">section 2</a>).</li>
+  <li>For Rarium Plus the app includes the <strong>Google Play Billing</strong>
+  library, which sends Google technical diagnostics data about its own operation
+  even if you never buy anything, because the app asks Google Play for the
+  subscription status every time you open it
+  (<a href="#en-billing">section 2</a>).</li>
   <li>To find cards, artwork and prices the app queries <strong>third-party
   services</strong>, which receive your IP address and, depending on the
   service, the card searched or the artwork shown
@@ -569,8 +741,12 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   <li>Your collection, scan history and price history stay <strong>on the
   phone</strong>; Android backup may copy them to your Google Drive
   (<a href="#en-backup">section 5</a>).</li>
-  <li>No ads, no analytics tools that send data to the controller, and today the
-  app sells nothing.</li>
+  <li>No ads and no analytics tools that send data to the controller.</li>
+  <li>Some features are part of <strong>Rarium Plus</strong>, an optional
+  subscription bought on Google Play: Google handles the payment, the controller
+  never receives your payment method details, and the app checks the
+  subscription on the phone without sending anything to the controller
+  (<a href="#en-payments">section 12</a>).</li>
 </ul>
 
 <h2 id="en-app">1. What the app does</h2>
@@ -582,6 +758,12 @@ what you paid, write a note, mark a card as graded or for sale, record a sale
 with the price you received, keep a wishlist, choose a price below (or above)
 which you get an alert, and export the collection to a CSV file or a full
 backup. All of this works without signing up: the app has no accounts.</p>
+<p>Some of these features, including price alerts, more than one binder, a
+collection beyond 50 copies and a wishlist beyond 10 cards, are part of Rarium
+Plus, an optional subscription bought on Google Play
+(<a href="#en-payments">section 12</a>); the full list is in the
+<a href="termini.html#english">Terms of Use</a>. Scanning, recognition and the
+price of every card stay free.</p>
 
 <h2 id="en-camera">2. Camera frames stay on the phone</h2>
 <p>Recognition runs <strong>on the phone</strong>: frames are analysed in memory
@@ -621,6 +803,32 @@ off, and ML Kit does not document one. Sources:
 disclosure</a>, <a href="https://developers.google.com/ml-kit/terms">ML Kit
 terms</a>, <a href="https://policies.google.com/privacy">Google privacy
 policy</a>.</p>
+
+<h3 id="en-billing">Google Play Billing</h3>
+<p>To sell Rarium Plus and check the subscription
+(<a href="#en-payments">section 12</a>) the app includes the Google Play Billing
+library (version 9.1.0). Besides talking to the phone's Play Store app, the
+library sends Google, directly from the app and not through the Play Store,
+technical diagnostics events about its own operation. This happens for
+<strong>everyone who uses the app, including people who never buy Rarium
+Plus</strong>: the app asks Google Play for the subscription status every time
+you open it or return to it (at most once every 30 seconds) and in the
+background job that updates prices.</p>
+<p>According to Google's release notes, since version 6 the library logs
+information about the use of its functions (for example successful and failed
+requests) and about connection problems with Google Play, which Google uses to
+improve its performance and its support for errors. Google does not document the
+exact content of these events; the library's code shows that they include,
+among other things, the phone's brand, manufacturer and model, the Android
+version and the system build, the phone's RAM, the app's name and version,
+the library's version and a random number generated every time the app starts
+the library. They do not contain your cards, your collection or the prices you
+paid: the app does not pass them to the library. The Rarium data controller does
+not receive this data, which Google processes under its own
+<a href="https://policies.google.com/privacy">privacy policy</a>; the app has no
+setting to turn this off. Source:
+<a href="https://developer.android.com/google/play/billing/release-notes">Google
+Play Billing Library release notes</a>.</p>
 
 <h2 id="en-phone">3. Data on your phone</h2>
 <p>Rarium stores this data on the phone, in the storage reserved for the app; if
@@ -677,6 +885,17 @@ controller.</p>
       Wi-Fi only, price alerts and weekly summary on or off, the last printed
       language detected.</td>
       <td>Yes</td></tr>
+  <tr><td>Rarium Plus status</td>
+      <td>The result of the last successful check with Google Play: whether
+      Rarium Plus is active, whether the subscription is suspended or paused,
+      whether a payment is pending, whether it renews automatically, the plan
+      (monthly or yearly) when known, the SHA-256 fingerprint of the purchase
+      token (not the token itself) and when it was last checked. The fingerprint
+      is used only to recognise the same purchase at the next check, and none of
+      this data leaves the phone. It is valid for at most 40 days after the last
+      successful check (<a href="#en-payments">section 12</a>).</td>
+      <td>No, nor in the full backup to a file: on a new phone the app asks
+      Google Play again</td></tr>
   <tr><td>Downloaded catalogues</td>
       <td>The Cardmarket price guide and product catalogue, the lists of card
       names, the set numbering.</td>
@@ -706,7 +925,8 @@ price guide over mobile data.</p>
 collection) write and read a JSON file wherever you choose with Android's file
 picker: it contains binders, cards (including removed ones), wishlist with
 thresholds, notes, sales, scan history, daily value, price history of the
-products you follow and the settings. The file is yours and the app does not
+products you follow and the settings, but not the Rarium Plus status. The file
+is yours and the app does not
 send it to anyone. «Share as image», the for-sale list and the trade list go
 through Android's share menu: you choose which app to share them with, and none
 of the three contains the prices you paid or your notes.</p>
@@ -733,10 +953,22 @@ service, as the last column of the table shows:</p>
   <li><strong>Google</strong> receives from ML Kit the technical data described
   in <a href="#en-camera">section 2</a>, including the app's name and a
   per-installation identifier.</li>
+  <li><strong>Google Play</strong>, through the phone's Play Store app and the
+  Google Play Billing library included in Rarium, handles the purchase of Rarium
+  Plus and tells the app whether the subscription is active for the Google
+  account the Play Store is signed in with
+  (<a href="#en-payments">section 12</a>). The library also sends Google,
+  directly from the app, the technical diagnostics data described in
+  <a href="#en-billing">section 2</a>, including the app's name and a random
+  number generated every time the library starts, even if you never buy
+  anything.</li>
 </ul>
 <p>None of these services receives your collection as a list, or the prices you
 paid. Apart from Google, which receives ML Kit's per-installation identifier,
-none of them receives an identifier of the installation or of the phone.</p>
+the random number the Google Play Billing library generates every time it
+starts and, through Google Play, knows the Google account the Play Store is
+signed in with and that you buy Rarium Plus with, none of them receives an
+identifier of the installation or of the phone.</p>
 
 <table>
   <tr><th>Address</th><th>Purpose</th><th>What it learns about the card</th></tr>
@@ -808,6 +1040,18 @@ none of them receives an identifier of the installation or of the phone.</p>
       media.pokemoncentral.it</td>
       <td>Set logos and symbols shown in the list of sets</td>
       <td>The image requested, that is which set you are looking at</td></tr>
+  <tr><td>Google Play (the phone's Play Store app and Google servers)</td>
+      <td>Purchase of Rarium Plus and checking the subscription, with the Google
+      Play Billing library included in the app: the app asks the Play Store
+      whether the subscription is active every time you open it or return to it
+      (at most once every 30 seconds) and in the background job; purchase and
+      payment happen on Google Play (<a href="#en-payments">section 12</a>). The
+      library also sends Google, directly from the app, technical diagnostics
+      data about its own operation, even if you never buy anything
+      (<a href="#en-billing">section 2</a>)</td>
+      <td>Nothing about the card: the subscription, the plan chosen and, for
+      Google, your Google account; from the library, the technical data about the
+      phone and the app described in <a href="#en-billing">section 2</a></td></tr>
   <tr><td>Google servers (ML Kit)</td>
       <td>Technical diagnostics and usage data of text recognition
       (<a href="#en-camera">section 2</a>)</td>
@@ -826,10 +1070,11 @@ and only when you tap them: the card's page, search or offers on
 www.cardmarket.com; where available, the page the card's record comes from
 (for example on www.pokemon-card.com or www.tcgcollector.com); for a graded
 card, the sold listings on www.ebay.it filtered by card and grade and the
-certificate page on www.psacard.com or www.cgccards.com; and, from the
-«Privacy e licenze» (privacy and licences) screen, this notice and the licence
-pages of the libraries the app uses. Those sites apply their own privacy
-policies and cookies.</p>
+certificate page on www.psacard.com or www.cgccards.com; to manage or cancel
+Rarium Plus, the Google Play subscriptions centre on play.google.com; this
+notice and the Terms of Use, on this same site; and, from the «Privacy and
+licences» screen, the licence pages of the libraries the app uses. Those sites
+apply their own privacy policies and cookies.</p>
 
 <p>This page (ciano-ctrl.github.io) is hosted by GitHub Pages (GitHub, Inc.), which logs the IP
 address of visitors for security purposes
@@ -845,8 +1090,10 @@ history, price history and the collection's daily value) and of the app's
 settings, together with the name lists and set numbering, in a private folder
 of your Google Drive, up to 25 MB. Backup runs on its own, at most once a day,
 when the phone is idle and normally on Wi-Fi, and Google keeps only the most
-recent copy. The Cardmarket price guide and catalogue, the artwork cache and the
-app's external folder are excluded.</p>
+recent copy. The Cardmarket price guide and catalogue, the artwork cache, the
+app's external folder and the Rarium Plus status are excluded: on a new phone,
+or after reinstalling the app, Rarium asks Google Play for the status
+again.</p>
 <p>On Android 9 and later, if a PIN, pattern or password is set on the phone,
 the copy is end-to-end encrypted. The Rarium data controller does not receive
 this copy and has no way to read it. The same data can move to a new phone
@@ -877,6 +1124,12 @@ Backup documentation</a>.</p>
       <td>Diagnostics and usage analytics of text recognition</td>
       <td>Legitimate interest in keeping recognition working and fixing it
       (Art. 6(1)(f))</td></tr>
+  <tr><td>Technical data sent to Google by the Google Play Billing library
+      (<a href="#en-billing">section 2</a>)</td>
+      <td>Diagnostics of the library the app uses to sell and check Rarium
+      Plus</td>
+      <td>Legitimate interest in offering Rarium Plus through Google Play and in
+      keeping its check working (Art. 6(1)(f))</td></tr>
   <tr><td>Data stored on the phone</td>
       <td>Make the scan history, collection and price history work</td>
       <td>Performance of the service requested (Art. 6(1)(b)); the data stays
@@ -886,6 +1139,16 @@ Backup documentation</a>.</p>
       <td>Performed by Android according to your Google account settings,
       which you decide: the controller does not receive the copy and has no
       access to it</td></tr>
+  <tr><td>Checking Rarium Plus on the phone
+      (<a href="#en-payments">section 12</a>)</td>
+      <td>Know whether you are entitled to the Rarium Plus features</td>
+      <td>Performance of the subscription contract (Art. 6(1)(b)); the data stays
+      on the phone and the controller does not receive it</td></tr>
+  <tr><td>Rarium Plus order data in Play Console and accounting records
+      (<a href="#en-payments">section 12</a>)</td>
+      <td>Support, refunds and tax and accounting obligations</td>
+      <td>Legal obligation for tax and accounting records (Art. 6(1)(c)); for
+      support and refunds, performance of the contract (Art. 6(1)(b))</td></tr>
   <tr><td>Messages you send to the controller</td>
       <td>Answer your requests</td>
       <td>Steps taken at your request (Art. 6(1)(b)) or legitimate interest in
@@ -905,9 +1168,16 @@ Backup documentation</a>.</p>
 <h2 id="en-recipients">8. Recipients</h2>
 <ul>
   <li><strong>Google</strong>: for ML Kit (<a href="#en-camera">section 2</a>),
-  for Android backup (<a href="#en-backup">section 5</a>) and, when you download
-  the app from Google Play, for Google Play, which processes download and
-  installation data under its own privacy policy. If you have chosen on your
+  for the Google Play Billing library, which sends Google the technical data in
+  <a href="#en-billing">section 2</a> from the phone of everyone who uses the
+  app, including people who never buy Rarium Plus, for Android backup
+  (<a href="#en-backup">section 5</a>) and, when you download the app from Google
+  Play, for Google Play, which processes download and installation data under its
+  own privacy policy. If you buy Rarium Plus, Google
+  Play also processes the purchase and payment data: in the European Economic
+  Area the purchase contract is concluded with Google Commerce Limited, and
+  Google shows the controller, in Play Console, the order details described in
+  <a href="#en-payments">section 12</a>. If you have chosen on your
   phone to share usage and diagnostics data with Google, Google may show the
   controller, in Play Console, statistics and reports on the app's crashes and
   freezes, broken down by country, phone model, Android version and app version.
@@ -919,9 +1189,10 @@ Backup documentation</a>.</p>
   which receive the requests from the phone.</li>
 </ul>
 <p>No data is sold, and the controller uses no advertising or profiling tools.
-Google and the other services in section 4 process this data as independent
-controllers, under their own privacy policies: the Rarium controller has not
-entrusted them with any processing on its behalf.</p>
+Google, also for the technical data it receives from ML Kit and from the Google
+Play Billing library, and the other services in section 4 process this data as
+independent controllers, under their own privacy policies: the Rarium controller
+has not entrusted them with any processing on its behalf.</p>
 
 <h2 id="en-transfers">9. Transfers outside the EEA</h2>
 <p>Some of the services in <a href="#en-services">section 4</a> most likely have
@@ -948,22 +1219,69 @@ Play Console follows the rules below.</p>
   data under their own privacy policies.</li>
   <li>Crash reports and reviews stay in Play Console, where Google keeps them
   under its own rules.</li>
+  <li>The Rarium Plus status stays on the phone until you clear the app's data;
+  the app stops treating it as valid 40 days after the last successful check
+  with Google Play.</li>
+  <li>Rarium Plus order data stays in Play Console under Google's rules. The
+  controller keeps what is needed for tax and accounting obligations (for
+  example the sales reports) for as long as tax law requires.</li>
 </ul>
 
 <h2 id="en-optional">11. Optional data and automated decisions</h2>
 <p>You do not have to provide any data: there is no sign-up, and the price paid
 and the condition of your cards are optional. Scanning needs the camera
 permission and a connection, without which the app cannot search for cards or
-update prices.</p>
+update prices. Buying Rarium Plus requires a Google account and a payment
+method: Google Play asks for them and processes them, not the controller.</p>
 <p>Rarium takes no decisions based solely on automated processing that produce
 legal effects concerning you or similarly significantly affect you (Art. 22
 GDPR): it suggests a card and a price, which you can always compare with the
 card in your hand and correct.</p>
 
-<h2 id="en-payments">12. Payments</h2>
-<p>Today Rarium sells nothing: there are no purchases or subscriptions in the
-app, and the controller processes no payment data. If a subscription is
-introduced in the future, this notice will be updated beforehand.</p>
+<h2 id="en-payments">12. Rarium Plus and payments</h2>
+<p>Rarium Plus, the optional subscription that adds some features (listed in the
+<a href="termini.html#english">Terms of Use</a>), can be bought only on
+<strong>Google Play</strong>, through Google's payment system. Payment, VAT,
+renewal, cancellation and refunds are handled by Google Play: in the European
+Economic Area the purchase contract is concluded with Google Commerce Limited,
+under the <a href="https://play.google.com/about/play-terms/eea/index.html">Google
+Play Terms of Service</a>. <strong>The controller never receives your payment
+method details.</strong></p>
+<ul>
+  <li><strong>On the phone.</strong> To know whether Rarium Plus is active, the
+  app asks Google Play on the phone, through the Play Store app and the Google
+  Play Billing library included in Rarium, every time you open it or return to
+  it (at most once every 30 seconds) and in the background job that updates
+  prices. It keeps the result of the last successful check in the app's storage:
+  whether Rarium Plus is active, whether the subscription is suspended or paused,
+  whether a payment is pending, whether it renews automatically, the plan
+  (monthly or yearly) when known, the SHA-256 fingerprint of the purchase token
+  (not the token itself) and when it was last checked. The fingerprint is used
+  only to recognise the same purchase at the next check. This data does not
+  leave the phone: it is not sent to the controller, it is not included in
+  Android backup or in the full backup to a file, and it is deleted with the
+  app's data. It is valid for at most 40 days after the last successful check:
+  after that the app returns to the free version until Google Play confirms the
+  subscription again. The Google Play Billing library, on the other hand, sends
+  Google the technical diagnostics data described in
+  <a href="#en-billing">section 2</a>, even if you never buy anything.</li>
+  <li><strong>In Play Console.</strong> For each purchase Google shows the
+  controller, in Play Console and in the sales and earnings reports, the order
+  details: order number, date and time, product, plan (monthly or yearly) and
+  any offer (for example the free trial), price, taxes and amount charged with
+  the currency, status (for example charged or refunded), the buyer's country
+  and, where Google provides them, region, city and postal code, and the phone
+  model used for the purchase. In Play Console an order can also be looked
+  up by its number or by the full email address of the Google account that made
+  it: the controller does this when you provide them for a request. The
+  controller uses this data for support, refunds and tax and accounting
+  obligations, and keeps it for as long as tax law requires.</li>
+  <li><strong>Cancellation.</strong> The subscription is managed and cancelled
+  from the <a href="https://play.google.com/store/account/subscriptions">Google
+  Play subscriptions centre</a> (play.google.com). Uninstalling Rarium or
+  clearing its data does not cancel the subscription and does not delete the
+  order with Google.</li>
+</ul>
 
 <h2 id="en-rights">13. Your rights</h2>
 <p>Under the GDPR you have the right to access the data concerning you, rectify
@@ -975,7 +1293,10 @@ time, on grounds relating to your particular situation, to the processing based
 on legitimate interest (<a href="#en-bases">section 7</a>), by writing to
 <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (Art. 21 GDPR).</p>
 <p>Since the app sends the controller no data about the people who use it, the
-controller may be unable to identify data concerning you (Art. 11 GDPR). The
+controller may be unable to identify data concerning you (Art. 11 GDPR). Rarium
+Plus orders are the exception: give the order number shown on your Google Play
+receipt (it usually starts with «GPA.») or the email address of your Google
+account, and the controller can find the order in Play Console. The
 data in <a href="#en-phone">section 3</a> is already on your phone: you delete
 it as explained in <a href="#en-delete">section 15</a>, and you can export your
 collection to CSV. For data processed by Google or by the other services in
@@ -1005,6 +1326,12 @@ by manufacturer), and delete any backup from your Google account.</p>
   backup: it only goes away when you clear the app's data and the backup.</li>
   <li>Uninstalling the app does not delete a copy already saved on Google Drive,
   which Android restores if you reinstall Rarium with the same account.</li>
+  <li>Uninstalling Rarium or clearing its data <strong>does not cancel Rarium
+  Plus</strong> and does not delete the order with Google: the subscription is
+  cancelled from the
+  <a href="https://play.google.com/store/account/subscriptions">Google Play
+  subscriptions centre</a>. The Rarium Plus status saved on the phone is deleted
+  with the app's data.</li>
   <li>The backup is deleted from your Google account. Google manages backups
   together: depending on how you delete it, you may also erase the data of other
   apps and other phones on your account, WhatsApp included. Before doing so,
@@ -1016,7 +1343,720 @@ by manufacturer), and delete any backup from your Google account.</p>
 <h2 id="en-changes">16. Changes to this notice</h2>
 <p>Changes will be published on this page, with the update date at the top.
 This notice will be updated before any version that changes the data processed,
-for example by adding sign-in with an account or a subscription.</p>
+for example by adding sign-in with an account.</p>
+
+</section>
+
+<section lang="de">
+
+<h2 id="deutsch">Deutsche Fassung</h2>
+<p class="sub">Letzte Aktualisierung: 27. Oktober 2026 · Im Zweifel ist die
+italienische Fassung dieser Datenschutzerklärung maßgeblich.</p>
+<p>Rarium ist eine Android-App, die Sammelkarten erkennt, wenn du sie mit der
+Kamera erfasst, ihre Preisentwicklung zeigt und dich eine Sammlung auf dem
+Telefon führen lässt. Diese Seite erklärt, welche Daten sie verarbeitet, warum,
+wo sie bleiben und wie du sie löschst. Sie beschreibt die über Google Play
+vertriebene Version.</p>
+
+<p><strong>Verantwortlicher:</strong> Alberto Fontolan, via Trivellato 273, 35040 Piacenza d'Adige (PD) —
+Kontakt: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+
+<h2 id="de-short">Kurz gesagt</h2>
+<ul>
+  <li>Rarium funktioniert <strong>ohne Konto</strong>: Du registrierst dich
+  nicht, und die App sendet dem Verantwortlichen keine Daten über die Personen,
+  die sie nutzen. Google Play zeigt ihm jedoch Statistiken zu Abstürzen der App,
+  die veröffentlichten Rezensionen und, bei Personen, die Rarium Plus kaufen, die
+  Bestelldaten (<a href="#de-recipients">Abschnitt 8</a> und
+  <a href="#de-payments">Abschnitt 12</a>).</li>
+  <li>Die <strong>Kamerabilder</strong> werden nur auf dem Telefon verarbeitet
+  und an niemanden gesendet. Von jeder erkannten Karte speichert die App einen
+  kleinen Ausschnitt auf dem Telefon, als Vorschau
+  (<a href="#de-camera">Abschnitt 2</a>).</li>
+  <li>Die Texterkennung nutzt <strong>Google ML Kit</strong>, das technische
+  Diagnose- und Nutzungsdaten an Google sendet
+  (<a href="#de-camera">Abschnitt 2</a>).</li>
+  <li>Für Rarium Plus enthält die App die Bibliothek <strong>Google Play
+  Billing</strong>, die technische Diagnosedaten über ihre eigene Funktion an
+  Google sendet, auch wenn du nichts kaufst, weil die App Google Play bei jedem
+  Öffnen nach dem Status des Abos fragt
+  (<a href="#de-billing">Abschnitt 2</a>).</li>
+  <li>Der Vergleich zwischen der erfassten Karte und den Illustrationen des
+  Katalogs nutzt ein <strong>in der App enthaltenes Modell</strong> (DINOv2) und
+  findet vollständig auf dem Telefon statt: Es sendet niemandem Daten.</li>
+  <li>Um Karten, Illustrationen und Preise zu finden, fragt die App
+  <strong>Dienste Dritter</strong> ab, die deine IP-Adresse und, je nach Dienst,
+  die gesuchte Karte oder die angezeigte Illustration erhalten
+  (<a href="#de-services">Abschnitt 4</a>).</li>
+  <li>Sammlung, Scan-Verlauf und Preisverlauf bleiben <strong>auf dem
+  Telefon</strong>; das Android-Backup kann sie in dein Google Drive kopieren
+  (<a href="#de-backup">Abschnitt 5</a>).</li>
+  <li>Keine Werbung und keine Statistik-Tools, die Daten an den Verantwortlichen
+  senden.</li>
+  <li>Einige Funktionen gehören zu <strong>Rarium Plus</strong>, einem
+  optionalen Abo, das man bei Google Play kauft: Die Zahlung wickelt Google ab,
+  der Verantwortliche erhält die Daten deiner Zahlungsmethode nicht, und die App
+  prüft das Abo auf dem Telefon, ohne dem Verantwortlichen etwas zu senden
+  (<a href="#de-payments">Abschnitt 12</a>).</li>
+</ul>
+
+<h2 id="de-app">1. Was die App macht</h2>
+<p>Du erfasst eine Karte mit der Kamera: Die App liest den aufgedruckten Namen
+und die Nummer, sucht die Karte in den Katalogen, zeigt ihre Illustration, damit
+du sie mit der Karte in deiner Hand vergleichen kannst, und zeigt die
+Preisentwicklung auf Cardmarket. Du kannst Karten einer Sammlung hinzufügen,
+angeben, wie viele Exemplare du hast, ihren Zustand und, wenn du willst, was du
+dafür bezahlt hast, eine Notiz schreiben, eine Karte als gegradet oder zum
+Verkauf markieren, einen Verkauf mit dem erzielten Preis eintragen, eine
+Wunschliste führen, einen Preis wählen, unter dem (oder über dem) du einen Alarm
+erhältst, und die Sammlung als CSV-Datei oder als vollständiges Backup
+exportieren. All das funktioniert ohne Registrierung: Die App hat keine
+Konten.</p>
+<p>Einige dieser Funktionen, darunter die Preisalarme, mehr als ein Ordner, eine
+Sammlung mit mehr als 50 Exemplaren und eine Wunschliste mit mehr als 10 Karten,
+gehören zu Rarium Plus, einem optionalen Abo, das man bei Google Play kauft
+(<a href="#de-payments">Abschnitt 12</a>); die vollständige Liste steht in den
+<a href="termini.html#deutsch">Nutzungsbedingungen</a>. Das Scannen, die
+Erkennung und der Preis jeder Karte bleiben kostenlos.</p>
+
+<h2 id="de-camera">2. Die Kamerabilder bleiben auf dem Telefon</h2>
+<p>Die Erkennung findet <strong>auf dem Telefon</strong> statt: Die Kamerabilder
+werden im Arbeitsspeicher analysiert, um den Titel und die Nummer zu lesen, die
+auf der Karte gedruckt sind, und in der auf Google Play veröffentlichten Version
+werden sie nie an einen Server gesendet. Rarium fragt nicht nach Zugriff auf die
+Fotos deiner Galerie. Von jeder erkannten Karte speichert die App auf dem
+Telefon einen kleinen Ausschnitt (höchstens 480 Pixel an der langen Seite), der
+als Vorschau dient, wenn der Katalog keine Illustration hat: Er bleibt im
+Speicher der App, ist nicht im Backup enthalten und wird beim Deinstallieren der
+App gelöscht. Außerdem bewahrt sie die aus den Katalogen geladenen
+Kartenillustrationen in einem temporären Cache auf
+(<a href="#de-phone">Abschnitt 3</a>).</p>
+
+<h3>Google ML Kit</h3>
+<p>Die Texterkennung nutzt Google ML Kit, eine Bibliothek von Google, die in der
+App enthalten ist. Die Bilder werden nur auf dem Telefon verarbeitet: Weder die
+Bilder noch der erkannte Text werden an Google gesendet. ML Kit sendet jedoch
+verschlüsselt technische Diagnose- und Nutzungsdaten an Google:</p>
+<ul>
+  <li>Hersteller, Modell und Systemversion des Telefons sowie die verfügbaren
+  Hardwarebeschleuniger;</li>
+  <li>Name und Version der App;</li>
+  <li>eine Kennung pro Installation, die laut Google nicht dazu bestimmt ist, den
+  Nutzer oder das Telefon eindeutig zu identifizieren;</li>
+  <li>Verarbeitungszeiten, Format und Auflösung der Bilder, Größe dessen, was in
+  die Erkennung eingeht und aus ihr herauskommt, Version der Funktion;</li>
+  <li>Art des Ereignisses (zum Beispiel der Start oder eine Erkennung) und
+  Fehlercodes.</li>
+</ul>
+<p>Google erklärt, diese Daten für Diagnose und Nutzungsstatistiken zu verwenden
+und nicht an Dritte weiterzugeben; die Nutzungsbedingungen von ML Kit fügen
+hinzu, dass Google sie auch verwendet, um die Leistung zu messen, die APIs zu
+korrigieren, zu warten und zu verbessern und unsachgemäße Nutzung oder Missbrauch
+zu erkennen. ML Kit kann außerdem Server von Google kontaktieren, um
+Fehlerkorrekturen, aktualisierte Modelle und Informationen zur Kompatibilität der
+Hardwarebeschleuniger zu erhalten. Der Verantwortliche für Rarium erhält diese
+Daten nicht. Die App hat keine Einstellung, um diese Übermittlung abzuschalten,
+und ML Kit dokumentiert keine. Quellen:
+<a href="https://developers.google.com/ml-kit/android-data-disclosure">von ML Kit
+erhobene Daten</a>, <a href="https://developers.google.com/ml-kit/terms">Nutzungsbedingungen
+von ML Kit</a>, <a href="https://policies.google.com/privacy">Datenschutzerklärung
+von Google</a>.</p>
+
+<h3 id="de-billing">Google Play Billing</h3>
+<p>Um Rarium Plus zu verkaufen und das Abo zu prüfen
+(<a href="#de-payments">Abschnitt 12</a>), enthält die App die Bibliothek Google
+Play Billing (Version 9.1.0). Neben der Kommunikation mit der Play-Store-App des
+Telefons sendet die Bibliothek technische Diagnoseereignisse über ihre eigene
+Funktion an Google, direkt aus der App und nicht über den Play Store. Das
+geschieht bei <strong>allen, die die App nutzen, auch bei denen, die Rarium Plus
+nicht kaufen</strong>: Die App fragt Google Play jedes Mal nach dem Status des
+Abos, wenn du sie öffnest oder zu ihr zurückkehrst (höchstens einmal alle 30
+Sekunden), und in der Hintergrundaufgabe, die die Preise aktualisiert.</p>
+<p>Laut den Versionshinweisen von Google protokolliert die Bibliothek seit
+Version 6 Informationen über die Nutzung ihrer Funktionen (zum Beispiel
+erfolgreiche und fehlgeschlagene Anfragen) und über Verbindungsprobleme mit
+Google Play, die Google nutzt, um ihre Leistung und die Unterstützung bei
+Fehlern zu verbessern. Google dokumentiert den genauen Inhalt dieser Ereignisse
+nicht; aus dem Code der Bibliothek geht hervor, dass sie unter anderem Marke,
+Hersteller und Modell des Telefons, die Android-Version und den System-Build, den
+Arbeitsspeicher (RAM) des Telefons, Name und Version der App, die Version der
+Bibliothek und eine Zufallszahl enthalten, die jedes Mal erzeugt wird, wenn die
+App die Bibliothek startet. Sie enthalten weder deine Karten noch die Sammlung
+noch die Preise, die du bezahlt hast: Die App gibt sie nicht an die Bibliothek
+weiter. Der Verantwortliche für Rarium erhält diese Daten nicht; Google
+verarbeitet sie gemäß seiner eigenen
+<a href="https://policies.google.com/privacy">Datenschutzerklärung</a>. Die App
+hat keine Einstellung, um diese Übermittlung abzuschalten. Quelle:
+<a href="https://developer.android.com/google/play/billing/release-notes">Versionshinweise
+der Google Play Billing Library</a>.</p>
+
+<h2 id="de-phone">3. Daten auf deinem Telefon</h2>
+<p>Rarium speichert diese Daten auf dem Telefon, im Speicherbereich der App; wenn
+das Android-Backup aktiv ist, geht eine Kopie in dein Google Drive
+(<a href="#de-backup">Abschnitt 5</a>). Nichts davon wird an den
+Verantwortlichen gesendet.</p>
+<table>
+  <tr><th>Was</th><th>Details</th><th>Im Android-Backup (<a href="#de-backup">Abschnitt 5</a>)</th></tr>
+  <tr><td>Scan-Verlauf</td>
+      <td>Die erkannten Karten: Name, Set, Nummer, Preis zum Zeitpunkt des Scans,
+      Datum und Uhrzeit. Wenn du einen Scan gedrückt hältst, verschwindet er aus
+      dem Verlauf, aber die Zeile bleibt in der Datenbank des Telefons.</td>
+      <td>Ja</td></tr>
+  <tr><td>Sammlung</td>
+      <td>Die Ordner und für jede Karte: Druck, Sprache, Ausführung, Zustand,
+      Anzahl der Exemplare, Kaufpreis (nur wenn du ihn einträgst), die Notiz, die
+      du schreibst, ob sie zum Verkauf steht, die Preisschwelle, über der du einen
+      Alarm möchtest, und bei einer gegradeten Karte die Grading-Firma, die Note,
+      die Zertifikatsnummer und der Wert, den du selbst angibst, mit seinem Datum.
+      Das Datum, an dem du sie hinzugefügt hast. Karten, die du entfernst, bleiben
+      im „Papierkorb“, zusammen mit dem Protokoll der Hinzufügungen und
+      Entfernungen.</td>
+      <td>Ja</td></tr>
+  <tr><td>Verkäufe</td>
+      <td>Die Verkäufe, die du einträgst: Karte, Exemplare, erzielter Preis,
+      Kosten der verkauften Exemplare, der Trend zu diesem Zeitpunkt und das
+      Datum.</td>
+      <td>Ja</td></tr>
+  <tr><td>Scan-Stapel</td>
+      <td>Wenn der Stapel-Scan eingeschaltet ist, die Karten, die auf deine
+      Bestätigung warten, in einer Datei im Speicher der App, bis du sie
+      bestätigst oder entfernst.</td>
+      <td>Ja</td></tr>
+  <tr><td>Wunschliste</td>
+      <td>Die Karten, denen du folgst: Druck, Sprache, Ausführung, gewählte
+      Edition, die Preisschwelle, unter der du einen Alarm möchtest, und, wenn ein
+      Alarm ausgelöst wurde, der Betrag in diesem Moment.</td>
+      <td>Ja</td></tr>
+  <tr><td>Wert der Sammlung</td>
+      <td>Ein Wert pro Tag, mit Kosten und Marge. Er wird geschrieben, wenn du die
+      App öffnest, und auch bei geschlossener App von der Hintergrundaufgabe, die
+      den Preisverlauf aktualisiert.</td>
+      <td>Ja</td></tr>
+  <tr><td>Preisverlauf</td>
+      <td>Die Cardmarket-Preise, Tag für Tag, der Produkte, denen du folgst: der
+      Produkte in deiner Sammlung oder auf deiner Wunschliste und der Karten, die
+      du in den letzten 120 Tagen gescannt hast. Tage, die die App nicht erfasst
+      hat, werden aus einem öffentlichen Archiv der Preislisten ergänzt und als
+      solche gekennzeichnet.</td>
+      <td>Ja</td></tr>
+  <tr><td>Fotos der Karten</td>
+      <td>Von jeder erkannten Karte ein kleiner Ausschnitt des Kamerabilds (480
+      Pixel an der langen Seite), insgesamt bis zu 12 MB, als Vorschau
+      verwendet.</td>
+      <td>Nein</td></tr>
+  <tr><td>Einstellungen</td>
+      <td>Die Einstellungen der App: Schnell hinzufügen, Stapel-Scan, Ordner für
+      neue Karten, Wertziel, zweite Währung und die zuletzt geladenen
+      Wechselkurse, Preise nur mit WLAN aktualisieren, Preisalarme und
+      Wochenübersicht ein oder aus, die zuletzt erkannte Drucksprache.</td>
+      <td>Ja</td></tr>
+  <tr><td>Status von Rarium Plus</td>
+      <td>Das Ergebnis der letzten erfolgreichen Prüfung bei Google Play: ob
+      Rarium Plus aktiv ist, ob das Abo ausgesetzt oder pausiert ist, ob eine
+      Zahlung aussteht, ob es sich automatisch verlängert, das Abo-Modell (Monats-
+      oder Jahresabo), wenn es bekannt ist, der SHA-256-Fingerabdruck des
+      Kauf-Tokens (nicht das Token selbst) und wann zuletzt geprüft wurde. Der
+      Fingerabdruck dient nur dazu, denselben Kauf bei der nächsten Prüfung
+      wiederzuerkennen, und keine dieser Angaben verlässt das Telefon. Der Status
+      gilt höchstens 40 Tage ab der letzten erfolgreichen Prüfung
+      (<a href="#de-payments">Abschnitt 12</a>).</td>
+      <td>Nein, und auch nicht im vollständigen Backup in einer Datei: Auf einem
+      neuen Telefon fragt die App erneut bei Google Play nach</td></tr>
+  <tr><td>Geladene Kataloge</td>
+      <td>Die Cardmarket-Preisliste und der Cardmarket-Produktkatalog, die Listen
+      der Kartennamen, die Nummerierungen der Sets.</td>
+      <td>Nur die Namenslisten und die Nummerierungen der Sets; die
+      Cardmarket-Preisliste und der Cardmarket-Katalog nicht</td></tr>
+  <tr><td>Kartenillustrationen</td>
+      <td>Ein temporärer Cache von bis zu 20 MB, den Android leeren kann, wenn
+      Platz gebraucht wird. Die Illustrationen werden nach sieben Tagen erneut
+      geprüft.</td>
+      <td>Nein</td></tr>
+  <tr><td>Bildvergleich</td>
+      <td>Die numerischen Fingerabdrücke der Katalogillustrationen, auf dem
+      Telefon berechnet, um sie mit der Karte zu vergleichen, die du erfasst (bis
+      zu 70 MB Cache), und die Kartenlisten für die Katalogsuche (bis zu 2,4 MB
+      pro Sprache). Es sind temporäre Caches, die Android leeren kann.</td>
+      <td>Nein</td></tr>
+</table>
+<p>Die Preisalarme und die Wochenübersicht sind <strong>auf dem Telefon erzeugte
+Benachrichtigungen</strong>: Die App vergleicht den Preisverlauf, den sie bereits
+gespeichert hat, mit den Schwellen, die du gewählt hast, ohne Server und ohne
+irgendjemandem etwas zu senden. Android fragt dich nur dann nach der
+Berechtigung, Benachrichtigungen anzuzeigen, wenn du einen Alarm einrichtest oder
+die Übersicht einschaltest (auch beim Wiederherstellen eines Backups, in dem sie
+eingeschaltet war), und du kannst sie in den Einstellungen des Telefons
+entziehen. Die Hintergrundaufgabe, die die Preise aktualisiert, läuft etwa alle
+acht Stunden, wenn eine Verbindung besteht und der Akku nicht schwach ist; ist
+der Schalter „Preise nur mit WLAN aktualisieren“ eingeschaltet, lädt sie die
+Preisliste nicht über mobile Daten.</p>
+<p>„Vollständiges Backup speichern“ und „Backup mit der Sammlung zusammenführen“
+(Menü ⋮ der Sammlung) schreiben und lesen eine JSON-Datei an dem Ort, den du mit
+der Dateiauswahl von Android wählst: Sie enthält Ordner, Karten (auch die
+entfernten), die Wunschliste mit den Schwellen, Notizen, Verkäufe, den
+Scan-Verlauf, den täglichen Wert, den Preisverlauf der Produkte, denen du folgst,
+und die Einstellungen, aber nicht den Status von Rarium Plus. Die Datei gehört
+dir, und die App sendet sie an niemanden. „Als Bild teilen“, die Verkaufsliste
+und die Tauschliste laufen über das Teilen-Menü von Android: Du wählst, mit
+welcher App du sie teilst, und keines der drei enthält die Preise, die du bezahlt
+hast, oder deine Notizen.</p>
+<p>Der CSV-Export (Sammlung → Menü ⋮ → Als CSV exportieren) erstellt eine Datei
+an dem Ort, den du mit der Dateiauswahl von Android wählst: Ab diesem Moment
+gehört die Datei dir, und die App sendet sie an niemanden.</p>
+
+<h2 id="de-services">4. Von der App kontaktierte Dienste</h2>
+<p>Um die Karten, die Illustrationen und die Preise zu finden, verbindet sich die
+App direkt vom Telefon aus mit den unten aufgeführten Diensten. <strong>Jeder
+Dienst erhält die IP-Adresse, die Uhrzeit und die technischen
+Verbindungsdaten</strong>; was er sonst noch erhält, hängt vom Dienst ab, wie die
+letzte Spalte der Tabelle zeigt:</p>
+<ul>
+  <li>die <strong>Cardmarket-Preisliste</strong> und die Listen der Kartennamen
+  werden regelmäßig vollständig heruntergeladen, auch ohne Suche: An diesen
+  Downloads erkennen die Server nicht, welche Karte dich interessiert;</li>
+  <li>die <strong>Kataloge und Bilddienste</strong> erhalten den Namen oder die
+  Nummer der gesuchten Karte oder die angeforderte Illustration. Illustrationen
+  werden geladen, wenn die App eine Karte zeigt: wenn du sie suchst, aber auch,
+  wenn du dir die Sammlung, den Scan-Verlauf oder die Sets ansiehst, zusammen mit
+  den Set-Logos. Ein Cache auf dem Telefon vermeidet, dass viele bereits gesehene
+  Illustrationen erneut geladen werden, beseitigt diese Anfragen aber nicht:
+  Diese Server können also wissen, welche Karten du dir ansiehst;</li>
+  <li><strong>Google</strong> erhält von ML Kit die technischen Daten aus
+  <a href="#de-camera">Abschnitt 2</a>, darunter den Namen der App und eine
+  Kennung pro Installation.</li>
+  <li><strong>Google Play</strong> wickelt über die Play-Store-App des Telefons
+  und die in Rarium enthaltene Bibliothek Google Play Billing den Kauf von Rarium
+  Plus ab und teilt der App mit, ob das Abo für das Google-Konto aktiv ist, mit
+  dem der Play Store verbunden ist (<a href="#de-payments">Abschnitt 12</a>). Die
+  Bibliothek sendet außerdem direkt aus der App die technischen Diagnosedaten aus
+  <a href="#de-billing">Abschnitt 2</a> an Google, darunter den Namen der App und
+  eine Zufallszahl, die bei jedem Start der Bibliothek erzeugt wird, auch wenn du
+  nichts kaufst.</li>
+</ul>
+<p>Keiner dieser Dienste erhält deine Sammlung als Liste oder die Preise, die du
+bezahlt hast. Abgesehen von Google, das von ML Kit die Kennung pro Installation
+und von der Bibliothek Google Play Billing die bei jedem ihrer Starts erzeugte
+Zufallszahl erhält und über Google Play das Google-Konto kennt, mit dem der Play
+Store verbunden ist und mit dem du Rarium Plus kaufst, erhält keiner Kennungen
+der Installation oder des Telefons.</p>
+
+<table>
+  <tr><th>Adresse</th><th>Zweck</th><th>Was der Dienst über die Karte erfährt</th></tr>
+  <tr><td>api.tcgdex.net</td>
+      <td>Katalog der Karten, Erweiterungen und Namen (TCGdex)</td>
+      <td>Die gesuchte Karte</td></tr>
+  <tr><td>assets.tcgdex.net</td>
+      <td>Kartenillustrationen und Set-Logos (TCGdex)</td>
+      <td>Das angeforderte Bild, also welche Karte du dir ansiehst</td></tr>
+  <tr><td>downloads.s3.cardmarket.com</td>
+      <td>Preisliste und Produktkatalog von Cardmarket, vollständig
+      heruntergeladen, wenn die Kopie auf dem Telefon abgelaufen ist (etwa einmal
+      am Tag), auch bei geschlossener App: So hat der Preisverlauf keine Lücken an
+      Tagen, an denen du die App nicht öffnest</td>
+      <td>Nichts: Die Datei ist für alle gleich</td></tr>
+  <tr><td>raw.githubusercontent.com (öffentliches Archiv der Preislisten)</td>
+      <td>Die Cardmarket-Preise der Tage, an denen die App sie nicht erfasst
+      hatte, für die Karten in deiner Sammlung oder auf deiner Wunschliste: Ein
+      öffentliches Archiv kopiert die Preisliste seit dem 16. September 2026 jeden
+      Tag. Es wird jeweils ein Block von etwa 150 KB geladen, höchstens einmal pro
+      Woche und Karte, auch bei geschlossener App</td>
+      <td>Die Adresse des angeforderten Blocks, die von den letzten drei Ziffern
+      der Cardmarket-Produktnummer abhängt: nicht der Name der Karte und nicht,
+      wer du bist (der Dienst sieht, wie jede Website, deine IP-Adresse)</td></tr>
+  <tr><td>www.ecb.europa.eu</td>
+      <td>Die Referenzwechselkurse der Europäischen Zentralbank, nur wenn du in
+      den Einstellungen eine zweite Währung neben dem Euro gewählt hast: eine
+      öffentliche Datei, für alle gleich, höchstens alle zwölf Stunden
+      geladen</td>
+      <td>Nichts: Die Anfrage enthält keine Daten von dir</td></tr>
+  <tr><td>api.psacard.com</td>
+      <td>Die Prüfung des Zertifikats einer von PSA gegradeten Karte, nur in
+      Builds, in die die Person, die sie kompiliert, ihren eigenen
+      PSA-API-Schlüssel eingetragen hat (in den vertriebenen Builds gibt es ihn
+      nicht, und die Funktion erscheint nicht)</td>
+      <td>Die Zertifikatsnummer, die du im Eintrag der Sammlung angegeben
+      hast</td></tr>
+  <tr><td>www.pokemon-card.com</td>
+      <td>Offizieller japanischer Katalog: Suche, Kartenseiten und Illustrationen
+      japanischer Karten</td>
+      <td>Die gesuchte Karte und das angeforderte Bild</td></tr>
+  <tr><td>asia.pokemon-card.com</td>
+      <td>Offizieller Katalog von Taiwan: Suche, Kartenseiten und Illustrationen
+      von Karten in traditionellem Chinesisch</td>
+      <td>Die gesuchte Karte und das angeforderte Bild</td></tr>
+  <tr><td>www.hktcg.com, cdn.shopify.com</td>
+      <td>Shop in Hongkong (www.hktcg.com): Suche nach Karten in vereinfachtem
+      Chinesisch. Die Fotos der Karten werden von Shopify gehostet
+      (cdn.shopify.com)</td>
+      <td>Die gesuchte Karte und das angeforderte Bild</td></tr>
+  <tr><td>k-tcg.com, i0.wp.com</td>
+      <td>Koreanischer Shop (k-tcg.com): Suche nach koreanischen Karten. Die
+      Fotos der Karten können über den Bilddienst Jetpack von Automattic laufen
+      (i0.wp.com)</td>
+      <td>Die gesuchte Karte und das angeforderte Bild</td></tr>
+  <tr><td>pokeapi.co</td>
+      <td>Koreanischer Name einer Pokémon-Art, wenn er in der Liste fehlt, die in
+      der App enthalten ist (PokeAPI)</td>
+      <td>Der Name der Art</td></tr>
+  <tr><td>billsarchive.com, bills-archive.nyc3.cdn.digitaloceanspaces.com</td>
+      <td>Archiv historischer japanischer Karten: Liste der Erweiterungen und
+      Illustrationen</td>
+      <td>Nichts für die Liste, die vollständig geladen wird; das angeforderte
+      Bild</td></tr>
+  <tr><td>static.tcgcollector.com, limitlesstcg.nyc3.cdn.digitaloceanspaces.com,
+      api.pokemontcg.io, images.pokemontcg.io, images.scrydex.com,
+      tcgplayer-cdn.tcgplayer.com</td>
+      <td>Illustrationen von Karten, die die oben genannten Kataloge nicht
+      haben</td>
+      <td>Das angeforderte Bild, also welche Karte du dir ansiehst</td></tr>
+  <tr><td>pkmncards.com, dz3we2x72f7ol.cloudfront.net</td>
+      <td>Illustrationen der Trading-Card-Game-Classic-Decks (pkmncards.com) und
+      der Classic Collection zum 30. Jubiläum, von der offiziellen Website
+      (dz3we2x72f7ol.cloudfront.net)</td>
+      <td>Das angeforderte Bild, also welche Karte du dir ansiehst</td></tr>
+  <tr><td>raw.githubusercontent.com, pokesymbols.com, archives.bulbagarden.net,
+      media.pokemoncentral.it</td>
+      <td>Logos und Symbole der Sets, die in der Liste der Sets angezeigt
+      werden</td>
+      <td>Das angeforderte Bild, also welches Set du dir ansiehst</td></tr>
+  <tr><td>Google Play (Play-Store-App des Telefons und Server von Google)</td>
+      <td>Der Kauf von Rarium Plus und die Prüfung des Abos, mit der in der App
+      enthaltenen Bibliothek Google Play Billing: Die App fragt den Play Store
+      jedes Mal, ob das Abo aktiv ist, wenn du sie öffnest oder zu ihr
+      zurückkehrst (höchstens einmal alle 30 Sekunden), und in der
+      Hintergrundaufgabe; Kauf und Zahlung finden bei Google Play statt
+      (<a href="#de-payments">Abschnitt 12</a>). Die Bibliothek sendet außerdem
+      direkt aus der App technische Diagnosedaten über ihre eigene Funktion an
+      Google, auch wenn du nichts kaufst (<a href="#de-billing">Abschnitt 2</a>)</td>
+      <td>Nichts über die Karte: das Abo, das gewählte Abo-Modell und, für Google,
+      dein Google-Konto; von der Bibliothek die technischen Daten über das Telefon
+      und die App, die in <a href="#de-billing">Abschnitt 2</a> beschrieben
+      sind</td></tr>
+  <tr><td>Server von Google (ML Kit)</td>
+      <td>Technische Diagnose- und Nutzungsdaten der Texterkennung
+      (<a href="#de-camera">Abschnitt 2</a>)</td>
+      <td>Nichts: nie Bilder oder erkannten Text</td></tr>
+</table>
+
+<p>Jeder Dienst verarbeitet diese Daten gemäß seiner eigenen
+Datenschutzerklärung: Der Verantwortliche für Rarium hat keine Vereinbarungen mit
+ihnen und kontrolliert nicht, was sie damit tun. Einige dieser Server befinden
+sich mit hoher Wahrscheinlichkeit außerhalb des Europäischen Wirtschaftsraums
+(zum Beispiel in Japan, Südkorea, Hongkong oder den Vereinigten Staaten); ihre
+Standorte wurden nicht überprüft (<a href="#de-transfers">Abschnitt 9</a>).</p>
+
+<p>Einige Schaltflächen öffnen dagegen eine Seite im <strong>Browser</strong> des
+Telefons, und zwar nur, wenn du sie antippst: die Seite, die Suche oder die
+Angebote der Karte auf www.cardmarket.com; sofern vorhanden, die Seite, aus der
+die Kartendaten stammen (zum Beispiel auf www.pokemon-card.com oder
+www.tcgcollector.com); bei einer gegradeten Karte die nach Karte und Note
+gefilterten verkauften Artikel auf www.ebay.it und die Zertifikatsseite auf
+www.psacard.com oder www.cgccards.com; zum Verwalten oder Kündigen von Rarium Plus
+die Abo-Verwaltung von Google Play auf play.google.com; diese
+Datenschutzerklärung und die Nutzungsbedingungen auf dieser Website; und über den
+Bildschirm „Datenschutz und Lizenzen“ die Lizenzseiten der Bibliotheken, die die
+App nutzt. Diese Websites wenden ihre eigene Datenschutzerklärung und ihre
+eigenen Cookies an.</p>
+
+<p>Diese Seite (ciano-ctrl.github.io) wird von GitHub Pages (GitHub, Inc.)
+gehostet, das aus Sicherheitsgründen die IP-Adresse der Besucher protokolliert
+(<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection">Dokumentation
+von GitHub Pages</a>). Der Verantwortliche verwendet auf dieser Seite weder
+Cookies noch Statistiken.</p>
+
+<h2 id="de-backup">5. Android-Backup</h2>
+<p>Wenn das Android-Backup in deinem Google-Konto aktiv ist, speichert das System
+eine Kopie der Datenbank von Rarium (Sammlung, Kaufpreise, Hinzufügedaten,
+Notizen, Daten der gegradeten Karten, Verkäufe, Ordner, Wunschliste mit den
+Preisschwellen, Scan-Verlauf, Preisverlauf und täglicher Wert der Sammlung) und
+der Einstellungen der App, zusammen mit den Namenslisten und den Nummerierungen
+der Sets, in einem privaten Bereich deines Google Drive, bis zu 25 MB. Das Backup
+startet von selbst, höchstens einmal am Tag, wenn das Telefon inaktiv und in der
+Regel mit dem WLAN verbunden ist, und Google bewahrt nur die neueste Kopie auf.
+Ausgenommen sind die Cardmarket-Preisliste und der Cardmarket-Katalog, der Cache
+der Illustrationen, das externe Verzeichnis der App und der Status von Rarium
+Plus, den Rarium auf einem neuen Telefon oder nach einer Neuinstallation der App
+erneut bei Google Play abfragt.</p>
+<p>Ab Android 9 ist die Kopie Ende-zu-Ende-verschlüsselt, wenn auf dem Telefon
+eine PIN, ein Muster oder ein Passwort eingerichtet ist. Der Verantwortliche für
+Rarium erhält diese Kopie nicht und hat keine Möglichkeit, sie zu lesen.
+Dieselben Daten können bei einer Datenübertragung von Telefon zu Telefon auf ein
+neues Telefon gelangen, und Android stellt sie wieder her, wenn du Rarium
+mit demselben Google-Konto neu installierst: Deshalb <strong>löscht das
+Deinstallieren der App keine bereits in Google Drive gespeicherte
+Kopie</strong>. Du kannst das Backup in den Android-Einstellungen ausschalten
+oder es aus deinem Google-Konto löschen (<a href="#de-delete">Abschnitt 15</a>).
+Quelle: <a href="https://developer.android.com/identity/data/autobackup">Android-Dokumentation
+zur automatischen Sicherung</a>.</p>
+
+<h2 id="de-test">6. Kamerabilder und gelesener Text</h2>
+<p><strong>Die App speichert weder die Kamerabilder noch den von den Karten
+gelesenen Text und sendet sie an niemanden.</strong> Die Erkennung findet auf dem
+Telefon statt: Jedes Kamerabild wird gelesen und dann verworfen. Was auf dem
+Telefon bleibt, ist das, was <a href="#de-phone">Abschnitt 3</a> beschreibt (die
+Sammlung, der Verlauf und, wenn du eine Karte hinzufügst, das Foto des
+Ausschnitts der Karte).</p>
+
+<h2 id="de-bases">7. Zwecke und Rechtsgrundlagen</h2>
+<table>
+  <tr><th>Verarbeitung</th><th>Zweck</th><th>Rechtsgrundlage</th></tr>
+  <tr><td>Erkennung der Karte auf dem Telefon</td>
+      <td>Die erfasste Karte identifizieren</td>
+      <td>Erbringung des Dienstes, den du durch die Nutzung der App anforderst
+      (Art. 6 Abs. 1 lit. b DSGVO)</td></tr>
+  <tr><td>Anfragen an die Dienste in <a href="#de-services">Abschnitt 4</a></td>
+      <td>Die Karte, ihre Illustration und ihren Preis finden</td>
+      <td>Erbringung des angeforderten Dienstes (Art. 6 Abs. 1 lit. b) oder,
+      alternativ, berechtigtes Interesse daran, dir die Karte, die Illustration
+      und den Preis zu zeigen, die du suchst (Art. 6 Abs. 1 lit. f)</td></tr>
+  <tr><td>Von ML Kit an Google gesendete technische Daten</td>
+      <td>Diagnose und Nutzungsstatistiken der Texterkennung</td>
+      <td>Berechtigtes Interesse daran, die Erkennung funktionsfähig zu halten und
+      zu korrigieren (Art. 6 Abs. 1 lit. f)</td></tr>
+  <tr><td>Von der Bibliothek Google Play Billing an Google gesendete technische
+      Daten (<a href="#de-billing">Abschnitt 2</a>)</td>
+      <td>Diagnose der Funktion der Bibliothek, mit der die App Rarium Plus
+      verkauft und prüft</td>
+      <td>Berechtigtes Interesse daran, Rarium Plus über Google Play anzubieten und
+      seine Prüfung funktionsfähig zu halten (Art. 6 Abs. 1 lit. f)</td></tr>
+  <tr><td>Auf dem Telefon gespeicherte Daten</td>
+      <td>Verlauf, Sammlung und Preisverlauf funktionsfähig machen</td>
+      <td>Erbringung des angeforderten Dienstes (Art. 6 Abs. 1 lit. b); die Daten
+      bleiben unter deiner Kontrolle, und der Verantwortliche erhält sie
+      nicht</td></tr>
+  <tr><td>Android-Backup</td>
+      <td>Keine Daten verlieren, wenn du das Telefon wechselst</td>
+      <td>Android führt es gemäß den Einstellungen deines Google-Kontos aus, über
+      die du entscheidest: Der Verantwortliche erhält die Kopie nicht und hat
+      keinen Zugriff darauf</td></tr>
+  <tr><td>Prüfung von Rarium Plus auf dem Telefon
+      (<a href="#de-payments">Abschnitt 12</a>)</td>
+      <td>Wissen, ob du Anspruch auf die Funktionen von Rarium Plus hast</td>
+      <td>Erfüllung des Abovertrags (Art. 6 Abs. 1 lit. b); die Angabe bleibt auf
+      dem Telefon, und der Verantwortliche erhält sie nicht</td></tr>
+  <tr><td>Bestelldaten von Rarium Plus in der Play Console und
+      Buchhaltungsunterlagen (<a href="#de-payments">Abschnitt 12</a>)</td>
+      <td>Support, Erstattungen sowie steuerliche und buchhalterische
+      Pflichten</td>
+      <td>Rechtliche Verpflichtung für steuerliche und buchhalterische
+      Aufzeichnungen (Art. 6 Abs. 1 lit. c); für Support und Erstattungen
+      Vertragserfüllung (Art. 6 Abs. 1 lit. b)</td></tr>
+  <tr><td>Nachrichten, die du an den Verantwortlichen schreibst</td>
+      <td>Deine Anfragen beantworten</td>
+      <td>Auf deine Anfrage hin ergriffene Maßnahmen (Art. 6 Abs. 1 lit. b) oder
+      berechtigtes Interesse daran, denen zu antworten, die schreiben (Art. 6
+      Abs. 1 lit. f)</td></tr>
+  <tr><td>Absturzberichte in der Play Console
+      (<a href="#de-recipients">Abschnitt 8</a>)</td>
+      <td>Fehler der App beheben</td>
+      <td>Berechtigtes Interesse daran, Abstürze und Hänger der App zu finden und
+      zu beheben (Art. 6 Abs. 1 lit. f)</td></tr>
+  <tr><td>Rezensionen auf Google Play
+      (<a href="#de-recipients">Abschnitt 8</a>)</td>
+      <td>Sie lesen und beantworten</td>
+      <td>Berechtigtes Interesse daran, die Meinungen über Rarium zu kennen und
+      öffentlich zu antworten (Art. 6 Abs. 1 lit. f)</td></tr>
+</table>
+
+<h2 id="de-recipients">8. Empfänger</h2>
+<ul>
+  <li><strong>Google</strong>: für ML Kit (<a href="#de-camera">Abschnitt 2</a>),
+  für die Bibliothek Google Play Billing, die die technischen Daten aus
+  <a href="#de-billing">Abschnitt 2</a> vom Telefon aller, die die App nutzen, an
+  Google sendet, auch von denen, die Rarium Plus nicht kaufen, für das
+  Android-Backup (<a href="#de-backup">Abschnitt 5</a>) und, wenn du die App von
+  Google Play herunterlädst, für Google Play, das die Daten des Downloads und der
+  Installation gemäß seiner eigenen Datenschutzerklärung verarbeitet. Wenn du
+  Rarium Plus kaufst, verarbeitet Google Play auch die Kauf- und Zahlungsdaten: Im
+  Europäischen Wirtschaftsraum wird der Kaufvertrag mit Google Commerce Limited
+  geschlossen, und Google zeigt dem Verantwortlichen in der Play Console die in
+  <a href="#de-payments">Abschnitt 12</a> beschriebenen Bestelldaten. Wenn du auf
+  dem Telefon gewählt hast, Nutzungs- und Diagnosedaten mit Google zu teilen, kann
+  Google dem Verantwortlichen in der Play Console Statistiken und Berichte zu
+  Abstürzen und Hängern der App zeigen, aufgeschlüsselt nach Land, Telefonmodell,
+  Android-Version und App-Version. Wenn du auf Google Play eine Rezension
+  veröffentlichst, sieht der Verantwortliche sie in der Play Console mit dem
+  Namen, unter dem du sie veröffentlichst, dem Datum und, wenn Google sie
+  bereitstellt, einigen Daten des Telefons und der App (zum Beispiel Hersteller,
+  Android-Version, Sprache und App-Version), und er kann dir öffentlich
+  antworten.</li>
+  <li><strong>Die Dienste in <a href="#de-services">Abschnitt 4</a></strong>, die
+  die Anfragen vom Telefon erhalten.</li>
+</ul>
+<p>Es werden keine Daten verkauft, und der Verantwortliche nutzt weder Werbung
+noch Profiling-Tools. Google, auch für die technischen Daten, die es von ML Kit
+und von der Bibliothek Google Play Billing erhält, und die anderen Dienste in
+Abschnitt 4 verarbeiten diese Daten als eigenständige Verantwortliche gemäß ihren
+eigenen Datenschutzerklärungen: Der Verantwortliche für Rarium hat ihnen keine
+Verarbeitung in seinem Auftrag übertragen.</p>
+
+<h2 id="de-transfers">9. Übermittlungen außerhalb des EWR</h2>
+<p>Einige der Dienste in <a href="#de-services">Abschnitt 4</a> haben mit hoher
+Wahrscheinlichkeit Server außerhalb des Europäischen Wirtschaftsraums, zum
+Beispiel in Japan, Südkorea, Hongkong oder den Vereinigten Staaten; die
+Serverstandorte wurden nicht überprüft. Auch Google kann die Daten gemäß seiner
+eigenen Datenschutzerklärung außerhalb des EWR verarbeiten. Der Verantwortliche
+übermittelt keine Daten außerhalb des EWR: Es sind die Anfragen deines Telefons,
+wenn du eine Karte suchst oder ansiehst, die diese Server direkt erreichen, und
+diese verarbeiten sie gemäß ihren eigenen Datenschutzerklärungen.</p>
+
+<h2 id="de-retention">10. Wie lange</h2>
+<p><strong>Die App sendet dem Verantwortlichen keine Daten über die Personen, die
+sie nutzen.</strong> Der Verantwortliche bewahrt die Nachrichten, die du ihm
+freiwillig sendest, so lange auf, wie es nötig ist, um zu antworten und die Anfrage zu
+bearbeiten; für die Daten, die er in der Play Console sieht, gelten die folgenden
+Regeln.</p>
+<ul>
+  <li>Die Daten auf dem Telefon bleiben, bis du sie löschst
+  (<a href="#de-delete">Abschnitt 15</a>); den Cache der Illustrationen kann
+  Android jederzeit leeren.</li>
+  <li>Für die Kopie im Android-Backup gelten die Regeln von Google: Nur die
+  neueste wird aufbewahrt, und nicht mehr genutzte Backups werden nach einer
+  Zeit der Inaktivität gelöscht.</li>
+  <li>Google und die Dienste in <a href="#de-services">Abschnitt 4</a> bewahren
+  die Daten der Anfragen gemäß ihren eigenen Datenschutzerklärungen auf.</li>
+  <li>Die Absturzberichte und die Rezensionen bleiben in der Play Console, wo
+  Google sie nach seinen eigenen Regeln aufbewahrt.</li>
+  <li>Der Status von Rarium Plus bleibt auf dem Telefon, bis du die Daten der App
+  löschst; die App betrachtet ihn 40 Tage nach der letzten erfolgreichen Prüfung
+  bei Google Play nicht mehr als gültig.</li>
+  <li>Die Bestelldaten von Rarium Plus bleiben nach den Regeln von Google in der
+  Play Console. Der Verantwortliche bewahrt die Daten, die er für steuerliche und
+  buchhalterische Pflichten braucht (zum Beispiel die Verkaufsberichte), so lange
+  auf, wie es das Steuerrecht verlangt.</li>
+</ul>
+
+<h2 id="de-optional">11. Freiwillige Angaben und automatisierte Entscheidungen</h2>
+<p>Du musst keine Daten angeben: Man registriert sich nicht, und der Kaufpreis
+und der Zustand der Karten sind freiwillig. Zum Scannen brauchst du die
+Kameraberechtigung und eine Verbindung, ohne die die App weder Karten suchen noch
+Preise aktualisieren kann. Für den Kauf von Rarium Plus brauchst du ein
+Google-Konto und eine Zahlungsmethode: Diese fragt Google Play ab und verarbeitet
+sie, nicht der Verantwortliche.</p>
+<p>Rarium trifft keine ausschließlich auf einer automatisierten Verarbeitung
+beruhenden Entscheidungen, die dir gegenüber rechtliche Wirkung entfalten oder
+dich in ähnlicher Weise erheblich beeinträchtigen (Art. 22 DSGVO): Die App
+schlägt eine Karte und einen Preis vor, die du jederzeit mit der Karte in deiner Hand
+vergleichen und korrigieren kannst.</p>
+
+<h2 id="de-payments">12. Rarium Plus und Zahlungen</h2>
+<p>Rarium Plus, das optionale Abo, das einige Funktionen hinzufügt (die
+<a href="termini.html#deutsch">Nutzungsbedingungen</a> zählen sie auf), kann nur
+bei <strong>Google Play</strong> über das Zahlungssystem von Google gekauft
+werden. Zahlung, Mehrwertsteuer, Verlängerung, Kündigung und Erstattungen
+wickelt Google Play ab: Im Europäischen Wirtschaftsraum wird der Kaufvertrag mit
+Google Commerce Limited geschlossen, gemäß den
+<a href="https://play.google.com/about/play-terms/eea/index.html">Nutzungsbedingungen
+von Google Play</a>. <strong>Der Verantwortliche erhält die Daten deiner
+Zahlungsmethode nicht.</strong></p>
+<ul>
+  <li><strong>Auf dem Telefon.</strong> Um zu wissen, ob Rarium Plus aktiv ist,
+  fragt die App Google Play auf dem Telefon, über die Play-Store-App und die in
+  Rarium enthaltene Bibliothek Google Play Billing, jedes Mal, wenn du die App
+  öffnest oder zu ihr zurückkehrst (höchstens einmal alle 30 Sekunden), und in der
+  Hintergrundaufgabe, die die Preise aktualisiert. Die App bewahrt in ihrem
+  Speicher das Ergebnis der letzten erfolgreichen Prüfung auf: ob Rarium Plus aktiv ist, ob
+  das Abo ausgesetzt oder pausiert ist, ob eine Zahlung aussteht, ob es sich
+  automatisch verlängert, das Abo-Modell (Monats- oder Jahresabo), wenn es bekannt
+  ist, den SHA-256-Fingerabdruck des Kauf-Tokens (nicht das Token selbst) und wann
+  zuletzt geprüft wurde. Der Fingerabdruck dient nur dazu, denselben Kauf bei der
+  nächsten Prüfung wiederzuerkennen. Diese Daten verlassen das Telefon nicht: Sie
+  werden nicht an den Verantwortlichen gesendet, sind weder im Android-Backup noch
+  im vollständigen Backup in einer Datei enthalten und werden mit den Daten der
+  App gelöscht. Sie gelten höchstens 40 Tage ab der letzten erfolgreichen
+  Prüfung: Danach kehrt die App zur kostenlosen Version zurück, bis Google Play
+  das Abo erneut bestätigt. Die Bibliothek Google Play Billing sendet dagegen die
+  technischen Diagnosedaten aus <a href="#de-billing">Abschnitt 2</a> an Google,
+  auch wenn du nichts kaufst.</li>
+  <li><strong>In der Play Console.</strong> Für jeden Kauf zeigt Google dem
+  Verantwortlichen in der Play Console und in den Verkaufs- und
+  Einnahmenberichten die Bestelldaten: Bestellnummer, Datum und Uhrzeit, Produkt,
+  Abo-Modell (Monats- oder Jahresabo) und gegebenenfalls das Angebot (zum Beispiel
+  die kostenlose Testphase), Preis, Steuern und belasteter Betrag mit der Währung,
+  Status (zum Beispiel belastet oder erstattet), Land des Käufers und, wenn Google
+  sie bereitstellt, Region, Stadt und Postleitzahl sowie das für den Kauf
+  verwendete Telefonmodell. In der Play Console lässt sich eine Bestellung auch
+  über ihre Nummer oder über die vollständige E-Mail-Adresse des Google-Kontos
+  finden, mit dem sie getätigt wurde: Der Verantwortliche tut das, wenn du ihm
+  diese Angaben für eine Anfrage nennst. Der Verantwortliche verwendet diese Daten für Support,
+  Erstattungen sowie steuerliche und buchhalterische Pflichten und bewahrt sie so
+  lange auf, wie es das Steuerrecht verlangt.</li>
+  <li><strong>Kündigung.</strong> Das Abo wird über die
+  <a href="https://play.google.com/store/account/subscriptions">Abo-Verwaltung von
+  Google Play</a> (play.google.com) verwaltet und gekündigt. Wenn du Rarium
+  deinstallierst oder seine Daten löschst, wird das Abo nicht gekündigt und die
+  Bestellung bei Google nicht gelöscht.</li>
+</ul>
+
+<h2 id="de-rights">13. Deine Rechte</h2>
+<p>Die DSGVO gibt dir das Recht, auf die Daten zuzugreifen, die dich betreffen,
+sie berichtigen und löschen zu lassen, ihre Verarbeitung einschränken zu lassen
+und sie in einem übertragbaren Format zu erhalten (Artikel 15 bis 22). Schreib
+an <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
+<p class="separato"><strong>Widerspruchsrecht.</strong> Du kannst jederzeit aus
+Gründen, die sich aus deiner besonderen Situation ergeben, den Verarbeitungen
+widersprechen, die auf dem berechtigten Interesse beruhen
+(<a href="#de-bases">Abschnitt 7</a>), indem du an
+<a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> schreibst (Art. 21
+DSGVO).</p>
+<p>Da die App dem Verantwortlichen keine Daten über die Personen sendet, die sie
+nutzen, ist der Verantwortliche möglicherweise nicht in der Lage, Daten zu
+finden, die dich betreffen (Art. 11 DSGVO). Eine Ausnahme sind die Bestellungen
+von Rarium Plus: Gib die Bestellnummer an, die du in der Quittung von Google Play
+findest (sie beginnt meist mit „GPA.“), oder die E-Mail-Adresse deines
+Google-Kontos, und der Verantwortliche kann die Bestellung in der Play Console
+finden. Die Daten aus <a href="#de-phone">Abschnitt 3</a> sind bereits auf deinem
+Telefon: Du löschst sie, wie <a href="#de-delete">Abschnitt 15</a> erklärt, und
+kannst die Sammlung als CSV exportieren. Für die Daten, die Google oder die
+anderen Dienste in <a href="#de-services">Abschnitt 4</a> verarbeiten, kannst du
+dich auch direkt an sie wenden.</p>
+<p>Du kannst außerdem Beschwerde bei der italienischen Datenschutzbehörde, dem
+Garante per la protezione dei dati personali
+(<a href="https://www.garanteprivacy.it">garanteprivacy.it</a>), oder bei der
+Aufsichtsbehörde des Landes einlegen, in dem du lebst oder arbeitest oder in dem
+der mutmaßliche Verstoß stattgefunden hat.</p>
+
+<h2 id="de-minors">14. Minderjährige</h2>
+<p>Rarium richtet sich nicht an Kinder unter 14 Jahren. Der Verantwortliche
+erhält keine Daten, aus denen er das Alter der Personen erfahren könnte, die die
+App nutzen, und erhebt nicht wissentlich Daten von Minderjährigen. Wenn du ein
+Elternteil bist und Fragen hast, schreib an die oben genannte Adresse.</p>
+
+<h2 id="de-delete">15. Wie du deine Daten löschst</h2>
+<p>Rarium hat keine Konten. Um deine Daten zu löschen, deinstalliere die App oder
+lösche ihre Daten unter Android-Einstellungen → Apps → Rarium → Speicher → Daten
+löschen (die Bezeichnungen unterscheiden sich je nach Hersteller), und lösche ein
+eventuelles Backup aus deinem Google-Konto.</p>
+<ul>
+  <li><strong>Keine Aktion innerhalb der App löscht Daten wirklich.</strong> Wenn
+  du eine Karte aus der Sammlung entfernst, wird sie in den „Papierkorb“
+  verschoben, aus dem sie wiederhergestellt werden kann; wenn du einen Scan
+  gedrückt hältst, verschwindet er aus dem Verlauf. In beiden Fällen bleibt die
+  Zeile in der Datenbank des Telefons (bei der Sammlung zusammen mit dem Protokoll
+  der Hinzufügungen und Entfernungen) und in einem eventuellen Backup: Sie
+  verschwindet erst, wenn du die Daten der App und das Backup löschst.</li>
+  <li>Das Deinstallieren der App löscht keine bereits in Google Drive gespeicherte
+  Kopie; Android stellt sie wieder her, wenn du Rarium mit demselben Konto neu
+  installierst.</li>
+  <li>Das Deinstallieren von Rarium oder das Löschen seiner Daten <strong>kündigt
+  Rarium Plus nicht</strong> und löscht die Bestellung bei Google nicht: Das Abo
+  wird über die
+  <a href="https://play.google.com/store/account/subscriptions">Abo-Verwaltung von
+  Google Play</a> gekündigt. Der auf dem Telefon gespeicherte Status von Rarium
+  Plus wird mit den Daten der App gelöscht.</li>
+  <li>Das Backup löschst du aus deinem Google-Konto. Google verwaltet die Backups
+  gemeinsam: Je nachdem, wie du es löschst, kannst du auch die Daten anderer Apps
+  und anderer Telefone deines Kontos löschen, einschließlich der von WhatsApp.
+  Lies vorher die <a href="https://support.google.com/android/answer/2819582">Anleitung
+  von Google zum Backup</a>. Damit keine weiteren gespeichert werden, schalte das
+  Backup in den Android-Einstellungen aus.</li>
+</ul>
+
+<h2 id="de-changes">16. Änderungen dieser Datenschutzerklärung</h2>
+<p>Änderungen werden auf dieser Seite veröffentlicht, mit dem
+Aktualisierungsdatum oben. Die Datenschutzerklärung wird vor jeder Version
+aktualisiert, die die verarbeiteten Daten ändert, zum Beispiel durch eine
+Anmeldung mit einem Konto.</p>
 
 </section>
 
@@ -1037,6 +2077,15 @@ Creatures Inc. / GAME FREAK inc. Card artwork belongs to its respective rights
 holders and is shown only to help you identify the card. Prices are market
 statistics published by Cardmarket, for information only; they are not an
 appraisal or an offer.</p>
+<p lang="de">Rarium ist eine unabhängige, inoffizielle App. Sie wird nicht von
+Nintendo, The Pokémon Company, Creatures Inc., GAME FREAK inc. oder Cardmarket
+hergestellt, genehmigt oder gesponsert und ist nicht mit ihnen verbunden. Pokémon
+und die Namen der Pokémon-Figuren sind Marken von Nintendo. © 2026 Pokémon.
+© 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc. Die Kartenillustrationen
+gehören ihren jeweiligen Rechteinhabern und werden nur angezeigt, um dir zu
+helfen, die Karte zu identifizieren. Die Preise sind von Cardmarket
+veröffentlichte Marktstatistiken und dienen nur der Information: Sie sind weder
+ein Gutachten noch ein Angebot.</p>
 </footer>
 
 </main>
