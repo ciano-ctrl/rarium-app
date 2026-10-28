@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rarium — Privacy</title>
+<title>Tesoria — Privacy</title>
 <style>
   :root { --bg:#ffffff; --fg:#16191c; --muted:#5b6570; --line:#e3e6ea; --accent:#0f766e; }
   @media (prefers-color-scheme: dark) {
@@ -39,7 +39,7 @@
 <body>
 <main>
 
-<h1>Privacy — Rarium</h1>
+<h1>Privacy — Tesoria</h1>
 <p class="sub">Ultimo aggiornamento: 27 ottobre 2026 · <a href="#english" lang="en">English version below</a> · <a href="#deutsch" lang="de">Deutsche Fassung weiter unten</a></p>
 <!-- La pagina ha tre versioni: italiana, inglese (#english) e tedesca
      (#deutsch, che dichiara che in caso di dubbi fa fede l'italiana). L'app
@@ -47,7 +47,7 @@
      va fatta in tutte e tre.
      Le sezioni su account e sincronizzazione stanno in
      docs/legale/bozza-privacy-account.html e si pubblicano solo con la
-     versione che introduce l'accesso con un account. Rarium Plus, venduto con
+     versione che introduce l'accesso con un account. Tesoria Plus, venduto con
      Google Play Billing senza account e senza server, e' descritto qui
      (sezioni 2, 3, 4, 5, 7, 8, 10, 12, 13 e 15) e nei Termini d'uso (termini.html).
      I dati che la libreria Google Play Billing invia a Google (sezione 2) sono
@@ -55,7 +55,7 @@
      datatransport/CCT): se cambia playBilling in gradle/libs.versions.toml, vanno
      ricontrollati nelle tre versioni. -->
 
-<p>Rarium è un'app Android che riconosce le carte collezionabili inquadrandole
+<p>Tesoria è un'app Android che riconosce le carte collezionabili inquadrandole
 con la fotocamera, ne mostra l'andamento dei prezzi e permette di tenere una
 collezione sul telefono. Questa pagina spiega quali dati tratta, perché, dove
 restano e come cancellarli. Descrive la versione distribuita su Google Play.</p>
@@ -65,10 +65,10 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
 
 <h2 id="breve">In breve</h2>
 <ul>
-  <li>Rarium si usa <strong>senza account</strong>: non ci si registra, e l'app
+  <li>Tesoria si usa <strong>senza account</strong>: non ci si registra, e l'app
   non invia al titolare dati su chi la usa. Google Play gli mostra però
   statistiche sugli arresti anomali dell'app, le recensioni pubblicate e, per chi
-  compra Rarium Plus, i dati dell'ordine (<a href="#destinatari">sezione 8</a> e
+  compra Tesoria Plus, i dati dell'ordine (<a href="#destinatari">sezione 8</a> e
   <a href="#pagamenti">sezione 12</a>).</li>
   <li>Le <strong>immagini della fotocamera</strong> sono elaborate solo sul
   telefono e non vengono inviate a nessuno. Di ogni carta riconosciuta l'app
@@ -77,7 +77,7 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   <li>Il riconoscimento del testo usa <strong>Google ML Kit</strong>, che invia
   a Google dati tecnici di diagnostica e di utilizzo
   (<a href="#fotocamera">sezione 2</a>).</li>
-  <li>Per Rarium Plus l'app include la libreria <strong>Google Play
+  <li>Per Tesoria Plus l'app include la libreria <strong>Google Play
   Billing</strong>, che invia a Google dati tecnici di diagnostica sul proprio
   funzionamento anche se non compri nulla, perché l'app chiede a Google Play lo
   stato dell'abbonamento ogni volta che la apri
@@ -93,7 +93,7 @@ contatto: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   (<a href="#backup">sezione 5</a>).</li>
   <li>Niente pubblicità e niente strumenti di statistiche che mandino dati al
   titolare.</li>
-  <li>Alcune funzioni fanno parte di <strong>Rarium Plus</strong>, un abbonamento
+  <li>Alcune funzioni fanno parte di <strong>Tesoria Plus</strong>, un abbonamento
   facoltativo che si compra su Google Play: il pagamento lo gestisce Google, il
   titolare non riceve i dati del tuo metodo di pagamento, e l'app verifica
   l'abbonamento sul telefono senza inviare nulla al titolare
@@ -112,7 +112,7 @@ esportare la collezione in un file CSV o in un backup completo. Tutto questo fun
 account.</p>
 <p>Alcune di queste funzioni, fra cui gli avvisi di prezzo, più di un
 raccoglitore, la collezione oltre le 50 copie e la lista dei desideri oltre le
-10 carte, fanno parte di Rarium Plus, un abbonamento facoltativo che si compra su
+10 carte, fanno parte di Tesoria Plus, un abbonamento facoltativo che si compra su
 Google Play (<a href="#pagamenti">sezione 12</a>); l'elenco completo è nei
 <a href="termini.html">Termini d'uso</a>. La scansione, il riconoscimento e il
 prezzo di ogni carta restano gratuiti.</p>
@@ -121,7 +121,7 @@ prezzo di ogni carta restano gratuiti.</p>
 <p>Il riconoscimento avviene <strong>sul telefono</strong>: i fotogrammi vengono
 analizzati in memoria per leggere il titolo e il numero stampati sulla carta e,
 nella versione pubblicata su Google Play, non vengono mai inviati ad alcun
-server. Rarium non chiede l'accesso alle foto della galleria. Di ogni
+server. Tesoria non chiede l'accesso alle foto della galleria. Di ogni
 carta riconosciuta conserva sul telefono un piccolo ritaglio (al massimo 480
 pixel sul lato lungo), usato come anteprima quando il catalogo non ha
 l'illustrazione: resta nella memoria dell'app, non entra nel backup e si
@@ -150,7 +150,7 @@ non trasferirli a terzi; i termini di ML Kit aggiungono che li usa anche per
 misurare le prestazioni, correggere, mantenere e migliorare le API e rilevare
 usi impropri o abusi. ML Kit può inoltre contattare i server di Google per
 ricevere correzioni, modelli aggiornati e informazioni sulla compatibilità degli
-acceleratori hardware. Il titolare di Rarium non riceve questi dati. L'app non
+acceleratori hardware. Il titolare di Tesoria non riceve questi dati. L'app non
 ha un'impostazione per disattivare questo invio, e ML Kit non ne documenta una.
 Fonti: <a href="https://developers.google.com/ml-kit/android-data-disclosure">dati
 raccolti da ML Kit</a>, <a href="https://developers.google.com/ml-kit/terms">termini
@@ -158,12 +158,12 @@ di ML Kit</a>, <a href="https://policies.google.com/privacy">informativa privacy
 Google</a>.</p>
 
 <h3 id="billing">Google Play Billing</h3>
-<p>Per vendere Rarium Plus e verificare l'abbonamento
+<p>Per vendere Tesoria Plus e verificare l'abbonamento
 (<a href="#pagamenti">sezione 12</a>) l'app include la libreria Google Play
 Billing (versione 9.1.0). Oltre a dialogare con l'app Play Store del telefono, la
 libreria invia a Google, direttamente dall'app e non attraverso il Play Store,
 eventi tecnici di diagnostica sul proprio funzionamento. Succede a
-<strong>chiunque usi l'app, anche a chi non compra Rarium Plus</strong>: l'app
+<strong>chiunque usi l'app, anche a chi non compra Tesoria Plus</strong>: l'app
 chiede a Google Play lo stato dell'abbonamento ogni volta che la apri o ci torni
 (al massimo una volta ogni 30 secondi) e nel lavoro in sottofondo che aggiorna i
 prezzi.</p>
@@ -176,7 +176,7 @@ riportano, fra l'altro, marca, produttore e modello del telefono, la versione di
 Android e la build del sistema, la memoria RAM del telefono, il nome e la versione
 dell'app, la versione della libreria e un numero casuale generato ogni volta che
 l'app avvia la libreria. Non contengono le tue carte, la collezione né i prezzi
-che hai pagato: l'app non li passa alla libreria. Il titolare di Rarium non
+che hai pagato: l'app non li passa alla libreria. Il titolare di Tesoria non
 riceve questi dati, che Google tratta secondo la propria
 <a href="https://policies.google.com/privacy">informativa privacy</a>; l'app non
 ha un'impostazione per disattivare questo invio. Fonte:
@@ -184,7 +184,7 @@ ha un'impostazione per disattivare questo invio. Fonte:
 versione della libreria Google Play Billing</a>.</p>
 
 <h2 id="telefono">3. Dati sul tuo telefono</h2>
-<p>Rarium salva questi dati sul telefono, nella memoria riservata all'app; se il
+<p>Tesoria salva questi dati sul telefono, nella memoria riservata all'app; se il
 backup di Android è attivo, una copia va nel tuo Google Drive
 (<a href="#backup">sezione 5</a>). Nessuno di questi dati viene inviato al
 titolare.</p>
@@ -239,8 +239,8 @@ titolare.</p>
       di prezzo e riepilogo settimanale accesi o spenti, l'ultima lingua di
       stampa rilevata.</td>
       <td>Sì</td></tr>
-  <tr><td>Stato di Rarium Plus</td>
-      <td>L'esito dell'ultima verifica riuscita con Google Play: se Rarium Plus è
+  <tr><td>Stato di Tesoria Plus</td>
+      <td>L'esito dell'ultima verifica riuscita con Google Play: se Tesoria Plus è
       attivo, se l'abbonamento è sospeso o in pausa, se c'è un pagamento in
       attesa, se si rinnova automaticamente, il piano (mensile o annuale) quando è
       noto, l'impronta SHA-256 del codice dell'acquisto (non il codice) e quando è
@@ -279,7 +279,7 @@ listino con i dati mobili.</p>
 collezione) scrivono e leggono un file JSON nel punto che scegli tu con il
 selettore di Android: dentro ci sono raccoglitori, carte (anche quelle tolte),
 desideri con le soglie, note, vendite, cronologia, valore giornaliero, storico
-dei prezzi dei prodotti che segui e le impostazioni, ma non lo stato di Rarium
+dei prezzi dei prodotti che segui e le impostazioni, ma non lo stato di Tesoria
 Plus. Il file è tuo e l'app non lo invia a
 nessuno. «Condividi come immagine», l'elenco da vendere e la lista scambi
 passano dal menu di condivisione di Android: sei tu a scegliere con quale app
@@ -309,7 +309,7 @@ riceve dipende dal servizio, come dice l'ultima colonna della tabella:</p>
   <a href="#fotocamera">sezione 2</a>, compresi il nome dell'app e un
   identificativo per installazione.</li>
   <li><strong>Google Play</strong>, attraverso l'app Play Store del telefono e la
-  libreria Google Play Billing inclusa in Rarium, gestisce l'acquisto di Rarium
+  libreria Google Play Billing inclusa in Tesoria, gestisce l'acquisto di Tesoria
   Plus e risponde all'app se l'abbonamento è attivo per l'account Google con cui
   il Play Store è collegato (<a href="#pagamenti">sezione 12</a>). La libreria
   invia inoltre a Google, direttamente dall'app, i dati tecnici di diagnostica
@@ -320,7 +320,7 @@ riceve dipende dal servizio, come dice l'ultima colonna della tabella:</p>
 che hai pagato. Oltre a Google, che riceve da ML Kit l'identificativo per
 installazione, dalla libreria Google Play Billing il numero casuale generato a
 ogni suo avvio e, attraverso Google Play, conosce l'account Google con cui il
-Play Store è collegato e con cui compri Rarium Plus, nessuno riceve
+Play Store è collegato e con cui compri Tesoria Plus, nessuno riceve
 identificativi dell'installazione o del telefono.</p>
 
 <table>
@@ -397,7 +397,7 @@ identificativi dell'installazione o del telefono.</p>
       <td>Loghi e simboli dei set mostrati nell'elenco dei set</td>
       <td>L'immagine richiesta, cioè quale set stai guardando</td></tr>
   <tr><td>Google Play (app Play Store del telefono e server di Google)</td>
-      <td>L'acquisto di Rarium Plus e la verifica dell'abbonamento, con la libreria
+      <td>L'acquisto di Tesoria Plus e la verifica dell'abbonamento, con la libreria
       Google Play Billing inclusa nell'app: l'app chiede al Play Store se
       l'abbonamento è attivo ogni volta che la apri o ci torni (al massimo una
       volta ogni 30 secondi) e nel lavoro in sottofondo; acquisto e pagamento
@@ -415,7 +415,7 @@ identificativi dell'installazione o del telefono.</p>
 </table>
 
 <p>Ciascun servizio tratta questi dati secondo la propria informativa: il
-titolare di Rarium non ha accordi con loro e non controlla che cosa ne fanno.
+titolare di Tesoria non ha accordi con loro e non controlla che cosa ne fanno.
 Alcuni di questi server si trovano, con ogni probabilità, fuori dallo Spazio
 economico europeo (per esempio in Giappone, Corea del Sud, Hong Kong o negli
 Stati Uniti); le loro sedi non sono state verificate
@@ -426,7 +426,7 @@ telefono, e solo se li tocchi: la scheda, la ricerca o le offerte della carta su
 www.cardmarket.com; quando c'è, la pagina da cui arriva la scheda della carta
 (per esempio su www.pokemon-card.com o su www.tcgcollector.com); per una carta
 gradata, i venduti su www.ebay.it filtrati per carta e voto e la pagina del
-certificato su www.psacard.com o www.cgccards.com; per gestire o disdire Rarium
+certificato su www.psacard.com o www.cgccards.com; per gestire o disdire Tesoria
 Plus, il Centro abbonamenti di Google Play su play.google.com; questa
 informativa e i Termini d'uso, su questo stesso sito; e, dalla schermata
 «Privacy e licenze», le pagine delle licenze delle librerie usate dall'app. Quei
@@ -440,7 +440,7 @@ pagina.</p>
 
 <h2 id="backup">5. Backup di Android</h2>
 <p>Se il backup di Android è attivo nel tuo account Google, il sistema salva una
-copia del database di Rarium (collezione, prezzi pagati, date di aggiunta, note,
+copia del database di Tesoria (collezione, prezzi pagati, date di aggiunta, note,
 dati delle carte gradate, vendite, raccoglitori, lista desideri con le soglie di prezzo,
 cronologia delle scansioni, storico dei prezzi e valore giornaliero della
 collezione) e delle impostazioni dell'app, con gli elenchi dei
@@ -448,14 +448,14 @@ nomi e le numerazioni dei set, in una cartella privata del tuo Google Drive,
 fino a 25 MB. Il backup parte da solo, non più di una volta al giorno, quando il
 telefono è inattivo e di norma connesso al Wi-Fi, e Google conserva solo la copia
 più recente. Sono esclusi il listino e il catalogo Cardmarket, la cache delle
-illustrazioni, la cartella esterna dell'app e lo stato di Rarium Plus, che su un
-telefono nuovo, o dopo aver reinstallato l'app, Rarium chiede di nuovo a Google
+illustrazioni, la cartella esterna dell'app e lo stato di Tesoria Plus, che su un
+telefono nuovo, o dopo aver reinstallato l'app, Tesoria chiede di nuovo a Google
 Play.</p>
 <p>Da Android 9, se sul telefono è impostato un PIN, una sequenza o una
-password, la copia è cifrata end-to-end. Il titolare di Rarium non riceve questa
+password, la copia è cifrata end-to-end. Il titolare di Tesoria non riceve questa
 copia e non ha modo di leggerla. Gli stessi dati possono passare a un telefono
 nuovo durante il trasferimento dei dati da un telefono all'altro, e Android li
-ripristina quando reinstalli Rarium con lo stesso account Google: per questo
+ripristina quando reinstalli Tesoria con lo stesso account Google: per questo
 <strong>disinstallare l'app non cancella una copia già salvata su Google
 Drive</strong>. Puoi disattivare il backup dalle impostazioni di Android o
 eliminarlo dal tuo account Google (<a href="#cancellare">sezione 15</a>). Fonte:
@@ -483,8 +483,8 @@ Android sul backup automatico</a>.</p>
   <tr><td>Dati tecnici inviati a Google dalla libreria Google Play Billing
       (<a href="#billing">sezione 2</a>)</td>
       <td>Diagnostica del funzionamento della libreria con cui l'app vende e
-      verifica Rarium Plus</td>
-      <td>Legittimo interesse a offrire Rarium Plus con Google Play e a farne
+      verifica Tesoria Plus</td>
+      <td>Legittimo interesse a offrire Tesoria Plus con Google Play e a farne
       funzionare la verifica (art. 6.1.f)</td></tr>
   <tr><td>Dati salvati sul telefono</td>
       <td>Far funzionare cronologia, collezione e storico dei prezzi</td>
@@ -494,12 +494,12 @@ Android sul backup automatico</a>.</p>
       <td>Non perdere i dati se cambi telefono</td>
       <td>Lo esegue Android secondo le impostazioni del tuo account Google, che
       decidi tu: il titolare non riceve la copia e non vi accede</td></tr>
-  <tr><td>Verifica di Rarium Plus sul telefono
+  <tr><td>Verifica di Tesoria Plus sul telefono
       (<a href="#pagamenti">sezione 12</a>)</td>
-      <td>Sapere se hai diritto alle funzioni di Rarium Plus</td>
+      <td>Sapere se hai diritto alle funzioni di Tesoria Plus</td>
       <td>Esecuzione del contratto di abbonamento (art. 6.1.b); il dato resta sul
       telefono e il titolare non lo riceve</td></tr>
-  <tr><td>Dati degli ordini di Rarium Plus nella Play Console e registrazioni
+  <tr><td>Dati degli ordini di Tesoria Plus nella Play Console e registrazioni
       contabili (<a href="#pagamenti">sezione 12</a>)</td>
       <td>Assistenza, rimborsi e obblighi fiscali e contabili</td>
       <td>Obbligo di legge per le registrazioni fiscali e contabili
@@ -517,7 +517,7 @@ Android sul backup automatico</a>.</p>
   <tr><td>Recensioni su Google Play
       (<a href="#destinatari">sezione 8</a>)</td>
       <td>Leggerle e rispondere</td>
-      <td>Legittimo interesse a conoscere le opinioni su Rarium e a rispondere
+      <td>Legittimo interesse a conoscere le opinioni su Tesoria e a rispondere
       pubblicamente (art. 6.1.f)</td></tr>
 </table>
 
@@ -526,9 +526,9 @@ Android sul backup automatico</a>.</p>
   <li><strong>Google</strong>: per ML Kit (<a href="#fotocamera">sezione 2</a>),
   per la libreria Google Play Billing, che invia a Google i dati tecnici della
   <a href="#billing">sezione 2</a> dal telefono di chiunque usi l'app, anche di chi
-  non compra Rarium Plus, per il backup di Android (<a href="#backup">sezione 5</a>)
+  non compra Tesoria Plus, per il backup di Android (<a href="#backup">sezione 5</a>)
   e, quando scarichi l'app da Google Play, per Google Play, che tratta i dati del
-  download e dell'installazione secondo la propria informativa. Se compri Rarium Plus,
+  download e dell'installazione secondo la propria informativa. Se compri Tesoria Plus,
   Google Play tratta anche i dati dell'acquisto e del pagamento: nello Spazio
   economico europeo il contratto d'acquisto si conclude con Google Commerce
   Limited, e Google mostra al titolare, nella Play Console, i dati dell'ordine
@@ -548,7 +548,7 @@ Android sul backup automatico</a>.</p>
 profilazione. Google, anche per i dati tecnici che riceve da ML Kit e dalla
 libreria Google Play Billing, e gli altri servizi della sezione 4 trattano questi
 dati come titolari autonomi, secondo le proprie informative: il titolare di
-Rarium non ha affidato loro alcun trattamento per proprio conto.</p>
+Tesoria non ha affidato loro alcun trattamento per proprio conto.</p>
 
 <h2 id="trasferimenti">9. Trasferimenti fuori dallo SEE</h2>
 <p>Alcuni dei servizi della <a href="#servizi">sezione 4</a> hanno, con ogni
@@ -574,10 +574,10 @@ rispondere e a gestire la richiesta; i dati che vede nella Play Console seguono 
   delle richieste secondo le proprie informative.</li>
   <li>I rapporti sugli arresti anomali e le recensioni restano nella Play
   Console, dove li conserva Google secondo le proprie regole.</li>
-  <li>Lo stato di Rarium Plus resta sul telefono finché non cancelli i dati
+  <li>Lo stato di Tesoria Plus resta sul telefono finché non cancelli i dati
   dell'app; l'app smette di considerarlo valido 40 giorni dopo l'ultima verifica
   riuscita con Google Play.</li>
-  <li>I dati degli ordini di Rarium Plus restano nella Play Console secondo le
+  <li>I dati degli ordini di Tesoria Plus restano nella Play Console secondo le
   regole di Google. Il titolare conserva quelli che servono agli obblighi fiscali
   e contabili (per esempio i rapporti di vendita) per il tempo richiesto dalla
   legge fiscale.</li>
@@ -587,15 +587,15 @@ rispondere e a gestire la richiesta; i dati che vede nella Play Console seguono 
 <p>Non devi fornire alcun dato: non ci si registra, e il prezzo pagato e la
 condizione delle carte sono facoltativi. Per scansionare servono il permesso
 della fotocamera e la connessione, senza la quale l'app non può cercare le carte
-né aggiornare i prezzi. Per comprare Rarium Plus servono un account Google e un
+né aggiornare i prezzi. Per comprare Tesoria Plus servono un account Google e un
 metodo di pagamento: li chiede e li tratta Google Play, non il titolare.</p>
-<p>Rarium non prende decisioni basate unicamente su un trattamento automatizzato
+<p>Tesoria non prende decisioni basate unicamente su un trattamento automatizzato
 che producano effetti giuridici o che ti riguardino in modo significativo
 (art. 22 GDPR): propone una carta e un prezzo, che puoi sempre confrontare con
 la carta che hai in mano e correggere.</p>
 
-<h2 id="pagamenti">12. Rarium Plus e pagamenti</h2>
-<p>Rarium Plus, l'abbonamento facoltativo che aggiunge alcune funzioni (le
+<h2 id="pagamenti">12. Tesoria Plus e pagamenti</h2>
+<p>Tesoria Plus, l'abbonamento facoltativo che aggiunge alcune funzioni (le
 elencano i <a href="termini.html">Termini d'uso</a>), si compra solo su
 <strong>Google Play</strong>, con il sistema di pagamento di Google. Pagamento,
 IVA, rinnovo, disdetta e rimborsi li gestisce Google Play: nello Spazio economico
@@ -604,12 +604,12 @@ europeo il contratto d'acquisto si conclude con Google Commerce Limited, secondo
 servizio di Google Play</a>. <strong>Il titolare non riceve i dati del tuo metodo
 di pagamento.</strong></p>
 <ul>
-  <li><strong>Sul telefono.</strong> Per sapere se Rarium Plus è attivo, l'app lo
+  <li><strong>Sul telefono.</strong> Per sapere se Tesoria Plus è attivo, l'app lo
   chiede a Google Play sul telefono, attraverso l'app Play Store e la libreria
-  Google Play Billing inclusa in Rarium, ogni volta che la apri o ci torni (al
+  Google Play Billing inclusa in Tesoria, ogni volta che la apri o ci torni (al
   massimo una volta ogni 30 secondi) e nel lavoro in sottofondo che aggiorna i
   prezzi. Conserva nella memoria dell'app l'esito dell'ultima verifica riuscita:
-  se Rarium Plus è attivo, se l'abbonamento è sospeso o in pausa, se c'è un
+  se Tesoria Plus è attivo, se l'abbonamento è sospeso o in pausa, se c'è un
   pagamento in attesa, se si rinnova automaticamente, il piano (mensile o
   annuale) quando è noto, l'impronta SHA-256 del codice dell'acquisto (non il
   codice) e quando è stato verificato l'ultima volta. L'impronta serve solo a
@@ -635,7 +635,7 @@ di pagamento.</strong></p>
   fiscale.</li>
   <li><strong>Disdetta.</strong> L'abbonamento si gestisce e si disdice dal
   <a href="https://play.google.com/store/account/subscriptions">Centro
-  abbonamenti di Google Play</a> (play.google.com). Disinstallare Rarium o
+  abbonamenti di Google Play</a> (play.google.com). Disinstallare Tesoria o
   cancellarne i dati non disdice l'abbonamento e non cancella l'ordine presso
   Google.</li>
 </ul>
@@ -652,7 +652,7 @@ trattamenti che si basano sul legittimo interesse
 <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (art. 21 GDPR).</p>
 <p>Poiché l'app non invia al titolare dati su chi la usa, il titolare potrebbe
 non essere in grado di individuare dati che ti riguardano (art. 11 GDPR). Fanno
-eccezione gli ordini di Rarium Plus: indica il numero d'ordine che trovi nella
+eccezione gli ordini di Tesoria Plus: indica il numero d'ordine che trovi nella
 ricevuta di Google Play (di solito comincia con «GPA.») o l'indirizzo email del
 tuo account Google, e il titolare può ritrovare l'ordine nella Play Console. I dati
 della <a href="#telefono">sezione 3</a> sono già sul tuo telefono: li cancelli
@@ -665,14 +665,14 @@ controllo del paese in cui vivi, lavori o in cui è avvenuta la presunta
 violazione.</p>
 
 <h2 id="minori">14. Minori</h2>
-<p>Rarium non è rivolto a minori di 14 anni. Il titolare non riceve dati che gli
+<p>Tesoria non è rivolta a minori di 14 anni. Il titolare non riceve dati che gli
 permettano di conoscere l'età di chi usa l'app e non raccoglie consapevolmente
 dati di minori. Se sei un genitore e hai domande, scrivi all'indirizzo qui
 sopra.</p>
 
 <h2 id="cancellare">15. Come cancellare i tuoi dati</h2>
-<p>Rarium non ha account. Per cancellare i tuoi dati disinstalla l'app, oppure
-cancellane i dati da Impostazioni di Android → App → Rarium → Spazio di
+<p>Tesoria non ha account. Per cancellare i tuoi dati disinstalla l'app, oppure
+cancellane i dati da Impostazioni di Android → App → Tesoria → Spazio di
 archiviazione → Cancella dati (le voci cambiano da un produttore all'altro), ed
 elimina l'eventuale backup dal tuo account Google.</p>
 <ul>
@@ -683,11 +683,11 @@ elimina l'eventuale backup dal tuo account Google.</p>
   insieme al registro delle aggiunte e delle rimozioni) e nell'eventuale backup:
   se ne va solo cancellando i dati dell'app e il backup.</li>
   <li>Disinstallare l'app non cancella una copia già salvata su Google Drive,
-  che Android ripristina se reinstalli Rarium con lo stesso account.</li>
-  <li>Disinstallare Rarium o cancellarne i dati <strong>non disdice Rarium
+  che Android ripristina se reinstalli Tesoria con lo stesso account.</li>
+  <li>Disinstallare Tesoria o cancellarne i dati <strong>non disdice Tesoria
   Plus</strong> e non cancella l'ordine presso Google: l'abbonamento si disdice dal
   <a href="https://play.google.com/store/account/subscriptions">Centro abbonamenti
-  di Google Play</a>. Lo stato di Rarium Plus salvato sul telefono si cancella
+  di Google Play</a>. Lo stato di Tesoria Plus salvato sul telefono si cancella
   con i dati dell'app.</li>
   <li>Il backup si elimina dal tuo account Google. Google gestisce i backup
   insieme: secondo come lo elimini, puoi cancellare anche i dati delle altre app
@@ -705,7 +705,7 @@ cambi i dati trattati, per esempio con un accesso tramite account.</p>
 <section lang="en">
 
 <h2 id="english">English version</h2>
-<p>Rarium is an Android app that identifies collectible cards through the
+<p>Tesoria is an Android app that identifies collectible cards through the
 camera, shows their price trend and lets you keep a collection on your phone.
 This page explains which data it processes, why, where the data stays and how to
 delete it. It describes the version distributed on Google Play.</p>
@@ -715,10 +715,10 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
 
 <h2 id="en-short">In short</h2>
 <ul>
-  <li>Rarium is used <strong>without an account</strong>: there is no sign-up,
+  <li>Tesoria is used <strong>without an account</strong>: there is no sign-up,
   and the app sends the controller no data about the people who use it. Google
   Play does, however, show the controller statistics on the app's crashes, the
-  published reviews and, for people who buy Rarium Plus, the order details
+  published reviews and, for people who buy Tesoria Plus, the order details
   (<a href="#en-recipients">section 8</a> and
   <a href="#en-payments">section 12</a>).</li>
   <li><strong>Camera frames</strong> are processed only on the phone and are
@@ -729,7 +729,7 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   the phone: it sends no data to anyone.</li>
   <li>Text recognition uses <strong>Google ML Kit</strong>, which sends Google
   technical diagnostics and usage data (<a href="#en-camera">section 2</a>).</li>
-  <li>For Rarium Plus the app includes the <strong>Google Play Billing</strong>
+  <li>For Tesoria Plus the app includes the <strong>Google Play Billing</strong>
   library, which sends Google technical diagnostics data about its own operation
   even if you never buy anything, because the app asks Google Play for the
   subscription status every time you open it
@@ -742,7 +742,7 @@ contact: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   phone</strong>; Android backup may copy them to your Google Drive
   (<a href="#en-backup">section 5</a>).</li>
   <li>No ads and no analytics tools that send data to the controller.</li>
-  <li>Some features are part of <strong>Rarium Plus</strong>, an optional
+  <li>Some features are part of <strong>Tesoria Plus</strong>, an optional
   subscription bought on Google Play: Google handles the payment, the controller
   never receives your payment method details, and the app checks the
   subscription on the phone without sending anything to the controller
@@ -759,7 +759,7 @@ with the price you received, keep a wishlist, choose a price below (or above)
 which you get an alert, and export the collection to a CSV file or a full
 backup. All of this works without signing up: the app has no accounts.</p>
 <p>Some of these features, including price alerts, more than one binder, a
-collection beyond 50 copies and a wishlist beyond 10 cards, are part of Rarium
+collection beyond 50 copies and a wishlist beyond 10 cards, are part of Tesoria
 Plus, an optional subscription bought on Google Play
 (<a href="#en-payments">section 12</a>); the full list is in the
 <a href="termini.html#english">Terms of Use</a>. Scanning, recognition and the
@@ -768,7 +768,7 @@ price of every card stay free.</p>
 <h2 id="en-camera">2. Camera frames stay on the phone</h2>
 <p>Recognition runs <strong>on the phone</strong>: frames are analysed in memory
 to read the title and number printed on the card and, in the version published
-on Google Play, they are never sent to any server. Rarium does not ask for
+on Google Play, they are never sent to any server. Tesoria does not ask for
 access to your photo gallery. For each recognised card it keeps a small crop
 on the phone (at most 480 pixels on the long side), used as a preview when the
 catalogue has no artwork: it stays in the app's storage, is not included in
@@ -796,7 +796,7 @@ diagnostics and usage data:</p>
 does not transfer it to third parties; the ML Kit terms add that Google also
 uses it to measure performance, debug, maintain and improve the APIs, and detect
 misuse or abuse. ML Kit may also contact Google servers to receive bug fixes,
-updated models and hardware accelerator compatibility information. The Rarium
+updated models and hardware accelerator compatibility information. The Tesoria
 data controller does not receive this data. The app has no setting to turn this
 off, and ML Kit does not document one. Sources:
 <a href="https://developers.google.com/ml-kit/android-data-disclosure">ML Kit data
@@ -805,12 +805,12 @@ terms</a>, <a href="https://policies.google.com/privacy">Google privacy
 policy</a>.</p>
 
 <h3 id="en-billing">Google Play Billing</h3>
-<p>To sell Rarium Plus and check the subscription
+<p>To sell Tesoria Plus and check the subscription
 (<a href="#en-payments">section 12</a>) the app includes the Google Play Billing
 library (version 9.1.0). Besides talking to the phone's Play Store app, the
 library sends Google, directly from the app and not through the Play Store,
 technical diagnostics events about its own operation. This happens for
-<strong>everyone who uses the app, including people who never buy Rarium
+<strong>everyone who uses the app, including people who never buy Tesoria
 Plus</strong>: the app asks Google Play for the subscription status every time
 you open it or return to it (at most once every 30 seconds) and in the
 background job that updates prices.</p>
@@ -823,7 +823,7 @@ among other things, the phone's brand, manufacturer and model, the Android
 version and the system build, the phone's RAM, the app's name and version,
 the library's version and a random number generated every time the app starts
 the library. They do not contain your cards, your collection or the prices you
-paid: the app does not pass them to the library. The Rarium data controller does
+paid: the app does not pass them to the library. The Tesoria data controller does
 not receive this data, which Google processes under its own
 <a href="https://policies.google.com/privacy">privacy policy</a>; the app has no
 setting to turn this off. Source:
@@ -831,7 +831,7 @@ setting to turn this off. Source:
 Play Billing Library release notes</a>.</p>
 
 <h2 id="en-phone">3. Data on your phone</h2>
-<p>Rarium stores this data on the phone, in the storage reserved for the app; if
+<p>Tesoria stores this data on the phone, in the storage reserved for the app; if
 Android backup is on, a copy goes to your Google Drive
 (<a href="#en-backup">section 5</a>). None of this data is sent to the
 controller.</p>
@@ -885,9 +885,9 @@ controller.</p>
       Wi-Fi only, price alerts and weekly summary on or off, the last printed
       language detected.</td>
       <td>Yes</td></tr>
-  <tr><td>Rarium Plus status</td>
+  <tr><td>Tesoria Plus status</td>
       <td>The result of the last successful check with Google Play: whether
-      Rarium Plus is active, whether the subscription is suspended or paused,
+      Tesoria Plus is active, whether the subscription is suspended or paused,
       whether a payment is pending, whether it renews automatically, the plan
       (monthly or yearly) when known, the SHA-256 fingerprint of the purchase
       token (not the token itself) and when it was last checked. The fingerprint
@@ -925,7 +925,7 @@ price guide over mobile data.</p>
 collection) write and read a JSON file wherever you choose with Android's file
 picker: it contains binders, cards (including removed ones), wishlist with
 thresholds, notes, sales, scan history, daily value, price history of the
-products you follow and the settings, but not the Rarium Plus status. The file
+products you follow and the settings, but not the Tesoria Plus status. The file
 is yours and the app does not
 send it to anyone. «Share as image», the for-sale list and the trade list go
 through Android's share menu: you choose which app to share them with, and none
@@ -954,7 +954,7 @@ service, as the last column of the table shows:</p>
   in <a href="#en-camera">section 2</a>, including the app's name and a
   per-installation identifier.</li>
   <li><strong>Google Play</strong>, through the phone's Play Store app and the
-  Google Play Billing library included in Rarium, handles the purchase of Rarium
+  Google Play Billing library included in Tesoria, handles the purchase of Tesoria
   Plus and tells the app whether the subscription is active for the Google
   account the Play Store is signed in with
   (<a href="#en-payments">section 12</a>). The library also sends Google,
@@ -967,7 +967,7 @@ service, as the last column of the table shows:</p>
 paid. Apart from Google, which receives ML Kit's per-installation identifier,
 the random number the Google Play Billing library generates every time it
 starts and, through Google Play, knows the Google account the Play Store is
-signed in with and that you buy Rarium Plus with, none of them receives an
+signed in with and that you buy Tesoria Plus with, none of them receives an
 identifier of the installation or of the phone.</p>
 
 <table>
@@ -1041,7 +1041,7 @@ identifier of the installation or of the phone.</p>
       <td>Set logos and symbols shown in the list of sets</td>
       <td>The image requested, that is which set you are looking at</td></tr>
   <tr><td>Google Play (the phone's Play Store app and Google servers)</td>
-      <td>Purchase of Rarium Plus and checking the subscription, with the Google
+      <td>Purchase of Tesoria Plus and checking the subscription, with the Google
       Play Billing library included in the app: the app asks the Play Store
       whether the subscription is active every time you open it or return to it
       (at most once every 30 seconds) and in the background job; purchase and
@@ -1058,7 +1058,7 @@ identifier of the installation or of the phone.</p>
       <td>Nothing: never images or recognised text</td></tr>
 </table>
 
-<p>Each service processes this data under its own privacy policy: the Rarium
+<p>Each service processes this data under its own privacy policy: the Tesoria
 data controller has no agreement with them and does not control what they do
 with it. Some of these servers are most likely located outside the European
 Economic Area (for example in Japan, South Korea, Hong Kong or the United
@@ -1071,7 +1071,7 @@ www.cardmarket.com; where available, the page the card's record comes from
 (for example on www.pokemon-card.com or www.tcgcollector.com); for a graded
 card, the sold listings on www.ebay.it filtered by card and grade and the
 certificate page on www.psacard.com or www.cgccards.com; to manage or cancel
-Rarium Plus, the Google Play subscriptions centre on play.google.com; this
+Tesoria Plus, the Google Play subscriptions centre on play.google.com; this
 notice and the Terms of Use, on this same site; and, from the «Privacy and
 licences» screen, the licence pages of the libraries the app uses. Those sites
 apply their own privacy policies and cookies.</p>
@@ -1084,21 +1084,21 @@ page.</p>
 
 <h2 id="en-backup">5. Android backup</h2>
 <p>If Android backup is turned on for your Google account, the system saves a
-copy of Rarium's database (collection, prices paid, dates added, notes, graded
+copy of Tesoria's database (collection, prices paid, dates added, notes, graded
 card details, sales, binders, wishlist with price thresholds, scan
 history, price history and the collection's daily value) and of the app's
 settings, together with the name lists and set numbering, in a private folder
 of your Google Drive, up to 25 MB. Backup runs on its own, at most once a day,
 when the phone is idle and normally on Wi-Fi, and Google keeps only the most
 recent copy. The Cardmarket price guide and catalogue, the artwork cache, the
-app's external folder and the Rarium Plus status are excluded: on a new phone,
-or after reinstalling the app, Rarium asks Google Play for the status
+app's external folder and the Tesoria Plus status are excluded: on a new phone,
+or after reinstalling the app, Tesoria asks Google Play for the status
 again.</p>
 <p>On Android 9 and later, if a PIN, pattern or password is set on the phone,
-the copy is end-to-end encrypted. The Rarium data controller does not receive
+the copy is end-to-end encrypted. The Tesoria data controller does not receive
 this copy and has no way to read it. The same data can move to a new phone
 during a phone-to-phone data transfer, and Android restores it when you
-reinstall Rarium with the same Google account: this is why
+reinstall Tesoria with the same Google account: this is why
 <strong>uninstalling the app does not delete a copy already saved on Google
 Drive</strong>. You can turn backup off in Android settings or delete it from
 your Google account (<a href="#en-delete">section 15</a>). Source:
@@ -1126,9 +1126,9 @@ Backup documentation</a>.</p>
       (Art. 6(1)(f))</td></tr>
   <tr><td>Technical data sent to Google by the Google Play Billing library
       (<a href="#en-billing">section 2</a>)</td>
-      <td>Diagnostics of the library the app uses to sell and check Rarium
+      <td>Diagnostics of the library the app uses to sell and check Tesoria
       Plus</td>
-      <td>Legitimate interest in offering Rarium Plus through Google Play and in
+      <td>Legitimate interest in offering Tesoria Plus through Google Play and in
       keeping its check working (Art. 6(1)(f))</td></tr>
   <tr><td>Data stored on the phone</td>
       <td>Make the scan history, collection and price history work</td>
@@ -1139,12 +1139,12 @@ Backup documentation</a>.</p>
       <td>Performed by Android according to your Google account settings,
       which you decide: the controller does not receive the copy and has no
       access to it</td></tr>
-  <tr><td>Checking Rarium Plus on the phone
+  <tr><td>Checking Tesoria Plus on the phone
       (<a href="#en-payments">section 12</a>)</td>
-      <td>Know whether you are entitled to the Rarium Plus features</td>
+      <td>Know whether you are entitled to the Tesoria Plus features</td>
       <td>Performance of the subscription contract (Art. 6(1)(b)); the data stays
       on the phone and the controller does not receive it</td></tr>
-  <tr><td>Rarium Plus order data in Play Console and accounting records
+  <tr><td>Tesoria Plus order data in Play Console and accounting records
       (<a href="#en-payments">section 12</a>)</td>
       <td>Support, refunds and tax and accounting obligations</td>
       <td>Legal obligation for tax and accounting records (Art. 6(1)(c)); for
@@ -1161,7 +1161,7 @@ Backup documentation</a>.</p>
   <tr><td>Reviews on Google Play
       (<a href="#en-recipients">section 8</a>)</td>
       <td>Read them and reply</td>
-      <td>Legitimate interest in knowing what people think of Rarium and in
+      <td>Legitimate interest in knowing what people think of Tesoria and in
       replying publicly (Art. 6(1)(f))</td></tr>
 </table>
 
@@ -1170,10 +1170,10 @@ Backup documentation</a>.</p>
   <li><strong>Google</strong>: for ML Kit (<a href="#en-camera">section 2</a>),
   for the Google Play Billing library, which sends Google the technical data in
   <a href="#en-billing">section 2</a> from the phone of everyone who uses the
-  app, including people who never buy Rarium Plus, for Android backup
+  app, including people who never buy Tesoria Plus, for Android backup
   (<a href="#en-backup">section 5</a>) and, when you download the app from Google
   Play, for Google Play, which processes download and installation data under its
-  own privacy policy. If you buy Rarium Plus, Google
+  own privacy policy. If you buy Tesoria Plus, Google
   Play also processes the purchase and payment data: in the European Economic
   Area the purchase contract is concluded with Google Commerce Limited, and
   Google shows the controller, in Play Console, the order details described in
@@ -1191,7 +1191,7 @@ Backup documentation</a>.</p>
 <p>No data is sold, and the controller uses no advertising or profiling tools.
 Google, also for the technical data it receives from ML Kit and from the Google
 Play Billing library, and the other services in section 4 process this data as
-independent controllers, under their own privacy policies: the Rarium controller
+independent controllers, under their own privacy policies: the Tesoria controller
 has not entrusted them with any processing on its behalf.</p>
 
 <h2 id="en-transfers">9. Transfers outside the EEA</h2>
@@ -1219,10 +1219,10 @@ Play Console follows the rules below.</p>
   data under their own privacy policies.</li>
   <li>Crash reports and reviews stay in Play Console, where Google keeps them
   under its own rules.</li>
-  <li>The Rarium Plus status stays on the phone until you clear the app's data;
+  <li>The Tesoria Plus status stays on the phone until you clear the app's data;
   the app stops treating it as valid 40 days after the last successful check
   with Google Play.</li>
-  <li>Rarium Plus order data stays in Play Console under Google's rules. The
+  <li>Tesoria Plus order data stays in Play Console under Google's rules. The
   controller keeps what is needed for tax and accounting obligations (for
   example the sales reports) for as long as tax law requires.</li>
 </ul>
@@ -1231,15 +1231,15 @@ Play Console follows the rules below.</p>
 <p>You do not have to provide any data: there is no sign-up, and the price paid
 and the condition of your cards are optional. Scanning needs the camera
 permission and a connection, without which the app cannot search for cards or
-update prices. Buying Rarium Plus requires a Google account and a payment
+update prices. Buying Tesoria Plus requires a Google account and a payment
 method: Google Play asks for them and processes them, not the controller.</p>
-<p>Rarium takes no decisions based solely on automated processing that produce
+<p>Tesoria takes no decisions based solely on automated processing that produce
 legal effects concerning you or similarly significantly affect you (Art. 22
 GDPR): it suggests a card and a price, which you can always compare with the
 card in your hand and correct.</p>
 
-<h2 id="en-payments">12. Rarium Plus and payments</h2>
-<p>Rarium Plus, the optional subscription that adds some features (listed in the
+<h2 id="en-payments">12. Tesoria Plus and payments</h2>
+<p>Tesoria Plus, the optional subscription that adds some features (listed in the
 <a href="termini.html#english">Terms of Use</a>), can be bought only on
 <strong>Google Play</strong>, through Google's payment system. Payment, VAT,
 renewal, cancellation and refunds are handled by Google Play: in the European
@@ -1248,12 +1248,12 @@ under the <a href="https://play.google.com/about/play-terms/eea/index.html">Goog
 Play Terms of Service</a>. <strong>The controller never receives your payment
 method details.</strong></p>
 <ul>
-  <li><strong>On the phone.</strong> To know whether Rarium Plus is active, the
+  <li><strong>On the phone.</strong> To know whether Tesoria Plus is active, the
   app asks Google Play on the phone, through the Play Store app and the Google
-  Play Billing library included in Rarium, every time you open it or return to
+  Play Billing library included in Tesoria, every time you open it or return to
   it (at most once every 30 seconds) and in the background job that updates
   prices. It keeps the result of the last successful check in the app's storage:
-  whether Rarium Plus is active, whether the subscription is suspended or paused,
+  whether Tesoria Plus is active, whether the subscription is suspended or paused,
   whether a payment is pending, whether it renews automatically, the plan
   (monthly or yearly) when known, the SHA-256 fingerprint of the purchase token
   (not the token itself) and when it was last checked. The fingerprint is used
@@ -1278,7 +1278,7 @@ method details.</strong></p>
   obligations, and keeps it for as long as tax law requires.</li>
   <li><strong>Cancellation.</strong> The subscription is managed and cancelled
   from the <a href="https://play.google.com/store/account/subscriptions">Google
-  Play subscriptions centre</a> (play.google.com). Uninstalling Rarium or
+  Play subscriptions centre</a> (play.google.com). Uninstalling Tesoria or
   clearing its data does not cancel the subscription and does not delete the
   order with Google.</li>
 </ul>
@@ -1293,7 +1293,7 @@ time, on grounds relating to your particular situation, to the processing based
 on legitimate interest (<a href="#en-bases">section 7</a>), by writing to
 <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a> (Art. 21 GDPR).</p>
 <p>Since the app sends the controller no data about the people who use it, the
-controller may be unable to identify data concerning you (Art. 11 GDPR). Rarium
+controller may be unable to identify data concerning you (Art. 11 GDPR). Tesoria
 Plus orders are the exception: give the order number shown on your Google Play
 receipt (it usually starts with «GPA.») or the email address of your Google
 account, and the controller can find the order in Play Console. The
@@ -1308,14 +1308,14 @@ supervisory authority of the country where you live, where you work or where
 the alleged infringement took place.</p>
 
 <h2 id="en-minors">14. Minors</h2>
-<p>Rarium is not intended for children under 14. The controller receives no data
+<p>Tesoria is not intended for children under 14. The controller receives no data
 that would reveal the age of the people using the app and does not knowingly
 collect data from minors. If you are a parent and have questions, write to the
 address above.</p>
 
 <h2 id="en-delete">15. How to delete your data</h2>
-<p>Rarium has no accounts. To delete your data, uninstall the app or clear its
-data in Android Settings → Apps → Rarium → Storage → Clear storage (labels vary
+<p>Tesoria has no accounts. To delete your data, uninstall the app or clear its
+data in Android Settings → Apps → Tesoria → Storage → Clear storage (labels vary
 by manufacturer), and delete any backup from your Google account.</p>
 <ul>
   <li><strong>Nothing you do inside the app really deletes data.</strong>
@@ -1325,12 +1325,12 @@ by manufacturer), and delete any backup from your Google account.</p>
   collection, together with the log of additions and removals) and in any
   backup: it only goes away when you clear the app's data and the backup.</li>
   <li>Uninstalling the app does not delete a copy already saved on Google Drive,
-  which Android restores if you reinstall Rarium with the same account.</li>
-  <li>Uninstalling Rarium or clearing its data <strong>does not cancel Rarium
+  which Android restores if you reinstall Tesoria with the same account.</li>
+  <li>Uninstalling Tesoria or clearing its data <strong>does not cancel Tesoria
   Plus</strong> and does not delete the order with Google: the subscription is
   cancelled from the
   <a href="https://play.google.com/store/account/subscriptions">Google Play
-  subscriptions centre</a>. The Rarium Plus status saved on the phone is deleted
+  subscriptions centre</a>. The Tesoria Plus status saved on the phone is deleted
   with the app's data.</li>
   <li>The backup is deleted from your Google account. Google manages backups
   together: depending on how you delete it, you may also erase the data of other
@@ -1352,7 +1352,7 @@ for example by adding sign-in with an account.</p>
 <h2 id="deutsch">Deutsche Fassung</h2>
 <p class="sub">Letzte Aktualisierung: 27. Oktober 2026 · Im Zweifel ist die
 italienische Fassung dieser Datenschutzerklärung maßgeblich.</p>
-<p>Rarium ist eine Android-App, die Sammelkarten erkennt, wenn du sie mit der
+<p>Tesoria ist eine Android-App, die Sammelkarten erkennt, wenn du sie mit der
 Kamera erfasst, ihre Preisentwicklung zeigt und dich eine Sammlung auf dem
 Telefon führen lässt. Diese Seite erklärt, welche Daten sie verarbeitet, warum,
 wo sie bleiben und wie du sie löschst. Sie beschreibt die über Google Play
@@ -1363,10 +1363,10 @@ Kontakt: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
 
 <h2 id="de-short">Kurz gesagt</h2>
 <ul>
-  <li>Rarium funktioniert <strong>ohne Konto</strong>: Du registrierst dich
+  <li>Tesoria funktioniert <strong>ohne Konto</strong>: Du registrierst dich
   nicht, und die App sendet dem Verantwortlichen keine Daten über die Personen,
   die sie nutzen. Google Play zeigt ihm jedoch Statistiken zu Abstürzen der App,
-  die veröffentlichten Rezensionen und, bei Personen, die Rarium Plus kaufen, die
+  die veröffentlichten Rezensionen und, bei Personen, die Tesoria Plus kaufen, die
   Bestelldaten (<a href="#de-recipients">Abschnitt 8</a> und
   <a href="#de-payments">Abschnitt 12</a>).</li>
   <li>Die <strong>Kamerabilder</strong> werden nur auf dem Telefon verarbeitet
@@ -1376,7 +1376,7 @@ Kontakt: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   <li>Die Texterkennung nutzt <strong>Google ML Kit</strong>, das technische
   Diagnose- und Nutzungsdaten an Google sendet
   (<a href="#de-camera">Abschnitt 2</a>).</li>
-  <li>Für Rarium Plus enthält die App die Bibliothek <strong>Google Play
+  <li>Für Tesoria Plus enthält die App die Bibliothek <strong>Google Play
   Billing</strong>, die technische Diagnosedaten über ihre eigene Funktion an
   Google sendet, auch wenn du nichts kaufst, weil die App Google Play bei jedem
   Öffnen nach dem Status des Abos fragt
@@ -1393,7 +1393,7 @@ Kontakt: <a href="mailto:rariumx@gmail.com">rariumx@gmail.com</a>.</p>
   (<a href="#de-backup">Abschnitt 5</a>).</li>
   <li>Keine Werbung und keine Statistik-Tools, die Daten an den Verantwortlichen
   senden.</li>
-  <li>Einige Funktionen gehören zu <strong>Rarium Plus</strong>, einem
+  <li>Einige Funktionen gehören zu <strong>Tesoria Plus</strong>, einem
   optionalen Abo, das man bei Google Play kauft: Die Zahlung wickelt Google ab,
   der Verantwortliche erhält die Daten deiner Zahlungsmethode nicht, und die App
   prüft das Abo auf dem Telefon, ohne dem Verantwortlichen etwas zu senden
@@ -1414,7 +1414,7 @@ exportieren. All das funktioniert ohne Registrierung: Die App hat keine
 Konten.</p>
 <p>Einige dieser Funktionen, darunter die Preisalarme, mehr als ein Ordner, eine
 Sammlung mit mehr als 50 Exemplaren und eine Wunschliste mit mehr als 10 Karten,
-gehören zu Rarium Plus, einem optionalen Abo, das man bei Google Play kauft
+gehören zu Tesoria Plus, einem optionalen Abo, das man bei Google Play kauft
 (<a href="#de-payments">Abschnitt 12</a>); die vollständige Liste steht in den
 <a href="termini.html#deutsch">Nutzungsbedingungen</a>. Das Scannen, die
 Erkennung und der Preis jeder Karte bleiben kostenlos.</p>
@@ -1423,7 +1423,7 @@ Erkennung und der Preis jeder Karte bleiben kostenlos.</p>
 <p>Die Erkennung findet <strong>auf dem Telefon</strong> statt: Die Kamerabilder
 werden im Arbeitsspeicher analysiert, um den Titel und die Nummer zu lesen, die
 auf der Karte gedruckt sind, und in der auf Google Play veröffentlichten Version
-werden sie nie an einen Server gesendet. Rarium fragt nicht nach Zugriff auf die
+werden sie nie an einen Server gesendet. Tesoria fragt nicht nach Zugriff auf die
 Fotos deiner Galerie. Von jeder erkannten Karte speichert die App auf dem
 Telefon einen kleinen Ausschnitt (höchstens 480 Pixel an der langen Seite), der
 als Vorschau dient, wenn der Katalog keine Illustration hat: Er bleibt im
@@ -1454,7 +1454,7 @@ hinzu, dass Google sie auch verwendet, um die Leistung zu messen, die APIs zu
 korrigieren, zu warten und zu verbessern und unsachgemäße Nutzung oder Missbrauch
 zu erkennen. ML Kit kann außerdem Server von Google kontaktieren, um
 Fehlerkorrekturen, aktualisierte Modelle und Informationen zur Kompatibilität der
-Hardwarebeschleuniger zu erhalten. Der Verantwortliche für Rarium erhält diese
+Hardwarebeschleuniger zu erhalten. Der Verantwortliche für Tesoria erhält diese
 Daten nicht. Die App hat keine Einstellung, um diese Übermittlung abzuschalten,
 und ML Kit dokumentiert keine. Quellen:
 <a href="https://developers.google.com/ml-kit/android-data-disclosure">von ML Kit
@@ -1463,12 +1463,12 @@ von ML Kit</a>, <a href="https://policies.google.com/privacy">Datenschutzerklär
 von Google</a>.</p>
 
 <h3 id="de-billing">Google Play Billing</h3>
-<p>Um Rarium Plus zu verkaufen und das Abo zu prüfen
+<p>Um Tesoria Plus zu verkaufen und das Abo zu prüfen
 (<a href="#de-payments">Abschnitt 12</a>), enthält die App die Bibliothek Google
 Play Billing (Version 9.1.0). Neben der Kommunikation mit der Play-Store-App des
 Telefons sendet die Bibliothek technische Diagnoseereignisse über ihre eigene
 Funktion an Google, direkt aus der App und nicht über den Play Store. Das
-geschieht bei <strong>allen, die die App nutzen, auch bei denen, die Rarium Plus
+geschieht bei <strong>allen, die die App nutzen, auch bei denen, die Tesoria Plus
 nicht kaufen</strong>: Die App fragt Google Play jedes Mal nach dem Status des
 Abos, wenn du sie öffnest oder zu ihr zurückkehrst (höchstens einmal alle 30
 Sekunden), und in der Hintergrundaufgabe, die die Preise aktualisiert.</p>
@@ -1483,7 +1483,7 @@ Arbeitsspeicher (RAM) des Telefons, Name und Version der App, die Version der
 Bibliothek und eine Zufallszahl enthalten, die jedes Mal erzeugt wird, wenn die
 App die Bibliothek startet. Sie enthalten weder deine Karten noch die Sammlung
 noch die Preise, die du bezahlt hast: Die App gibt sie nicht an die Bibliothek
-weiter. Der Verantwortliche für Rarium erhält diese Daten nicht; Google
+weiter. Der Verantwortliche für Tesoria erhält diese Daten nicht; Google
 verarbeitet sie gemäß seiner eigenen
 <a href="https://policies.google.com/privacy">Datenschutzerklärung</a>. Die App
 hat keine Einstellung, um diese Übermittlung abzuschalten. Quelle:
@@ -1491,7 +1491,7 @@ hat keine Einstellung, um diese Übermittlung abzuschalten. Quelle:
 der Google Play Billing Library</a>.</p>
 
 <h2 id="de-phone">3. Daten auf deinem Telefon</h2>
-<p>Rarium speichert diese Daten auf dem Telefon, im Speicherbereich der App; wenn
+<p>Tesoria speichert diese Daten auf dem Telefon, im Speicherbereich der App; wenn
 das Android-Backup aktiv ist, geht eine Kopie in dein Google Drive
 (<a href="#de-backup">Abschnitt 5</a>). Nichts davon wird an den
 Verantwortlichen gesendet.</p>
@@ -1550,9 +1550,9 @@ Verantwortlichen gesendet.</p>
       Wechselkurse, Preise nur mit WLAN aktualisieren, Preisalarme und
       Wochenübersicht ein oder aus, die zuletzt erkannte Drucksprache.</td>
       <td>Ja</td></tr>
-  <tr><td>Status von Rarium Plus</td>
+  <tr><td>Status von Tesoria Plus</td>
       <td>Das Ergebnis der letzten erfolgreichen Prüfung bei Google Play: ob
-      Rarium Plus aktiv ist, ob das Abo ausgesetzt oder pausiert ist, ob eine
+      Tesoria Plus aktiv ist, ob das Abo ausgesetzt oder pausiert ist, ob eine
       Zahlung aussteht, ob es sich automatisch verlängert, das Abo-Modell (Monats-
       oder Jahresabo), wenn es bekannt ist, der SHA-256-Fingerabdruck des
       Kauf-Tokens (nicht das Token selbst) und wann zuletzt geprüft wurde. Der
@@ -1595,7 +1595,7 @@ Preisliste nicht über mobile Daten.</p>
 der Dateiauswahl von Android wählst: Sie enthält Ordner, Karten (auch die
 entfernten), die Wunschliste mit den Schwellen, Notizen, Verkäufe, den
 Scan-Verlauf, den täglichen Wert, den Preisverlauf der Produkte, denen du folgst,
-und die Einstellungen, aber nicht den Status von Rarium Plus. Die Datei gehört
+und die Einstellungen, aber nicht den Status von Tesoria Plus. Die Datei gehört
 dir, und die App sendet sie an niemanden. „Als Bild teilen“, die Verkaufsliste
 und die Tauschliste laufen über das Teilen-Menü von Android: Du wählst, mit
 welcher App du sie teilst, und keines der drei enthält die Preise, die du bezahlt
@@ -1625,7 +1625,7 @@ letzte Spalte der Tabelle zeigt:</p>
   <a href="#de-camera">Abschnitt 2</a>, darunter den Namen der App und eine
   Kennung pro Installation.</li>
   <li><strong>Google Play</strong> wickelt über die Play-Store-App des Telefons
-  und die in Rarium enthaltene Bibliothek Google Play Billing den Kauf von Rarium
+  und die in Tesoria enthaltene Bibliothek Google Play Billing den Kauf von Tesoria
   Plus ab und teilt der App mit, ob das Abo für das Google-Konto aktiv ist, mit
   dem der Play Store verbunden ist (<a href="#de-payments">Abschnitt 12</a>). Die
   Bibliothek sendet außerdem direkt aus der App die technischen Diagnosedaten aus
@@ -1637,7 +1637,7 @@ letzte Spalte der Tabelle zeigt:</p>
 bezahlt hast. Abgesehen von Google, das von ML Kit die Kennung pro Installation
 und von der Bibliothek Google Play Billing die bei jedem ihrer Starts erzeugte
 Zufallszahl erhält und über Google Play das Google-Konto kennt, mit dem der Play
-Store verbunden ist und mit dem du Rarium Plus kaufst, erhält keiner Kennungen
+Store verbunden ist und mit dem du Tesoria Plus kaufst, erhält keiner Kennungen
 der Installation oder des Telefons.</p>
 
 <table>
@@ -1720,7 +1720,7 @@ der Installation oder des Telefons.</p>
       werden</td>
       <td>Das angeforderte Bild, also welches Set du dir ansiehst</td></tr>
   <tr><td>Google Play (Play-Store-App des Telefons und Server von Google)</td>
-      <td>Der Kauf von Rarium Plus und die Prüfung des Abos, mit der in der App
+      <td>Der Kauf von Tesoria Plus und die Prüfung des Abos, mit der in der App
       enthaltenen Bibliothek Google Play Billing: Die App fragt den Play Store
       jedes Mal, ob das Abo aktiv ist, wenn du sie öffnest oder zu ihr
       zurückkehrst (höchstens einmal alle 30 Sekunden), und in der
@@ -1739,7 +1739,7 @@ der Installation oder des Telefons.</p>
 </table>
 
 <p>Jeder Dienst verarbeitet diese Daten gemäß seiner eigenen
-Datenschutzerklärung: Der Verantwortliche für Rarium hat keine Vereinbarungen mit
+Datenschutzerklärung: Der Verantwortliche für Tesoria hat keine Vereinbarungen mit
 ihnen und kontrolliert nicht, was sie damit tun. Einige dieser Server befinden
 sich mit hoher Wahrscheinlichkeit außerhalb des Europäischen Wirtschaftsraums
 (zum Beispiel in Japan, Südkorea, Hongkong oder den Vereinigten Staaten); ihre
@@ -1751,7 +1751,7 @@ Angebote der Karte auf www.cardmarket.com; sofern vorhanden, die Seite, aus der
 die Kartendaten stammen (zum Beispiel auf www.pokemon-card.com oder
 www.tcgcollector.com); bei einer gegradeten Karte die nach Karte und Note
 gefilterten verkauften Artikel auf www.ebay.it und die Zertifikatsseite auf
-www.psacard.com oder www.cgccards.com; zum Verwalten oder Kündigen von Rarium Plus
+www.psacard.com oder www.cgccards.com; zum Verwalten oder Kündigen von Tesoria Plus
 die Abo-Verwaltung von Google Play auf play.google.com; diese
 Datenschutzerklärung und die Nutzungsbedingungen auf dieser Website; und über den
 Bildschirm „Datenschutz und Lizenzen“ die Lizenzseiten der Bibliotheken, die die
@@ -1766,7 +1766,7 @@ Cookies noch Statistiken.</p>
 
 <h2 id="de-backup">5. Android-Backup</h2>
 <p>Wenn das Android-Backup in deinem Google-Konto aktiv ist, speichert das System
-eine Kopie der Datenbank von Rarium (Sammlung, Kaufpreise, Hinzufügedaten,
+eine Kopie der Datenbank von Tesoria (Sammlung, Kaufpreise, Hinzufügedaten,
 Notizen, Daten der gegradeten Karten, Verkäufe, Ordner, Wunschliste mit den
 Preisschwellen, Scan-Verlauf, Preisverlauf und täglicher Wert der Sammlung) und
 der Einstellungen der App, zusammen mit den Namenslisten und den Nummerierungen
@@ -1774,14 +1774,14 @@ der Sets, in einem privaten Bereich deines Google Drive, bis zu 25 MB. Das Backu
 startet von selbst, höchstens einmal am Tag, wenn das Telefon inaktiv und in der
 Regel mit dem WLAN verbunden ist, und Google bewahrt nur die neueste Kopie auf.
 Ausgenommen sind die Cardmarket-Preisliste und der Cardmarket-Katalog, der Cache
-der Illustrationen, das externe Verzeichnis der App und der Status von Rarium
-Plus, den Rarium auf einem neuen Telefon oder nach einer Neuinstallation der App
+der Illustrationen, das externe Verzeichnis der App und der Status von Tesoria
+Plus, den Tesoria auf einem neuen Telefon oder nach einer Neuinstallation der App
 erneut bei Google Play abfragt.</p>
 <p>Ab Android 9 ist die Kopie Ende-zu-Ende-verschlüsselt, wenn auf dem Telefon
 eine PIN, ein Muster oder ein Passwort eingerichtet ist. Der Verantwortliche für
-Rarium erhält diese Kopie nicht und hat keine Möglichkeit, sie zu lesen.
+Tesoria erhält diese Kopie nicht und hat keine Möglichkeit, sie zu lesen.
 Dieselben Daten können bei einer Datenübertragung von Telefon zu Telefon auf ein
-neues Telefon gelangen, und Android stellt sie wieder her, wenn du Rarium
+neues Telefon gelangen, und Android stellt sie wieder her, wenn du Tesoria
 mit demselben Google-Konto neu installierst: Deshalb <strong>löscht das
 Deinstallieren der App keine bereits in Google Drive gespeicherte
 Kopie</strong>. Du kannst das Backup in den Android-Einstellungen ausschalten
@@ -1815,9 +1815,9 @@ Ausschnitts der Karte).</p>
       zu korrigieren (Art. 6 Abs. 1 lit. f)</td></tr>
   <tr><td>Von der Bibliothek Google Play Billing an Google gesendete technische
       Daten (<a href="#de-billing">Abschnitt 2</a>)</td>
-      <td>Diagnose der Funktion der Bibliothek, mit der die App Rarium Plus
+      <td>Diagnose der Funktion der Bibliothek, mit der die App Tesoria Plus
       verkauft und prüft</td>
-      <td>Berechtigtes Interesse daran, Rarium Plus über Google Play anzubieten und
+      <td>Berechtigtes Interesse daran, Tesoria Plus über Google Play anzubieten und
       seine Prüfung funktionsfähig zu halten (Art. 6 Abs. 1 lit. f)</td></tr>
   <tr><td>Auf dem Telefon gespeicherte Daten</td>
       <td>Verlauf, Sammlung und Preisverlauf funktionsfähig machen</td>
@@ -1829,12 +1829,12 @@ Ausschnitts der Karte).</p>
       <td>Android führt es gemäß den Einstellungen deines Google-Kontos aus, über
       die du entscheidest: Der Verantwortliche erhält die Kopie nicht und hat
       keinen Zugriff darauf</td></tr>
-  <tr><td>Prüfung von Rarium Plus auf dem Telefon
+  <tr><td>Prüfung von Tesoria Plus auf dem Telefon
       (<a href="#de-payments">Abschnitt 12</a>)</td>
-      <td>Wissen, ob du Anspruch auf die Funktionen von Rarium Plus hast</td>
+      <td>Wissen, ob du Anspruch auf die Funktionen von Tesoria Plus hast</td>
       <td>Erfüllung des Abovertrags (Art. 6 Abs. 1 lit. b); die Angabe bleibt auf
       dem Telefon, und der Verantwortliche erhält sie nicht</td></tr>
-  <tr><td>Bestelldaten von Rarium Plus in der Play Console und
+  <tr><td>Bestelldaten von Tesoria Plus in der Play Console und
       Buchhaltungsunterlagen (<a href="#de-payments">Abschnitt 12</a>)</td>
       <td>Support, Erstattungen sowie steuerliche und buchhalterische
       Pflichten</td>
@@ -1854,7 +1854,7 @@ Ausschnitts der Karte).</p>
   <tr><td>Rezensionen auf Google Play
       (<a href="#de-recipients">Abschnitt 8</a>)</td>
       <td>Sie lesen und beantworten</td>
-      <td>Berechtigtes Interesse daran, die Meinungen über Rarium zu kennen und
+      <td>Berechtigtes Interesse daran, die Meinungen über Tesoria zu kennen und
       öffentlich zu antworten (Art. 6 Abs. 1 lit. f)</td></tr>
 </table>
 
@@ -1863,11 +1863,11 @@ Ausschnitts der Karte).</p>
   <li><strong>Google</strong>: für ML Kit (<a href="#de-camera">Abschnitt 2</a>),
   für die Bibliothek Google Play Billing, die die technischen Daten aus
   <a href="#de-billing">Abschnitt 2</a> vom Telefon aller, die die App nutzen, an
-  Google sendet, auch von denen, die Rarium Plus nicht kaufen, für das
+  Google sendet, auch von denen, die Tesoria Plus nicht kaufen, für das
   Android-Backup (<a href="#de-backup">Abschnitt 5</a>) und, wenn du die App von
   Google Play herunterlädst, für Google Play, das die Daten des Downloads und der
   Installation gemäß seiner eigenen Datenschutzerklärung verarbeitet. Wenn du
-  Rarium Plus kaufst, verarbeitet Google Play auch die Kauf- und Zahlungsdaten: Im
+  Tesoria Plus kaufst, verarbeitet Google Play auch die Kauf- und Zahlungsdaten: Im
   Europäischen Wirtschaftsraum wird der Kaufvertrag mit Google Commerce Limited
   geschlossen, und Google zeigt dem Verantwortlichen in der Play Console die in
   <a href="#de-payments">Abschnitt 12</a> beschriebenen Bestelldaten. Wenn du auf
@@ -1887,7 +1887,7 @@ Ausschnitts der Karte).</p>
 noch Profiling-Tools. Google, auch für die technischen Daten, die es von ML Kit
 und von der Bibliothek Google Play Billing erhält, und die anderen Dienste in
 Abschnitt 4 verarbeiten diese Daten als eigenständige Verantwortliche gemäß ihren
-eigenen Datenschutzerklärungen: Der Verantwortliche für Rarium hat ihnen keine
+eigenen Datenschutzerklärungen: Der Verantwortliche für Tesoria hat ihnen keine
 Verarbeitung in seinem Auftrag übertragen.</p>
 
 <h2 id="de-transfers">9. Übermittlungen außerhalb des EWR</h2>
@@ -1917,10 +1917,10 @@ Regeln.</p>
   die Daten der Anfragen gemäß ihren eigenen Datenschutzerklärungen auf.</li>
   <li>Die Absturzberichte und die Rezensionen bleiben in der Play Console, wo
   Google sie nach seinen eigenen Regeln aufbewahrt.</li>
-  <li>Der Status von Rarium Plus bleibt auf dem Telefon, bis du die Daten der App
+  <li>Der Status von Tesoria Plus bleibt auf dem Telefon, bis du die Daten der App
   löschst; die App betrachtet ihn 40 Tage nach der letzten erfolgreichen Prüfung
   bei Google Play nicht mehr als gültig.</li>
-  <li>Die Bestelldaten von Rarium Plus bleiben nach den Regeln von Google in der
+  <li>Die Bestelldaten von Tesoria Plus bleiben nach den Regeln von Google in der
   Play Console. Der Verantwortliche bewahrt die Daten, die er für steuerliche und
   buchhalterische Pflichten braucht (zum Beispiel die Verkaufsberichte), so lange
   auf, wie es das Steuerrecht verlangt.</li>
@@ -1930,17 +1930,17 @@ Regeln.</p>
 <p>Du musst keine Daten angeben: Man registriert sich nicht, und der Kaufpreis
 und der Zustand der Karten sind freiwillig. Zum Scannen brauchst du die
 Kameraberechtigung und eine Verbindung, ohne die die App weder Karten suchen noch
-Preise aktualisieren kann. Für den Kauf von Rarium Plus brauchst du ein
+Preise aktualisieren kann. Für den Kauf von Tesoria Plus brauchst du ein
 Google-Konto und eine Zahlungsmethode: Diese fragt Google Play ab und verarbeitet
 sie, nicht der Verantwortliche.</p>
-<p>Rarium trifft keine ausschließlich auf einer automatisierten Verarbeitung
+<p>Tesoria trifft keine ausschließlich auf einer automatisierten Verarbeitung
 beruhenden Entscheidungen, die dir gegenüber rechtliche Wirkung entfalten oder
 dich in ähnlicher Weise erheblich beeinträchtigen (Art. 22 DSGVO): Die App
 schlägt eine Karte und einen Preis vor, die du jederzeit mit der Karte in deiner Hand
 vergleichen und korrigieren kannst.</p>
 
-<h2 id="de-payments">12. Rarium Plus und Zahlungen</h2>
-<p>Rarium Plus, das optionale Abo, das einige Funktionen hinzufügt (die
+<h2 id="de-payments">12. Tesoria Plus und Zahlungen</h2>
+<p>Tesoria Plus, das optionale Abo, das einige Funktionen hinzufügt (die
 <a href="termini.html#deutsch">Nutzungsbedingungen</a> zählen sie auf), kann nur
 bei <strong>Google Play</strong> über das Zahlungssystem von Google gekauft
 werden. Zahlung, Mehrwertsteuer, Verlängerung, Kündigung und Erstattungen
@@ -1950,12 +1950,12 @@ Google Commerce Limited geschlossen, gemäß den
 von Google Play</a>. <strong>Der Verantwortliche erhält die Daten deiner
 Zahlungsmethode nicht.</strong></p>
 <ul>
-  <li><strong>Auf dem Telefon.</strong> Um zu wissen, ob Rarium Plus aktiv ist,
+  <li><strong>Auf dem Telefon.</strong> Um zu wissen, ob Tesoria Plus aktiv ist,
   fragt die App Google Play auf dem Telefon, über die Play-Store-App und die in
-  Rarium enthaltene Bibliothek Google Play Billing, jedes Mal, wenn du die App
+  Tesoria enthaltene Bibliothek Google Play Billing, jedes Mal, wenn du die App
   öffnest oder zu ihr zurückkehrst (höchstens einmal alle 30 Sekunden), und in der
   Hintergrundaufgabe, die die Preise aktualisiert. Die App bewahrt in ihrem
-  Speicher das Ergebnis der letzten erfolgreichen Prüfung auf: ob Rarium Plus aktiv ist, ob
+  Speicher das Ergebnis der letzten erfolgreichen Prüfung auf: ob Tesoria Plus aktiv ist, ob
   das Abo ausgesetzt oder pausiert ist, ob eine Zahlung aussteht, ob es sich
   automatisch verlängert, das Abo-Modell (Monats- oder Jahresabo), wenn es bekannt
   ist, den SHA-256-Fingerabdruck des Kauf-Tokens (nicht das Token selbst) und wann
@@ -1983,7 +1983,7 @@ Zahlungsmethode nicht.</strong></p>
   lange auf, wie es das Steuerrecht verlangt.</li>
   <li><strong>Kündigung.</strong> Das Abo wird über die
   <a href="https://play.google.com/store/account/subscriptions">Abo-Verwaltung von
-  Google Play</a> (play.google.com) verwaltet und gekündigt. Wenn du Rarium
+  Google Play</a> (play.google.com) verwaltet und gekündigt. Wenn du Tesoria
   deinstallierst oder seine Daten löschst, wird das Abo nicht gekündigt und die
   Bestellung bei Google nicht gelöscht.</li>
 </ul>
@@ -2002,7 +2002,7 @@ DSGVO).</p>
 <p>Da die App dem Verantwortlichen keine Daten über die Personen sendet, die sie
 nutzen, ist der Verantwortliche möglicherweise nicht in der Lage, Daten zu
 finden, die dich betreffen (Art. 11 DSGVO). Eine Ausnahme sind die Bestellungen
-von Rarium Plus: Gib die Bestellnummer an, die du in der Quittung von Google Play
+von Tesoria Plus: Gib die Bestellnummer an, die du in der Quittung von Google Play
 findest (sie beginnt meist mit „GPA.“), oder die E-Mail-Adresse deines
 Google-Kontos, und der Verantwortliche kann die Bestellung in der Play Console
 finden. Die Daten aus <a href="#de-phone">Abschnitt 3</a> sind bereits auf deinem
@@ -2017,14 +2017,14 @@ Aufsichtsbehörde des Landes einlegen, in dem du lebst oder arbeitest oder in de
 der mutmaßliche Verstoß stattgefunden hat.</p>
 
 <h2 id="de-minors">14. Minderjährige</h2>
-<p>Rarium richtet sich nicht an Kinder unter 14 Jahren. Der Verantwortliche
+<p>Tesoria richtet sich nicht an Kinder unter 14 Jahren. Der Verantwortliche
 erhält keine Daten, aus denen er das Alter der Personen erfahren könnte, die die
 App nutzen, und erhebt nicht wissentlich Daten von Minderjährigen. Wenn du ein
 Elternteil bist und Fragen hast, schreib an die oben genannte Adresse.</p>
 
 <h2 id="de-delete">15. Wie du deine Daten löschst</h2>
-<p>Rarium hat keine Konten. Um deine Daten zu löschen, deinstalliere die App oder
-lösche ihre Daten unter Android-Einstellungen → Apps → Rarium → Speicher → Daten
+<p>Tesoria hat keine Konten. Um deine Daten zu löschen, deinstalliere die App oder
+lösche ihre Daten unter Android-Einstellungen → Apps → Tesoria → Speicher → Daten
 löschen (die Bezeichnungen unterscheiden sich je nach Hersteller), und lösche ein
 eventuelles Backup aus deinem Google-Konto.</p>
 <ul>
@@ -2036,13 +2036,13 @@ eventuelles Backup aus deinem Google-Konto.</p>
   der Hinzufügungen und Entfernungen) und in einem eventuellen Backup: Sie
   verschwindet erst, wenn du die Daten der App und das Backup löschst.</li>
   <li>Das Deinstallieren der App löscht keine bereits in Google Drive gespeicherte
-  Kopie; Android stellt sie wieder her, wenn du Rarium mit demselben Konto neu
+  Kopie; Android stellt sie wieder her, wenn du Tesoria mit demselben Konto neu
   installierst.</li>
-  <li>Das Deinstallieren von Rarium oder das Löschen seiner Daten <strong>kündigt
-  Rarium Plus nicht</strong> und löscht die Bestellung bei Google nicht: Das Abo
+  <li>Das Deinstallieren von Tesoria oder das Löschen seiner Daten <strong>kündigt
+  Tesoria Plus nicht</strong> und löscht die Bestellung bei Google nicht: Das Abo
   wird über die
   <a href="https://play.google.com/store/account/subscriptions">Abo-Verwaltung von
-  Google Play</a> gekündigt. Der auf dem Telefon gespeicherte Status von Rarium
+  Google Play</a> gekündigt. Der auf dem Telefon gespeicherte Status von Tesoria
   Plus wird mit den Daten der App gelöscht.</li>
   <li>Das Backup löschst du aus deinem Google-Konto. Google verwaltet die Backups
   gemeinsam: Je nachdem, wie du es löschst, kannst du auch die Daten anderer Apps
@@ -2061,7 +2061,7 @@ Anmeldung mit einem Konto.</p>
 </section>
 
 <footer>
-<p>Rarium è un'app indipendente e non ufficiale. Non è prodotta, approvata,
+<p>Tesoria è un'app indipendente e non ufficiale. Non è prodotta, approvata,
 sponsorizzata né affiliata a Nintendo, The Pokémon Company, Creatures Inc.,
 GAME FREAK inc. o Cardmarket. Pokémon e i nomi dei personaggi Pokémon sono
 marchi di Nintendo. © 2026 Pokémon. © 1995–2026 Nintendo / Creatures Inc. /
@@ -2069,7 +2069,7 @@ GAME FREAK inc. Le illustrazioni delle carte appartengono ai rispettivi titolari
 dei diritti e sono mostrate solo per aiutarti a identificare la carta. I prezzi
 sono statistiche di mercato pubblicate da Cardmarket, a scopo informativo: non
 sono una perizia né un'offerta.</p>
-<p lang="en">Rarium is an independent, unofficial app. It is not produced,
+<p lang="en">Tesoria is an independent, unofficial app. It is not produced,
 endorsed, sponsored by, or affiliated with Nintendo, The Pokémon Company,
 Creatures Inc., GAME FREAK inc., or Cardmarket. Pokémon and Pokémon character
 names are trademarks of Nintendo. © 2026 Pokémon. © 1995–2026 Nintendo /
@@ -2077,7 +2077,7 @@ Creatures Inc. / GAME FREAK inc. Card artwork belongs to its respective rights
 holders and is shown only to help you identify the card. Prices are market
 statistics published by Cardmarket, for information only; they are not an
 appraisal or an offer.</p>
-<p lang="de">Rarium ist eine unabhängige, inoffizielle App. Sie wird nicht von
+<p lang="de">Tesoria ist eine unabhängige, inoffizielle App. Sie wird nicht von
 Nintendo, The Pokémon Company, Creatures Inc., GAME FREAK inc. oder Cardmarket
 hergestellt, genehmigt oder gesponsert und ist nicht mit ihnen verbunden. Pokémon
 und die Namen der Pokémon-Figuren sind Marken von Nintendo. © 2026 Pokémon.
